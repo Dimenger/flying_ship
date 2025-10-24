@@ -1,20 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "./news.module.css";
 import { fetchNews } from "../../../thunk-action/fetch-news";
+
+import styles from "./news.module.css";
 
 export const News = () => {
   const news = useSelector((state) => state.news.news);
   const dispatch = useDispatch();
 
+  const [dateSotredNews, setDateSotredNews] = useState(news);
+  const [isSorted, setIsSorted] = useState(false);
+
   useEffect(() => {
     dispatch(fetchNews());
   }, [dispatch]);
 
+  useEffect(() => {
+    setDateSotredNews(news);
+  }, [news]);
+
+  const hadleSorting = () => {
+    if (!isSorted) {
+      const sortingNews = dateSotredNews
+        .slice()
+        .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+      setDateSotredNews(sortingNews);
+      setIsSorted(true);
+    } else {
+      setDateSotredNews(news);
+      setIsSorted(false);
+    }
+  };
+
   return (
     <div className={styles.newsContainer}>
-      {news.map(({ id, title, content, published_at }) => (
+      <button className={styles.sorting} onClick={hadleSorting}>
+        <i
+          id="sorting-icon"
+          className="fa fa-sort fa-lg"
+          aria-hidden="true"
+        ></i>
+        <label htmlFor="sorting-icon" className={styles.lable}>
+          Сортировка по дате
+        </label>
+      </button>
+      {dateSotredNews.map(({ id, title, content, published_at }) => (
         <article key={id} className={styles.article}>
           <div className={styles.title}>
             <h3>{title}</h3>

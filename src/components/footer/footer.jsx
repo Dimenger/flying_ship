@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 import { Phones } from "../../elements/phones/phones";
 import { SocialIcon } from "../../elements/social-icon/social-icon";
-import { Button } from "../../elements/button/button";
 
 import styles from "./footer.module.css";
 
