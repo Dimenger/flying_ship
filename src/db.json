@@ -2,15 +2,18 @@
   "roles": [
     {
       "id": "A",
-      "name": "Administrator"
+      "name": "Administrator",
+      "role": "0"
     },
     {
       "id": "R",
-      "name": "Reader"
+      "name": "Reader",
+      "role": "1"
     },
     {
       "id": "G",
-      "name": "Guest"
+      "name": "Guest",
+      "role": "2"
     }
   ],
 
@@ -97,24 +100,31 @@
   "users": [
     {
       "id": "qwe",
-      "login": "Adam",
+      "login": "Princeps",
       "password": "qwe123",
-      "registered_at": "2025-02-01 10:04",
-      "role_id": "A"
+      "registered_at": "2025-02-01",
+      "role": "0"
     },
     {
       "id": "d62b",
-      "login": "Ivan",
+      "login": "Lector",
       "password": "qwe123",
-      "registered_at": "2025-09-19 15:40",
-      "role_id": "R"
+      "registered_at": "2025-09-19",
+      "role": "1"
+    },
+    {
+      "id": "Rhуrj8OуZ",
+      "login": "Visitator",
+      "password": "qwe123",
+      "registered_at": "2023-09-26",
+      "role": "1"
     },
     {
       "id": "Rhrj8OZ",
-      "login": "Alex",
-      "password": "qazwsx",
-      "registered_at": "2025-09-26 12:25",
-      "role_id": "R"
+      "login": "Hospes",
+      "password": "qwe123",
+      "registered_at": "2025-09-26",
+      "role": "2"
     }
   ]
 }

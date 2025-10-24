@@ -9,7 +9,7 @@ export const News = () => {
   const news = useSelector((state) => state.news.news);
   const dispatch = useDispatch();
 
-  const [sortedNews, setSortedNews] = useState(news);
+  const [dateSotredNews, setDateSotredNews] = useState(news);
   const [isSorted, setIsSorted] = useState(false);
 
   useEffect(() => {
@@ -17,30 +17,35 @@ export const News = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setSortedNews(news);
+    setDateSotredNews(news);
   }, [news]);
 
-  const sortNewsDate = () => {
+  const hadleSorting = () => {
     if (!isSorted) {
-      const newSort = sortedNews
+      const sortingNews = dateSotredNews
         .slice()
         .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-      setSortedNews(newSort);
+      setDateSotredNews(sortingNews);
       setIsSorted(true);
     } else {
-      setSortedNews(news);
+      setDateSotredNews(news);
       setIsSorted(false);
     }
   };
 
   return (
     <div className={styles.newsContainer}>
-      <button onClick={sortNewsDate}>
-        <i className="fa fa-sort fa-2x" aria-hidden="true">
+      <button className={styles.sorting} onClick={hadleSorting}>
+        <i
+          id="sorting-icon"
+          className="fa fa-sort fa-lg"
+          aria-hidden="true"
+        ></i>
+        <label htmlFor="sorting-icon" className={styles.lable}>
           Сортировка по дате
-        </i>
+        </label>
       </button>
-      {sortedNews.map(({ id, title, content, published_at }) => (
+      {dateSotredNews.map(({ id, title, content, published_at }) => (
         <article key={id} className={styles.article}>
           <div className={styles.title}>
             <h3>{title}</h3>
