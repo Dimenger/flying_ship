@@ -6,17 +6,21 @@
       "role": "0"
     },
     {
-      "id": "R",
+      "id": "M",
       "name": "Reader",
       "role": "1"
     },
     {
-      "id": "G",
+      "id": "R",
       "name": "Guest",
       "role": "2"
+    },
+    {
+      "id": "G",
+      "name": "Guest",
+      "role": "3"
     }
   ],
-
   "news": [
     {
       "id": "001",
@@ -96,35 +100,46 @@
       "postId": 1
     }
   ],
-
   "users": [
     {
-      "id": "qwe",
-      "login": "Princeps",
-      "password": "qwe123",
+      "id": "AdSum5H",
+      "surname": "Master",
+      "name": "First",
+      "password": "qwerty",
       "registered_at": "2025-02-01",
+      "email": "qwe@qwe.ru",
+      "phone": "452 343-82-99",
       "role": "0"
     },
     {
-      "id": "d62b",
-      "login": "Lector",
-      "password": "qwe123",
-      "registered_at": "2025-09-19",
-      "role": "1"
-    },
-    {
-      "id": "Rhуrj8OуZ",
-      "login": "Visitator",
-      "password": "qwe123",
-      "registered_at": "2023-09-26",
-      "role": "1"
-    },
-    {
       "id": "Rhrj8OZ",
-      "login": "Hospes",
-      "password": "qwe123",
+      "surname": "Moderator",
+      "name": "Second",
+      "password": "asdfgh",
+      "email": "asd@asd.ru",
       "registered_at": "2025-09-26",
-      "role": "2"
+      "phone": "999 444-55-99",
+      "role": "1"
+    },
+    {
+      "surname": "Lector",
+      "name": "New",
+      "email": "zxc@zxc.ru",
+      "phone": "923 546-99-33",
+      "password": "zxcvbn",
+      "registered_at": "2025-10-25",
+      "role": "2",
+      "id": "nrskcDO"
+    },
+    {
+      "surname": "Visitator",
+      "name": "Alius",
+      "email": "wsx@wsx.ru",
+      "phone": "666 888-44-66",
+      "password": "wsxedc",
+      "registered_at": "2025-10-25",
+      "role": "2",
+      "id": "J7yT1dP"
     }
   ]
 }

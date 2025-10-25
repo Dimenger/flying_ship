@@ -5,6 +5,7 @@ import { MainPage } from "./components/pages/main-page/main-page";
 import { About } from "./components/pages/about/about";
 import { News } from "./components/pages/news/news";
 import { Users } from "./components/pages/users/users";
+import { Registration } from "./components/pages/registration/registration";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -20,6 +21,7 @@ export const App = () => {
         { path: "news", element: <News /> },
         { path: "/contacts", element: <div> Contacts </div> },
         { path: "/users", element: <Users /> },
+        { path: "/registration", element: <Registration /> },
       ],
     },
   ]);

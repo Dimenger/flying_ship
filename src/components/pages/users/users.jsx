@@ -27,19 +27,38 @@ export const Users = () => {
           <caption>Список пользователей</caption>
           <thead>
             <tr>
+              <th scope="col">Фамилия</th>
               <th scope="col">Имя</th>
+              <th scope="col">Пароль</th>
               <th scope="col">Дата регистрации</th>
+              <th scope="col">Телефон</th>
+              <th scope="col">email</th>
               <th scope="col">Роль</th>
             </tr>
           </thead>
           <tbody>
-            {users.map(({ id, login, registered_at, role }) => (
-              <tr key={id}>
-                <td>{login}</td>
-                <td>{registered_at}</td>
-                <td>{role}</td>
-              </tr>
-            ))}
+            {users.map(
+              ({
+                id,
+                surname,
+                name,
+                password,
+                registered_at,
+                phone,
+                email,
+                role,
+              }) => (
+                <tr key={id}>
+                  <td>{surname}</td>
+                  <td>{name}</td>
+                  <td>{password}</td>
+                  <td>{registered_at}</td>
+                  <td>{phone}</td>
+                  <td>{email}</td>
+                  <td>{role}</td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>
