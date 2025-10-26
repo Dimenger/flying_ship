@@ -6,6 +6,7 @@ import { PersonalPage } from "./components/pages/personal-page/personal-page";
 import { News } from "./components/pages/news/news";
 import { Users } from "./components/pages/users/users";
 import { Registration } from "./components/pages/registration/registration";
+import { Services } from "./components/pages/services/services";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -15,7 +16,7 @@ export const App = () => {
       children: [
         { index: true, element: <MainPage /> },
         { path: "/personal-page", element: <PersonalPage /> },
-        { path: "/services", element: <div> Services </div> },
+        { path: "/services", element: <Services /> },
         { path: "/schedule", element: <div> Schedule </div> },
         { path: "news", element: <News /> },
         { path: "/contacts", element: <div> Contacts </div> },
