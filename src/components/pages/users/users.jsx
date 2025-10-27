@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./users.module.css";
+import { Spinner } from "../../../elements/spinner/spinner";
 
 export const Users = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -15,10 +17,16 @@ export const Users = () => {
         setUsers(loadedUsers);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     getUsers();
   }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles["users-container"]}>

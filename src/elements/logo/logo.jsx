@@ -1,4 +1,4 @@
-import logo from "../../assets/logo-img/logo.png";
+import logo from "../../assets/logo-img/logo_1.png";
 // import { Image } from "../image/image";
 
 import styles from "./logo.module.css";
