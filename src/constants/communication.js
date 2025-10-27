@@ -14,7 +14,6 @@ export const COMMUNICATION = {
     },
     {
       id: "address_2",
-
       district: "п. Сухая Самарка",
       address: "г. Самара, ул. Белорусская, 131",
     },

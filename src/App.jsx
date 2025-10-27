@@ -8,6 +8,8 @@ import { Users } from "./components/pages/users/users";
 import { Registration } from "./components/pages/registration/registration";
 import { Services } from "./components/pages/services/services";
 import { Service } from "./components/pages/service/service";
+import { Schedule } from "./components/pages/schedule/schedule";
+import { Contacts } from "./components/pages/contacts/contacts";
 import { Error } from "./components/error/error";
 import { ERROR } from "./constants";
 
@@ -20,9 +22,9 @@ export const App = () => {
         { index: true, element: <MainPage /> },
         { path: "/services", element: <Services /> },
         { path: "/services/:id", element: <Service /> },
-        { path: "/schedule", element: <div> Schedule </div> },
+        { path: "/schedule", element: <Schedule /> },
         { path: "/news", element: <News /> },
-        { path: "/contacts", element: <div> Contacts </div> },
+        { path: "/contacts", element: <Contacts /> },
         { path: "/registration", element: <Registration /> },
         { path: "/personal-page", element: <PersonalPage /> },
         { path: "/users", element: <Users /> },
