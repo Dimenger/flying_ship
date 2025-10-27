@@ -1,0 +1,28 @@
+.servicesContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.service {
+  border: 1px solid #8bc34a;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f0f5e9;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.service:hover {
+  border-color: #aed581;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.link{
+  text-decoration: none;
+}

@@ -1,11 +1,10 @@
-import logo from "../../assets/logo/logo.png";
+import logo from "../../assets/logo-img/logo_1.png";
+// import { Image } from "../image/image";
 
 import styles from "./logo.module.css";
 
 export const Logo = () => {
-  return (
-    <div className={styles.logoContainer}>
-      <img src={logo} alt="Logo" className={styles.logo} />
-    </div>
-  );
+  return <img src={logo} alt="logo" className={styles.logo} />;
 };
+
+// return <Image image={logo} alt="logo" width="350px" height="auto" />;

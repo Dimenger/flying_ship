@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchNews } from "../../../thunk-action/fetch-news";
+import { Spinner } from "../../../elements/spinner/spinner";
 
 import styles from "./news.module.css";
 
@@ -11,9 +12,12 @@ export const News = () => {
 
   const [dateSotredNews, setDateSotredNews] = useState(news);
   const [isSorted, setIsSorted] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchNews());
+    dispatch(fetchNews())
+      .then(() => setLoading(false))
+      .catch(() => setLoading(true));
   }, [dispatch]);
 
   useEffect(() => {
@@ -32,6 +36,10 @@ export const News = () => {
       setIsSorted(false);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.newsContainer}>

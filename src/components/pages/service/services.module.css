@@ -1,0 +1,23 @@
+.serviceContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px; /* отступ между картинкой и текстом */
+}
+
+.imageWrapper {
+  flex: 0 0 auto;
+}
+
+.content {
+  flex: 1; /* занимает всё оставшееся пространство */
+  display: flex;
+  flex-direction: column;
+}
+
+.prices, .aims {
+  margin-top: 10px;
+}
+
+.priceItem, .aimItem {
+  margin-bottom: 5px;
+}
