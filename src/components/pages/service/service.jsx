@@ -15,8 +15,7 @@ export const Service = () => {
   let param = useParams();
   const id = param.id;
 
-  const service = useSelector((state) => state.service.service);
-  const [prices, setPrices] = useState(null);
+  const service = useSelector((state) => state.service);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -45,23 +44,23 @@ export const Service = () => {
       <div className={styles.content}>
         <Title label={service.title} fontSize="26px" />
         <Title label={service.subtitle} />
-        {/* <div className={styles.prices}>
-          {prices.map(({ title, price }, index) => (
+        <div className={styles.prices}>
+          {service.prices.map(({ title, price }, index) => (
             <div key={index} className={styles.priceItem}>
               {title} : {price}
             </div>
           ))}
-        </div> */}
+        </div>
 
         <p>{service.description}</p>
 
-        {/* <div className={styles.aims}>
+        <div className={styles.aims}>
           {service.aims.map(({ title, text }, index) => (
             <div key={index} className={styles.aimItem}>
               <strong>{title}</strong>: {text}
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );
