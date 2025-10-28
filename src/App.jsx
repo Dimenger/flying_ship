@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
 import { MainPage } from "./components/pages/main-page/main-page";
 import { PersonalPage } from "./components/pages/personal-page/personal-page";
-import { News } from "./components/pages/news/news";
+import { Posts } from "./components/pages/posts/posts";
 import { Users } from "./components/pages/users/users";
 import { Registration } from "./components/pages/registration/registration";
 import { Services } from "./components/pages/services/services";
@@ -23,7 +23,7 @@ export const App = () => {
         { path: "/services", element: <Services /> },
         { path: "/services/:id", element: <Service /> },
         { path: "/schedule", element: <Schedule /> },
-        { path: "/news", element: <News /> },
+        { path: "/posts", element: <Posts /> },
         { path: "/contacts", element: <Contacts /> },
         { path: "/registration", element: <Registration /> },
         { path: "/personal-page", element: <PersonalPage /> },

@@ -5,13 +5,13 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 
-import { newsReducer } from "./reducers";
+import { postsReducer as postsReducer } from "./reducers";
 import { usersReducer } from "./reducers";
 import { serviceReducer } from "./reducers";
 import { thunk } from "redux-thunk";
 
 const rootReducer = combineReducers({
-  news: newsReducer,
+  posts: postsReducer,
   users: usersReducer,
   service: serviceReducer,
 });

@@ -1,37 +1,37 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchNews } from "../../../thunk-action/fetch-news";
+import { fetchPosts } from "../../../thunk-action/fetch-posts";
 import { Spinner } from "../../../elements/spinner/spinner";
 
-import styles from "./news.module.css";
+import styles from "./posts.module.css";
 
-export const News = () => {
-  const news = useSelector((state) => state.news);
+export const Posts = () => {
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
-  const [dateSotredNews, setDateSotredNews] = useState(news);
+  const [dateSotredPosts, setDateSotredPosts] = useState(posts);
   const [isSorted, setIsSorted] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchNews()).then(() => setLoading(false));
+    dispatch(fetchPosts()).then(() => setLoading(false));
   }, [dispatch]);
 
   useEffect(() => {
-    setDateSotredNews(news);
-  }, [news]);
+    setDateSotredPosts(posts);
+  }, [posts]);
 
   const hadleSorting = () => {
     if (!isSorted) {
-      const sortingNews = dateSotredNews
+      const sortingPosts = dateSotredPosts
         .slice()
         .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-      setDateSotredNews(sortingNews);
+      setDateSotredPosts(sortingPosts);
       setIsSorted(true);
     } else {
-      setDateSotredNews(news);
+      setDateSotredPosts(posts);
       setIsSorted(false);
     }
   };
@@ -41,7 +41,7 @@ export const News = () => {
   }
 
   return (
-    <div className={styles.newsContainer}>
+    <div className={styles.postsContainer}>
       <button className={styles.sorting} onClick={hadleSorting}>
         <i
           id="sorting-icon"
@@ -52,7 +52,7 @@ export const News = () => {
           Сортировка по дате
         </label>
       </button>
-      {dateSotredNews.map(({ id, title, content, published_at }) => (
+      {dateSotredPosts.map(({ id, title, content, published_at }) => (
         <article key={id} className={styles.article}>
           <div className={styles.title}>
             <h3>{title}</h3>

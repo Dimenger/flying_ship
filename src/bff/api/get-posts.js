@@ -1,6 +1,6 @@
-export const getNews = async () => {
+export const getPosts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/news");
+    const res = await fetch("http://localhost:3000/posts");
     if (!res.ok) {
       throw new Error(`Oшибка получения данных! status: ${res.status}`);
     }

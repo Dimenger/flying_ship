@@ -1,3 +1,3 @@
-export * from "./news-reducer";
+export * from "./posts-reducer";
 export * from "./users-reducer";
 export * from "./service-reducer";
