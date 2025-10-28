@@ -30,6 +30,7 @@ export const Registration = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registeredUserData),
+      credentials: "include",
     })
       .then((res) => {
         if (!res.ok) {

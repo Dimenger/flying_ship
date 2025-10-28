@@ -38,7 +38,7 @@ export const Users = () => {
           <tbody>
             {users.map(
               ({
-                id,
+                _id,
                 surname,
                 name,
                 password,
@@ -47,7 +47,7 @@ export const Users = () => {
                 email,
                 role,
               }) => (
-                <tr key={id}>
+                <tr key={_id}>
                   <td>{surname}</td>
                   <td>{name}</td>
                   <td>{password}</td>

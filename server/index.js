@@ -7,6 +7,7 @@ import chalk from "chalk";
 
 import { getPosts } from "./src/controllers/post.controller.js";
 import { getUsers, addUser } from "./src/controllers/user.controller.js";
+import { getService } from "./src/controllers/service.controller.js";
 
 dotenv.config();
 const app = express();
@@ -34,7 +35,17 @@ app.post("/users", async (req, res) => {
 
 app.get("/users", async (req, res) => {
   try {
-    res.json(await getUsers());
+    res.json(await getUsers(req.body));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/service", async (req, res) => {
+  try {
+    console.log(req.body);
+    const service = await getService(req.body.id);
+    res.json(service);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

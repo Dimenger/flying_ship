@@ -52,8 +52,8 @@ export const Posts = () => {
           Сортировка по дате
         </label>
       </button>
-      {dateSotredPosts.map(({ id, title, content, published_at }) => (
-        <article key={id} className={styles.article}>
+      {dateSotredPosts.map(({ _id, title, content, published_at }) => (
+        <article key={_id} className={styles.article}>
           <div className={styles.title}>
             <h3>{title}</h3>
             <div className={styles.time}>
