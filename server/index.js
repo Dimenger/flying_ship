@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import chalk from "chalk";
 
 import { getPosts } from "./src/controllers/post.controller.js";
+import { getUsers, addUser } from "./src/controllers/user.controller.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,23 @@ app.use(cookieParser());
 app.get("/posts", async (req, res) => {
   try {
     res.json(await getPosts());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  try {
+    await addUser(req.body);
+    res.json({ message: "Request was added!" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/users", async (req, res) => {
+  try {
+    res.json(await getUsers());
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
