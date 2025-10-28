@@ -1,7 +1,7 @@
-import { PostNewsList } from "../actions/post-news-list";
-import { GetNewsList } from "../bff/api";
+import { postNews } from "../actions";
+import { getNews } from "../bff/api";
 
 export const fetchNews = () => async (dispatch) => {
-  const news = await GetNewsList();
-  dispatch(PostNewsList(news));
+  const news = await getNews();
+  dispatch(postNews(news));
 };

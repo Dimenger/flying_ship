@@ -15,9 +15,8 @@ export const News = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchNews())
-      .then(() => setLoading(false))
-      .catch(() => setLoading(true));
+    setLoading(true);
+    dispatch(fetchNews()).then(() => setLoading(false));
   }, [dispatch]);
 
   useEffect(() => {

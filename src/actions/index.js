@@ -1,1 +1,3 @@
-export * from "./get-news-list";
+export * from "./post-news";
+export * from "./post-users";
+export * from "./post-service";
