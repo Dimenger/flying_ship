@@ -7,7 +7,7 @@ import { Spinner } from "../../../elements/spinner/spinner";
 import styles from "./news.module.css";
 
 export const News = () => {
-  const news = useSelector((state) => state.news.news);
+  const news = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
   const [dateSotredNews, setDateSotredNews] = useState(news);
@@ -15,9 +15,8 @@ export const News = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchNews())
-      .then(() => setLoading(false))
-      .catch(() => setLoading(true));
+    setLoading(true);
+    dispatch(fetchNews()).then(() => setLoading(false));
   }, [dispatch]);
 
   useEffect(() => {

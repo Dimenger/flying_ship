@@ -1,11 +1,9 @@
-const inintialNewsState = {
-  news: [],
-};
+const inintialNewsState = [];
 
 export const newsReducer = (state = inintialNewsState, action) => {
   switch (action.type) {
-    case "POST_NEWS_LIST":
-      return { ...state, news: action.payload };
+    case "POST_NEWS":
+      return [...action.payload];
 
     default:
       return state;

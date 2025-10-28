@@ -61,7 +61,7 @@ export const Registration = () => {
           <legend>
             <Title lable="ФИО" />
           </legend>
-          <p>
+          <div>
             <label htmlFor="surname">Фамилия</label>
             <input
               type="text"
@@ -74,8 +74,8 @@ export const Registration = () => {
               autoComplete="username"
               required
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <label htmlFor="name">Имя</label>
             <input
               type="text"
@@ -87,13 +87,13 @@ export const Registration = () => {
               }}
               required
             />
-          </p>
+          </div>
         </fieldset>
         <fieldset>
           <legend>
             <Title lable="Контакты" />
           </legend>
-          <p>
+          <div>
             <label htmlFor="email">email</label>
             <input
               type="email"
@@ -106,8 +106,8 @@ export const Registration = () => {
               autoComplete="username"
               required
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <label htmlFor="phone">Телефон</label>
             <input
               type="tel"
@@ -121,13 +121,13 @@ export const Registration = () => {
               pattern="[0-9]{3} [0-9]{3}-[0-9]{2}-[0-9]{2}"
               required
             />
-          </p>
+          </div>
         </fieldset>
         <fieldset>
           <legend>
             <Title lable="Пароль" />
           </legend>
-          <p>
+          <div>
             <label htmlFor="password">Пароль (6 символов минимум)</label>
             <input
               type="password"
@@ -142,8 +142,8 @@ export const Registration = () => {
               autoComplete="new-password"
               required
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <label htmlFor="repeat_password">Павтор пароля</label>
             <div className={styles["repeat-password"]}>
               <input
@@ -167,7 +167,7 @@ export const Registration = () => {
                 Пароли не совпадают
               </span>
             </div>
-          </p>
+          </div>
         </fieldset>
         <input
           type="submit"

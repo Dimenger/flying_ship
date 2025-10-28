@@ -1,28 +1,19 @@
 import { useEffect, useState } from "react";
 import styles from "./users.module.css";
 import { Spinner } from "../../../elements/spinner/spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "../../../thunk-action";
 
 export const Users = () => {
-  const [users, setUsers] = useState([]);
+  const users = useSelector((state) => state.users);
   const [loading, setLoading] = useState(true);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/users");
-        if (!res.ok) {
-          throw new Error(`Ошибка: ${res.status}. Текст: ${res.statusText}`);
-        }
-        const loadedUsers = await res.json();
-        setUsers(loadedUsers);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getUsers();
-  }, []);
+    setLoading(true);
+    dispatch(fetchUsers()).finally(() => setLoading(false));
+  }, [dispatch]);
 
   if (loading) {
     return <Spinner />;
