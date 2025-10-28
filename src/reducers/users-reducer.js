@@ -1,11 +1,9 @@
-const initialUserState = {
-  users: [],
-};
+const initialUserState = [];
 
 export const usersReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case "POST_USERS":
-      return { ...state, users: action.payload };
+      return [...action.payload];
 
     default:
       return state;

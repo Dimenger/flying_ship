@@ -7,5 +7,6 @@ export const getUsers = async () => {
     return await res.json();
   } catch (error) {
     console.error("Oшибка получения данных!", error);
+    return []; /*чтобы избежать проблем при обртоке dispatch(postUsers(users))*/
   }
 };

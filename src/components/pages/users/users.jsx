@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../../thunk-action";
 
 export const Users = () => {
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((state) => state.users);
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();

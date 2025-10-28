@@ -2,6 +2,10 @@ import { postUsers } from "../actions";
 import { getUsers } from "../bff/api";
 
 export const fetchUsers = () => async (dispatch) => {
-  const users = await getUsers();
-  dispatch(postUsers(users));
+  try {
+    const users = await getUsers();
+    dispatch(postUsers(users));
+  } catch (error) {
+    console.error("Ошибка при получении пользователей", error);
+  }
 };
