@@ -10,6 +10,7 @@ import { Services } from "./components/pages/services/services";
 import { Service } from "./components/pages/service/service";
 import { Schedule } from "./components/pages/schedule/schedule";
 import { Contacts } from "./components/pages/contacts/contacts";
+import { Login } from "./components/pages/login/login";
 import { Error } from "./components/error/error";
 import { ERROR } from "./constants";
 
@@ -28,6 +29,7 @@ export const App = () => {
         { path: "/registration", element: <Registration /> },
         { path: "/personal-page", element: <PersonalPage /> },
         { path: "/users", element: <Users /> },
+        { path: "/login", element: <Login /> },
         { path: "*", element: <Error error={ERROR.PAGE_NOT_EXIST} /> },
       ],
     },
