@@ -38,6 +38,14 @@ export const registerUser = async (userDate) => {
   }
 };
 
+export const deleteUser = async (id) => {
+  try {
+    await User.findByIdAndDelete(id);
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const loginUser = async (userData) => {
   try {
     const { email, password } = userData;
