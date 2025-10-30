@@ -12,21 +12,17 @@ export const Registration = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(false);
 
-  const date = new Date().toISOString().slice(0, 10);
-
   const registeredUserData = {
     surname,
     name,
     email,
     phone,
     password,
-    registered_at: date,
-    role: "2",
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:3000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registeredUserData),
@@ -39,7 +35,7 @@ export const Registration = () => {
         const result = res.json();
         console.log(result);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err, "Ошибка сервера!!!"));
 
     setSurname("");
     setName("");

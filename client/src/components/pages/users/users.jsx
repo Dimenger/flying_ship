@@ -6,6 +6,7 @@ import { fetchUsers } from "../../../thunk-action";
 
 export const Users = () => {
   const users = useSelector((state) => state.users);
+  console.log(users);
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ export const Users = () => {
             <tr>
               <th scope="col">Фамилия</th>
               <th scope="col">Имя</th>
-              <th scope="col">Пароль</th>
               <th scope="col">Дата регистрации</th>
               <th scope="col">Телефон</th>
               <th scope="col">email</th>
@@ -37,20 +37,10 @@ export const Users = () => {
           </thead>
           <tbody>
             {users.map(
-              ({
-                _id,
-                surname,
-                name,
-                password,
-                registered_at,
-                phone,
-                email,
-                role,
-              }) => (
-                <tr key={_id}>
+              ({ id, surname, name, registered_at, phone, email, role }) => (
+                <tr key={id}>
                   <td>{surname}</td>
                   <td>{name}</td>
-                  <td>{password}</td>
                   <td>{registered_at}</td>
                   <td>{phone}</td>
                   <td>{email}</td>

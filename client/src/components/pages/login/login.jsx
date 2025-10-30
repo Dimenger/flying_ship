@@ -9,22 +9,24 @@ export const Login = () => {
 
   const userData = { email, password };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = fetch("localhost3000/login", {
+      const res = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
         credentials: "include",
       });
       if (!res.ok) {
-        throw new Error("Jib,rf");
+        throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
       }
-      const result = res.json();
+      const result = await res.json();
       console.log(result);
+      setEmail("");
+      setPassword("");
     } catch (error) {
-      console.error(error, "errrorrrr!");
+      console.error(error, "Ошибка сервера!!!");
     }
   };
 
