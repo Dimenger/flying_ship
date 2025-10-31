@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 import { User } from "../models/user.model.js";
 import { userMapper } from "../mappers/user.mapper.js";
+import { generateToken } from "../helpers/generate-token.helper.js";
 
 export const getUsers = async () => {
   try {
@@ -57,8 +58,10 @@ export const loginUser = async (userData) => {
     if (!isPasswordCorrect) {
       throw new Error("Неверный пароль!");
     }
-    console.log(chalk.green(email));
-    return jwt.sign({ email }, process.env.API_KEY, { expiresIn: "1d" });
+    const token = generateToken({ id: user._id });
+    const mappedUser = userMapper(user);
+
+    return { token, user: mappedUser };
   } catch (error) {
     throw error;
   }

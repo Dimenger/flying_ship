@@ -66,9 +66,11 @@ app.post("/service", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    const token = await loginUser(req.body);
+    const { token, user } = await loginUser(req.body);
+
     res.cookie("token", token, { httpOnly: true });
-    res.json({ success: true, message: "Пользователь вошел!" });
+    res.json(user);
+    // res.json({ success: true, message: "Пользователь вошел!" });
     console.log(chalk.greenBright("Пользователь вошел!"));
   } catch (err) {
     res.status(500).json({ error: err.message });
