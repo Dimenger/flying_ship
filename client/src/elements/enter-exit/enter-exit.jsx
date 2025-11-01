@@ -1,11 +1,9 @@
 import styles from "./enter-exit.module.css";
 
-export const EnterExit = () => {
-  const flag = true;
-
+export const EnterExit = ({ stateFlag }) => {
   return (
     <div className={styles.EnterExit}>
-      {flag ? (
+      {stateFlag ? (
         <i className="fa fa-sign-in fa-2x" aria-hidden="true"></i>
       ) : (
         <i

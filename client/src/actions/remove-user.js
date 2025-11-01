@@ -1,4 +1,3 @@
-export const removeUser = (id) => ({
+export const removeUser = () => ({
   type: "REMOVE_USER",
-  payload: id,
 });

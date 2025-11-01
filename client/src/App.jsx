@@ -13,6 +13,7 @@ import { Contacts } from "./components/pages/contacts/contacts";
 import { Login } from "./components/pages/login/login";
 import { Error } from "./components/error/error";
 import { ERROR } from "./constants";
+import { PrivateRoute } from "./components/protected-route/protected-route";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -27,8 +28,22 @@ export const App = () => {
         { path: "/posts", element: <Posts /> },
         { path: "/contacts", element: <Contacts /> },
         { path: "/registration", element: <Registration /> },
-        { path: "/personal-page", element: <PersonalPage /> },
-        { path: "/users", element: <Users /> },
+        {
+          path: "/personal-page",
+          element: (
+            <PrivateRoute>
+              <PersonalPage />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/users",
+          element: (
+            <PrivateRoute>
+              <Users />
+            </PrivateRoute>
+          ),
+        },
         { path: "/login", element: <Login /> },
         { path: "*", element: <Error error={ERROR.PAGE_NOT_EXIST} /> },
       ],

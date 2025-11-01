@@ -77,9 +77,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/logout", async (res, req) => {
+app.get("/logout", async (req, res) => {
   try {
-    res.cookies("token", "", { httpOnly: true });
+    const token = "";
+    res.cookie("token", token, { httpOnly: true });
     res.json({ success: true, message: "Пользователь вышел!" });
     console.log(chalk.greenBright("Пользователь вышел!"));
   } catch (err) {

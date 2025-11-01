@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Title } from "../../../elements/title/title";
+import { getUser } from "../../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./login.module.css";
 
 export const Login = () => {
+  const user = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const userData = { email, password };
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +29,13 @@ export const Login = () => {
       console.log(result);
       setEmail("");
       setPassword("");
+      dispatch(getUser(result));
     } catch (error) {
       console.error(error, "Ошибка сервера!!!");
     }
   };
+
+  console.log(user);
 
   return (
     <div>
