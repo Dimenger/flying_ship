@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import { User } from "../models/user.model.js";
 import { userMapper } from "../mappers/user.mapper.js";
@@ -26,14 +25,18 @@ export const registerUser = async (userDate) => {
     }
     const passwordHash = await bcrypt.hash(userDate.password, 8);
 
-    await User.create({
+    const user = await User.create({
       surname: userDate.surname,
       name: userDate.name,
       email: userDate.email,
       phone: userDate.phone,
       password: passwordHash,
     });
+    const token = generateToken({ id: user._id });
+    const mappedUser = userMapper(user);
+
     console.log(chalk.green("User is added!"));
+    return { token, user: mappedUser };
   } catch (err) {
     throw err;
   }

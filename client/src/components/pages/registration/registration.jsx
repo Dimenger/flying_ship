@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Title } from "../../../elements/title/title";
+import { getUser } from "../../../actions";
 
 import styles from "./registration.module.css";
 
@@ -12,6 +14,8 @@ export const Registration = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(false);
 
+  const dispatch = useDispatch();
+
   const registeredUserData = {
     surname,
     name,
@@ -20,29 +24,31 @@ export const Registration = () => {
     password,
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(registeredUserData),
-      credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Ошибка: ${res.status}, ${res.statusText}`);
-        }
-        const result = res.json();
-        console.log(result);
-      })
-      .catch((err) => console.error(err, "Ошибка сервера!!!"));
+    try {
+      const res = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registeredUserData),
+        credentials: "include",
+      });
+      if (!res.ok) {
+        throw new Error(`Ошибка: ${res.status}, ${res.statusText}`);
+      }
+      const result = await res.json();
 
-    setSurname("");
-    setName("");
-    setEmail("");
-    setPhone("");
-    setPassword("");
-    setRepeatPassword("");
+      setSurname("");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setRepeatPassword("");
+
+      dispatch(getUser(result));
+    } catch (err) {
+      console.error(err, "Ошибка сервера!!!");
+    }
   };
 
   const RepeatPasswordChange = (event) => {

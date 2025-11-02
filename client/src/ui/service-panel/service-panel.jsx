@@ -19,7 +19,7 @@ export const ServicePanel = () => {
 
   const onLogout = async () => {
     try {
-      const res = await fetch("http://localhost:3000/logout", {
+      const res = await fetch("http://localhost:3000/auth/logout", {
         credentials: "include",
       });
       const result = await res.json();
