@@ -29,7 +29,7 @@ export const App = () => {
         { path: "/contacts", element: <Contacts /> },
         { path: "/registration", element: <Registration /> },
         {
-          path: "/personal-page",
+          path: "/user",
           element: (
             <PrivateRoute>
               <PersonalPage />

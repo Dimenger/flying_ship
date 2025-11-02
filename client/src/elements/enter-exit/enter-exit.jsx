@@ -4,12 +4,12 @@ export const EnterExit = ({ stateFlag }) => {
   return (
     <div className={styles.EnterExit}>
       {stateFlag ? (
-        <i className="fa fa-sign-in fa-2x" aria-hidden="true"></i>
-      ) : (
         <i
-          className="fa fa-sign-in fa-flip-horizontal fa-2x"
+          className="fa fa-sign-out fa-flip-horizontal fa-2x"
           aria-hidden="true"
         ></i>
+      ) : (
+        <i className="fa fa-sign-in fa-2x" aria-hidden="true"></i>
       )}
     </div>
   );
