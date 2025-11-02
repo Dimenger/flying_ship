@@ -4,11 +4,10 @@ export const getService = async (id) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: "service001",
+        id,
       }),
       credentials: "include",
     });
-    console.log(id);
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. ${res.statusText}`);
     }
