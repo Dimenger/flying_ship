@@ -13,12 +13,9 @@ export const ServicePanel = () => {
 
   const dispatch = useDispatch();
 
-  const role = user?.role;
+  // const role = user?.role;
   const userName = `${user?.name} ${user?.surname}`;
   const isAuth = !!user.id;
-
-  console.log("user.id :", user.id);
-  console.log("role :", role);
 
   const onLogout = async () => {
     try {
