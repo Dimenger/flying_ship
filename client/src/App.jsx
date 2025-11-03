@@ -11,37 +11,28 @@ import { Service } from "./components/pages/service/service";
 import { Schedule } from "./components/pages/schedule/schedule";
 import { Contacts } from "./components/pages/contacts/contacts";
 import { Login } from "./components/pages/login/login";
-import { Error } from "./components/error/error";
+import { Failure } from "./components/error/error";
 import { ERROR } from "./constants";
 import { PrivateRoute } from "./components/protected-route/protected-route";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser, removeUser } from "./actions";
+import { authMe } from "./bff/api/auth-me";
 
 export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const authMe = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/auth/me", {
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        });
-        if (!res.ok) {
-          throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
-        }
-        const user = await res.json();
-        if (user) {
-          dispatch(getUser(user));
-        } else {
-          dispatch(removeUser(user));
-        }
-      } catch (error) {
-        console.error(error, "Ошибка сервера!!!");
+    const Me = async () => {
+      const result = await authMe();
+      if (result) {
+        dispatch(getUser(result));
+      } else {
+        // если `null`, считаем, что пользователь не авторизован
+        dispatch(removeUser());
       }
     };
-    authMe();
+    Me();
   }, [dispatch]);
 
   const router = createBrowserRouter([
@@ -73,7 +64,7 @@ export const App = () => {
           ),
         },
         { path: "/login", element: <Login /> },
-        { path: "*", element: <Error error={ERROR.PAGE_NOT_EXIST} /> },
+        { path: "*", element: <Failure error={ERROR.PAGE_NOT_EXIST} /> },
       ],
     },
   ]);

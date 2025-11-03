@@ -1,6 +1,6 @@
 import styles from "./error.module.css";
 
-export const Error = ({ error }) =>
+export const Failure = ({ error }) =>
   error && (
     <div className={styles.error}>
       <h1>Ошибка</h1>

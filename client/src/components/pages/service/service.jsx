@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Title } from "../../../elements/title/title";
 import { SERVICES_IMAGES } from "../../../constants/services-images";
-import { Error } from "../../error/error";
+import { Failure } from "../../error/error";
 import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../thunk-action";
@@ -34,7 +34,7 @@ export const Service = () => {
   };
 
   if (loading) return <Spinner />;
-  if (!service) return <Error error={ERROR.SERVICE_NOT_EXIST} />;
+  if (!service.id) return <Failure error={ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>

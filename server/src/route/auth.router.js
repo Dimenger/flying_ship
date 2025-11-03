@@ -1,10 +1,12 @@
 import { Router } from "express";
 import chalk from "chalk";
+import { User } from "../models/user.model.js";
 import {
   registerUser,
   loginUser,
   authMe,
 } from "../controllers/auth.controller.js";
+import { verifyToken } from "../helpers/verify-token.helper.js";
 import { auth } from "../middlewares/auth.js";
 
 export const authRouter = Router();
@@ -43,13 +45,23 @@ authRouter.get("/logout", async (req, res) => {
   }
 });
 
-authRouter.get("/me", auth, async (req, res) => {
+authRouter.get("/me", async (req, res) => {
   try {
-    const user = authMe(req.user);
-
-    console.log(user);
+    const token = req.cookies.token;
+    console.log("token:", token);
+    if (!token) {
+      return res.status(401).json({ error: "Пользователь не авторизован" });
+    }
+    const verifyResult = verifyToken(token);
+    const verifyUser = await User.findById(verifyResult.id);
+    if (!verifyUser) {
+      res.json({ message: "Authenticated user not found!" });
+      return;
+    }
+    const user = authMe(verifyUser);
     res.json(user);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
