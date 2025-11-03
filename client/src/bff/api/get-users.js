@@ -1,6 +1,11 @@
 export const getUsers = async () => {
   try {
-    const res = await fetch("http://localhost:3000/users/users");
+    const res = await fetch("http://localhost:3000/users/users", {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. Текст: ${res.statusText}`);
     }

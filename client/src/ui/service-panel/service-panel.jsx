@@ -1,20 +1,21 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { EnterExit } from "../../elements/enter-exit/enter-exit";
-import { Button } from "../../elements/button/button";
-import { ICONS_LIST } from "../../constants";
-import { removeUser } from "../../actions/remove-user";
+// import { Button } from "../../elements/button/button";
+// import { ICONS_LIST } from "../../constants";
+import { removeUser, clearUserList } from "../../actions";
 
 import styles from "./service-panel.module.css";
+import { ROLES } from "../../constants/roles";
 
 export const ServicePanel = () => {
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  // const role = user?.role;
   const userName = `${user?.name} ${user?.surname}`;
+  const role = user?.role;
   const isAuth = !!user.id;
 
   const onLogout = async () => {
@@ -26,6 +27,7 @@ export const ServicePanel = () => {
       console.log(result);
 
       dispatch(removeUser());
+      dispatch(clearUserList());
     } catch (err) {
       console.error(err, "Ошибка сервера!!!");
     }
@@ -34,7 +36,7 @@ export const ServicePanel = () => {
   return (
     <div className={styles["service-panel-container"]}>
       <div className={styles.usersName}>
-        {isAuth && (
+        {isAuth && [ROLES.ADMINISTRATOR].includes(role) && (
           <Link to="/users" className={styles.link}>
             <i className={`fa fa-users ${styles.users}`} aria-hidden="true"></i>
           </Link>
@@ -85,4 +87,16 @@ export const ServicePanel = () => {
             </NavLink>
           ))}
         </div>
+
+
+        // Пример thunk-функции
+const clearUserData = () => (dispatch) => {
+  dispatch(removeUser());
+  dispatch(clearUserList());
+  // можно добавить дополнительную логику или асинхронные операции
+};
+
+// Затем в компоненте вы вызываете
+dispatch(clearUserData());
+
 */

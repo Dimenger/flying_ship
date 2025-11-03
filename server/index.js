@@ -6,9 +6,9 @@ import mongoose from "mongoose";
 import chalk from "chalk";
 
 import { authRouter } from "./src/route/auth.router.js";
-import { postRouter } from "./src/route/post.routher.js";
-import { serviceRout } from "./src/route/service.routher.js";
-import { usersRouther } from "./src/route/users.routher.js";
+import { postRouter } from "./src/route/post.router.js";
+import { serviceRouter } from "./src/route/service.router.js";
+import { usersRouter } from "./src/route/users.router.js";
 
 dotenv.config();
 const app = express();
@@ -19,8 +19,8 @@ app.use(cookieParser());
 
 app.use("/auth", authRouter);
 app.use("/post", postRouter);
-app.use("/service", serviceRout);
-app.use("/users", usersRouther);
+app.use("/service", serviceRouter);
+app.use("/users", usersRouter);
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL;

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Title } from "../../../elements/title/title";
 import { getUser } from "../../../actions";
 
@@ -15,6 +17,7 @@ export const Registration = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const registeredUserData = {
     surname,
@@ -46,6 +49,7 @@ export const Registration = () => {
       setRepeatPassword("");
 
       dispatch(getUser(result));
+      navigate("/user");
     } catch (err) {
       console.error(err, "Ошибка сервера!!!");
     }

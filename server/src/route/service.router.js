@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { getService } from "../controllers/service.controller.js";
 
-export const serviceRout = Router();
+export const serviceRouter = Router();
 
-serviceRout.post("/service", async (req, res) => {
+serviceRouter.post("/service", async (req, res) => {
   try {
     const service = await getService(req.body.id);
     res.json(service);

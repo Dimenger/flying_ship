@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Title } from "../../../elements/title/title";
 import { getUser } from "../../../actions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./login.module.css";
 
@@ -11,6 +12,7 @@ export const Login = () => {
 
   const userData = { email, password };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ export const Login = () => {
       setPassword("");
 
       dispatch(getUser(result));
+      navigate("/user");
     } catch (error) {
       console.error(error, "Ошибка сервера!!!");
     }
