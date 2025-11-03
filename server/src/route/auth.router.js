@@ -1,6 +1,11 @@
 import { Router } from "express";
 import chalk from "chalk";
-import { registerUser, loginUser } from "../controllers/user.controller.js";
+import {
+  registerUser,
+  loginUser,
+  authMe,
+} from "../controllers/auth.controller.js";
+import { auth } from "../middlewares/auth.js";
 
 export const authRouter = Router();
 
@@ -38,7 +43,13 @@ authRouter.get("/logout", async (req, res) => {
   }
 });
 
-authRouter.get("/me", async (req, res) => {
+authRouter.get("/me", auth, async (req, res) => {
   try {
-  } catch (error) {}
+    const user = authMe(req.user);
+
+    console.log(user);
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });

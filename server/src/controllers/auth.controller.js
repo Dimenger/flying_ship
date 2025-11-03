@@ -49,25 +49,14 @@ export const loginUser = async (userData) => {
   }
 };
 
-export const getUsers = async () => {
+export const authMe = (user) => {
   try {
-    const users = await User.find();
-    if (!users) {
-      throw new Error("Список пользователей пуст!");
+    if (!user) {
+      throw new Error("Пользователь не найден!");
     }
-    const mappedUsers = users.map((user) => userMapper(user));
-    return mappedUsers;
-  } catch (err) {
-    throw err;
+    const mappedUser = userMapper(user);
+    return mappedUser;
+  } catch (error) {
+    throw error;
   }
 };
-
-export const deleteUser = async (id) => {
-  try {
-    await User.findByIdAndDelete(id);
-  } catch (err) {
-    throw err;
-  }
-};
-
-//edit role

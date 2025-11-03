@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, deleteUser } from "../controllers/user.controller.js";
+import { getUsers, deleteUser } from "../controllers/users.controller.js";
 import { auth } from "../middlewares/auth.js";
 import { hasRole } from "../middlewares/has-role.js";
 import { ROLES } from "../constants/roles.constant.js";
@@ -19,11 +19,16 @@ usersRouter.get(
   }
 );
 
-usersRouter.delete("/users/:id", async (req, res) => {
-  try {
-    await deleteUser(req.params.id);
-    res.json({ success: true, message: "Пользователь удален!" });
-  } catch (err) {
-    res.json({ error: err.message || "Неизвестная ошибка" });
+usersRouter.delete(
+  "/users/:id",
+  auth,
+  hasRole([ROLES.ADMINISTRATOR]),
+  async (req, res) => {
+    try {
+      await deleteUser(req.params.id);
+      res.json({ success: true, message: "Пользователь удален!" });
+    } catch (err) {
+      res.json({ error: err.message || "Неизвестная ошибка" });
+    }
   }
-});
+);

@@ -14,8 +14,36 @@ import { Login } from "./components/pages/login/login";
 import { Error } from "./components/error/error";
 import { ERROR } from "./constants";
 import { PrivateRoute } from "./components/protected-route/protected-route";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser, removeUser } from "./actions";
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const authMe = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/auth/me", {
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+        if (!res.ok) {
+          throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
+        }
+        const user = await res.json();
+        if (user) {
+          dispatch(getUser(user));
+        } else {
+          dispatch(removeUser(user));
+        }
+      } catch (error) {
+        console.error(error, "Ошибка сервера!!!");
+      }
+    };
+    authMe();
+  }, [dispatch]);
+
   const router = createBrowserRouter([
     {
       path: "/",
