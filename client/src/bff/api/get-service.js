@@ -1,6 +1,6 @@
 export const getService = async (id) => {
   try {
-    const res = await fetch("http://localhost:3000/service", {
+    const res = await fetch("http://localhost:3000/service/service", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -6,19 +6,17 @@ import styles from "./layout.module.css";
 
 export const Layout = () => {
   return (
-    <div className={styles.body}>
+    <div className={styles.wrapper}>
+      <header className={styles.header}>
+        <Header />
+      </header>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
       <ScrollRestoration />
-      <div className={styles.wrapper}>
-        <header className={styles.header}>
-          <Header />
-        </header>
-        <main className={styles.main}>
-          <Outlet />
-        </main>
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
-      </div>
+      <footer className={styles.footer}>
+        <Footer />
+      </footer>
     </div>
   );
 };

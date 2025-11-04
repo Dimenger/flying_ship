@@ -2,10 +2,10 @@
   width: 100%;
   font-size: 20px;
   text-align: center;
-  padding: 10px; 
   background: linear-gradient(to bottom, #b2f2bb, #4caf50); 
   color: #fff; 
   gap: 20px; 
+  margin: 0;
 }
 
 .link {

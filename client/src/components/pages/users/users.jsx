@@ -20,7 +20,7 @@ export const Users = () => {
   const deleteUser = async (id) => {
     try {
       console.log("deleteUser:", id);
-      const res = await fetch(`http://localhost:3000/users/${id}`, {
+      const res = await fetch(`http://localhost:3000/users/users/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

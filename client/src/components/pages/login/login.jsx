@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { Title } from "../../../elements/title/title";
 import { getUser } from "../../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./login.module.css";
 
 export const Login = () => {
-  const user = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const userData = { email, password };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/login", {
+      const res = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -26,16 +27,16 @@ export const Login = () => {
         throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
       }
       const result = await res.json();
-      console.log(result);
+
       setEmail("");
       setPassword("");
+
       dispatch(getUser(result));
+      navigate("/user");
     } catch (error) {
       console.error(error, "Ошибка сервера!!!");
     }
   };
-
-  console.log(user);
 
   return (
     <div>

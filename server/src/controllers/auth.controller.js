@@ -1,23 +1,9 @@
 import chalk from "chalk";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import { User } from "../models/user.model.js";
 import { userMapper } from "../mappers/user.mapper.js";
 import { generateToken } from "../helpers/generate-token.helper.js";
-
-export const getUsers = async () => {
-  try {
-    const users = await User.find();
-    if (!users) {
-      throw new Error("Список пользователей пуст!");
-    }
-    const mappedUsers = users.map((user) => userMapper(user));
-    return mappedUsers;
-  } catch (err) {
-    throw err;
-  }
-};
 
 export const registerUser = async (userDate) => {
   try {
@@ -26,22 +12,18 @@ export const registerUser = async (userDate) => {
     }
     const passwordHash = await bcrypt.hash(userDate.password, 8);
 
-    await User.create({
+    const user = await User.create({
       surname: userDate.surname,
       name: userDate.name,
       email: userDate.email,
       phone: userDate.phone,
       password: passwordHash,
     });
-    console.log(chalk.green("User is added!"));
-  } catch (err) {
-    throw err;
-  }
-};
+    const token = generateToken({ id: user._id });
+    const mappedUser = userMapper(user);
 
-export const deleteUser = async (id) => {
-  try {
-    await User.findByIdAndDelete(id);
+    console.log(chalk.green("User is added!"));
+    return { token, user: mappedUser };
   } catch (err) {
     throw err;
   }
@@ -67,4 +49,14 @@ export const loginUser = async (userData) => {
   }
 };
 
-//edit role
+export const authMe = (user) => {
+  try {
+    if (!user) {
+      throw new Error("Пользователь не найден!");
+    }
+    const mappedUser = userMapper(user);
+    return mappedUser;
+  } catch (error) {
+    throw error;
+  }
+};
