@@ -3,7 +3,7 @@ import styles from "./users.module.css";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../../thunk-action";
-import { removeUser } from "../../../actions";
+import { fetchDeleteUser } from "../../../thunk-action";
 
 export const Users = () => {
   const users = useSelector((state) => state.users);
@@ -17,19 +17,10 @@ export const Users = () => {
     dispatch(fetchUsers()).finally(() => setLoading(false));
   }, [dispatch]);
 
-  const deleteUser = async (id) => {
+  const onDeleteUser = async (id) => {
     try {
       console.log("deleteUser:", id);
-      const res = await fetch(`http://localhost:3000/users/users/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      if (!res.ok) {
-        throw new Error(`Ошибка: ${res.status}, ${res.statusText}`);
-      }
-      const result = await res.json();
-      console.log(result);
-      dispatch(removeUser(id));
+      dispatch(fetchDeleteUser(id));
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +56,7 @@ export const Users = () => {
                   <td>{phone}</td>
                   <td>{email}</td>
                   <td>{role}</td>
-                  <td onClick={() => deleteUser(id)}>
+                  <td onClick={() => onDeleteUser(id)}>
                     {<i className="fa fa-trash-o" aria-hidden="true"></i>}
                   </td>
                 </tr>

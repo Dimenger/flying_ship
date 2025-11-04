@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EnterExit } from "../../elements/enter-exit/enter-exit";
 // import { Button } from "../../elements/button/button";
 // import { ICONS_LIST } from "../../constants";
-import { removeUser, clearUserList } from "../../actions";
+import { logoutUser, clearUserList } from "../../actions";
 
 import styles from "./service-panel.module.css";
 import { ROLES } from "../../constants/roles";
@@ -26,7 +26,7 @@ export const ServicePanel = () => {
       const result = await res.json();
       console.log(result);
 
-      dispatch(removeUser());
+      dispatch(logoutUser());
       dispatch(clearUserList());
     } catch (err) {
       console.error(err, "Ошибка сервера!!!");

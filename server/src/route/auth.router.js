@@ -48,7 +48,6 @@ authRouter.get("/logout", async (req, res) => {
 authRouter.get("/me", async (req, res) => {
   try {
     const token = req.cookies.token;
-    console.log("token:", token);
     if (!token) {
       return res.status(401).json({ error: "Пользователь не авторизован" });
     }

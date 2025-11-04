@@ -12,7 +12,7 @@ export const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case "GET_USER":
       return { ...state, ...action.payload };
-    case "REMOVE_USER":
+    case "LOGOUT_USER":
       return initialUserState;
 
     default:
