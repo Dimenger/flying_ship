@@ -7,6 +7,7 @@ import { ControlPanel } from "../../ui/control-panel/control-panel";
 import { ServicePanel } from "../../ui/service-panel/service-panel";
 
 import styles from "./header.module.css";
+import { Title } from "../../elements/title/title";
 
 export const Header = () => {
   return (
@@ -25,8 +26,16 @@ export const Header = () => {
         </div>
       </div>
       <div className={styles["service-panel-row"]}>
-        <ServicePanel />
+        <div className={styles.wraper}>
+          <Title
+            label="Детские центры раннего развития"
+            fontSize="26px"
+            color="#fff"
+          />
+          <ServicePanel />
+        </div>
       </div>
+
       <div className={styles["control-panel-row"]}>
         <ControlPanel />
       </div>
