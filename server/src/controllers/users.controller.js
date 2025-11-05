@@ -24,4 +24,10 @@ export const deleteUser = async (id) => {
   }
 };
 
-//edit role
+export const editUser = async (id, newUserRole) => {
+  try {
+    await User.findByIdAndUpdate(id, { role: newUserRole });
+  } catch (err) {
+    throw err;
+  }
+};

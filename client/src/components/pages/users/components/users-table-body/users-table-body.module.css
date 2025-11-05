@@ -1,0 +1,24 @@
+.tr-container {
+  transition: background-color 0.3s;
+  font-size: 22px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tr-container:hover {
+  background-color: #e0f7fa;
+}
+
+td {
+  padding: 12px 15px;
+  font-size: 0.95em;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap
+}
+
+.select{
+  font-size: 20px;
+}

@@ -5,5 +5,5 @@ export const userMapper = (user) => ({
   phone: user.phone,
   email: user.email,
   role: user.role,
-  registered_at: user.createdAt,
+  registered_at: user.createdAt.toISOString().slice(0, 10),
 });

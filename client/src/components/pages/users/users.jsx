@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import styles from "./users.module.css";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../../thunk-action";
 import { fetchDeleteUser } from "../../../thunk-action";
-import { convertRole } from "../../utils";
-import { ROLES } from "../../../constants";
+import { UsersTableHeader } from "./components/users-table-header/users-table-header";
+import { UsersTableBody } from "./components/users-table-body/users-table-body";
+
+import styles from "./users.module.css";
 
 export const Users = () => {
   const users = useSelector((state) => state.users);
@@ -28,9 +29,6 @@ export const Users = () => {
     }
   };
 
-  const onEditRole = async () => {};
-  const onSaveChange = async () => {};
-
   if (loading) {
     return <Spinner />;
   }
@@ -41,48 +39,22 @@ export const Users = () => {
         <table>
           <caption>Список пользователей</caption>
           <thead>
-            <tr>
-              <th scope="col">Фамилия</th>
-              <th scope="col">Имя</th>
-              <th scope="col">Дата регистрации</th>
-              <th scope="col">Телефон</th>
-              <th scope="col">email</th>
-              <th scope="col">Роль</th>
-              <th scope="col">Роль</th>
-
-              <th scope="col"></th>
-            </tr>
+            <UsersTableHeader />
           </thead>
           <tbody>
             {users.map(
               ({ id, surname, name, registered_at, phone, email, role }) => (
-                <tr key={id}>
-                  <td>{surname}</td>
-                  <td>{name}</td>
-                  <td>{registered_at}</td>
-                  <td>{phone}</td>
-                  <td>{email}</td>
-                  <td>{convertRole(role)}</td>
-                  <td>
-                    <select value={convertRole(role)} disabled="disabled">
-                      {Object.values(ROLES).map((role) => (
-                        <option value={convertRole(role)}>
-                          {convertRole(role)}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td onClick={() => onEditRole(id)}>
-                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </td>
-                  <td onClick={() => onSaveChange(id)}>
-                    <i className="fa fa-floppy-o" aria-hidden="true"></i>
-                  </td>
-
-                  <td onClick={() => onDeleteUser(id)}>
-                    {<i className="fa fa-trash-o" aria-hidden="true"></i>}
-                  </td>
-                </tr>
+                <UsersTableBody
+                  key={id}
+                  id={id}
+                  surname={surname}
+                  name={name}
+                  registered_at={registered_at}
+                  phone={phone}
+                  email={email}
+                  role={role}
+                  onDeleteUser={() => onDeleteUser(id)}
+                />
               )
             )}
           </tbody>

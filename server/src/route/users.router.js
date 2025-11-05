@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { getUsers, deleteUser } from "../controllers/users.controller.js";
+import {
+  getUsers,
+  editUser,
+  deleteUser,
+} from "../controllers/users.controller.js";
 import { auth } from "../middlewares/auth.js";
 import { hasRole } from "../middlewares/has-role.js";
 import { ROLES } from "../constants/roles.constant.js";
@@ -27,6 +31,23 @@ usersRouter.delete(
     try {
       await deleteUser(req.params.id);
       res.json({ success: true, message: "Пользователь удален!" });
+    } catch (err) {
+      res.json({ error: err.message || "Неизвестная ошибка" });
+    }
+  }
+);
+
+usersRouter.patch(
+  "/users/:id",
+  auth,
+  hasRole([ROLES.ADMINISTRATOR]),
+  async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const newUserRole = req.body.userRole;
+
+      await editUser(userId, ROLES[newUserRole]);
+      res.json({ success: true, message: "Роль изменена!" });
     } catch (err) {
       res.json({ error: err.message || "Неизвестная ошибка" });
     }

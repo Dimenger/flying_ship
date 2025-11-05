@@ -23,42 +23,13 @@ caption {
   color: #333;
 }
 
-thead th {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 1em;
-  border-bottom: 2px solid #ddd;
-}
-
-tbody tr {
-  transition: background-color 0.3s;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-  background-color: #e0f7fa;
-}
-
-td {
-  padding: 12px 15px;
-  font-size: 0.95em;
-  color: #555;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Мобильная оптимизация */
+/* Мобильная оптимизация 
 @media (max-width: 600px) {
   table {
     font-size: 14px;
   }
   thead {
-    display: none; /* скрываем шапку на мобильных */
+    display: none; /* скрываем шапку на мобильных 
   }
   tbody tr {
     display: block;
@@ -78,3 +49,4 @@ td {
   tbody td:nth-of-type(2)::before { content: "Дата регистрации"; }
   tbody td:nth-of-type(3)::before { content: "Роль"; }
 }
+*/
