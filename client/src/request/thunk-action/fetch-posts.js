@@ -1,5 +1,5 @@
-import { postPosts } from "../actions";
-import { getPosts } from "../bff/api";
+import { postPosts } from "../../actions";
+import { getPosts } from "../api";
 
 export const fetchPosts = () => async (dispatch) => {
   const posts = await getPosts();

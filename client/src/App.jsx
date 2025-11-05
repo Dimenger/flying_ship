@@ -17,7 +17,7 @@ import { PrivateRoute } from "./components/protected-route/protected-route";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser, removeUser } from "./actions";
-import { authMe } from "./bff/api/auth-me";
+import { authMe } from "./request/api/auth-me";
 
 export const App = () => {
   const dispatch = useDispatch();

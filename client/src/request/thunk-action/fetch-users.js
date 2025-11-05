@@ -1,5 +1,5 @@
-import { postUsers } from "../actions";
-import { getUsers } from "../bff/api";
+import { postUsers } from "../../actions";
+import { getUsers } from "../api";
 
 export const fetchUsers = () => async (dispatch) => {
   try {

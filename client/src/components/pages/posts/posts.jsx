@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPosts } from "../../../thunk-action/fetch-posts";
+import { fetchPosts } from "../../../request/thunk-action";
 import { Spinner } from "../../../elements/spinner/spinner";
 
 import styles from "./posts.module.css";

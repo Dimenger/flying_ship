@@ -6,7 +6,7 @@ import { SERVICES_IMAGES } from "../../../constants/services-images";
 import { Failure } from "../../error/error";
 import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
-import { fetchService } from "../../../thunk-action";
+import { fetchService } from "../../../request/thunk-action/";
 
 import styles from "./services.module.css";
 import { useDispatch, useSelector } from "react-redux";

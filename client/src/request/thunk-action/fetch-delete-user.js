@@ -1,5 +1,5 @@
-import { removeUser } from "../actions";
-import { deleteUser } from "../bff/api";
+import { removeUser } from "../../actions";
+import { deleteUser } from "../api";
 
 export const fetchDeleteUser = (id) => async (dispatch) => {
   try {

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../../thunk-action";
-import { fetchDeleteUser } from "../../../thunk-action";
+import { fetchDeleteUser, fetchUsers } from "../../../request/thunk-action";
 import { UsersTableHeader } from "./components/users-table-header/users-table-header";
 import { UsersTableBody } from "./components/users-table-body/users-table-body";
 
@@ -22,7 +21,6 @@ export const Users = () => {
 
   const onDeleteUser = async (id) => {
     try {
-      console.log("deleteUser:", id);
       dispatch(fetchDeleteUser(id));
     } catch (error) {
       console.error(error);
