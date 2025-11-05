@@ -28,7 +28,7 @@ export const Header = () => {
       <div className={styles["service-panel-row"]}>
         <div className={styles.wraper}>
           <Title
-            label="Детские центры раннего развития"
+            label="Детский центр раннего развития"
             fontSize="26px"
             color="#fff"
           />

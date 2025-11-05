@@ -4,6 +4,8 @@ import { Spinner } from "../../../elements/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../../thunk-action";
 import { fetchDeleteUser } from "../../../thunk-action";
+import { convertRole } from "../../utils";
+import { ROLES } from "../../../constants";
 
 export const Users = () => {
   const users = useSelector((state) => state.users);
@@ -26,6 +28,9 @@ export const Users = () => {
     }
   };
 
+  const onEditRole = async () => {};
+  const onSaveChange = async () => {};
+
   if (loading) {
     return <Spinner />;
   }
@@ -43,6 +48,8 @@ export const Users = () => {
               <th scope="col">Телефон</th>
               <th scope="col">email</th>
               <th scope="col">Роль</th>
+              <th scope="col">Роль</th>
+
               <th scope="col"></th>
             </tr>
           </thead>
@@ -55,7 +62,23 @@ export const Users = () => {
                   <td>{registered_at}</td>
                   <td>{phone}</td>
                   <td>{email}</td>
-                  <td>{role}</td>
+                  <td>{convertRole(role)}</td>
+                  <td>
+                    <select value={convertRole(role)} disabled="disabled">
+                      {Object.values(ROLES).map((role) => (
+                        <option value={convertRole(role)}>
+                          {convertRole(role)}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td onClick={() => onEditRole(id)}>
+                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </td>
+                  <td onClick={() => onSaveChange(id)}>
+                    <i className="fa fa-floppy-o" aria-hidden="true"></i>
+                  </td>
+
                   <td onClick={() => onDeleteUser(id)}>
                     {<i className="fa fa-trash-o" aria-hidden="true"></i>}
                   </td>

@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { EnterExit } from "../../elements/enter-exit/enter-exit";
-// import { Button } from "../../elements/button/button";
-// import { ICONS_LIST } from "../../constants";
 import { logoutUser, clearUserList } from "../../actions";
 
 import styles from "./service-panel.module.css";
