@@ -1,10 +1,12 @@
 import chalk from "chalk";
 
 import { Post } from "../models/post.model.js";
+import { postMapper } from "../mappers/post.mapper.js";
 
 export const getPosts = async () => {
-  const post = await Post.find();
-  return post;
+  const posts = await Post.find();
+  const mapedPosts = posts.map(postMapper);
+  return mapedPosts;
 };
 
 export const addNewPost = async (data) => {
@@ -18,6 +20,24 @@ export const addNewPost = async (data) => {
   return { success: true, message: "Пост добавлен!" };
 };
 
-// delete
+export const deletePost = async (id) => {
+  try {
+    await Post.findByIdAndDelete(id);
+  } catch (err) {
+    throw err;
+  }
+};
 
-//edit
+export const editPost = async (post) => {
+  try {
+    const id = post.id;
+    await Post.findByIdAndUpdate(id, {
+      title: post.title,
+      content: post.content,
+      author: post.author,
+    });
+    return { success: true, message: "Пост изменен!" };
+  } catch (error) {
+    throw error;
+  }
+};

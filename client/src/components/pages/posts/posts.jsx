@@ -5,6 +5,8 @@ import { fetchPosts } from "../../../request/thunk-action";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { AddButton } from "./components/manage-buttons/add-post-button/add-post-button";
 import { SortingButton } from "./components/manage-buttons/sorting-burron/sorting-batton";
+import { DeleteButton } from "./components/manage-buttons/delete-post-button/delete-post-button";
+import { EditButton } from "./components/manage-buttons/edit-post-button/edit-post-button";
 import { checkAccess } from "../../utils";
 import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
@@ -20,6 +22,8 @@ export const Posts = () => {
   const [isSorted, setIsSorted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [addPostState, setAddPostState] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editPostData, setEditPostData] = useState({});
 
   const iaAuth = !!user.id;
   const role = user?.role;
@@ -50,6 +54,30 @@ export const Posts = () => {
     setAddPostState(true);
   };
 
+  const onEditPost = (post) => {
+    setIsEditMode(true);
+    setAddPostState(true);
+    setEditPostData(post);
+  };
+
+  const onDeletePost = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3000/post/delete-post/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      console.log(id);
+      if (!res.ok) {
+        throw new Error("Error");
+      }
+      const result = await res.json();
+      dispatch(fetchPosts()).then(() => setLoading(false));
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (loading) {
     return <Spinner />;
   }
@@ -57,7 +85,13 @@ export const Posts = () => {
   return (
     <>
       {addPostState ? (
-        <NewPost setAddPostState={setAddPostState} />
+        <NewPost
+          setAddPostState={setAddPostState}
+          isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
+          editPostData={editPostData}
+          setEditPostData={setEditPostData}
+        />
       ) : (
         <div className={styles["postsContainer"]}>
           <div className={styles["manage-panel"]}>
@@ -67,16 +101,32 @@ export const Posts = () => {
                 <AddButton onClick={onAddPost} />
               )}
           </div>
-          {dateSotredPosts.map(({ _id, title, content, published_at }) => (
-            <article key={_id} className={styles.article}>
+          {dateSotredPosts.map((post) => (
+            <article key={post.id} className={styles.article}>
               <div className={styles.title}>
-                <h3>{title}</h3>
-                <div className={styles.time}>
-                  <i className="fa fa-calendar-o"></i>
-                  <time dateTime={published_at}>{published_at}</time>
+                <h3>{post.title}</h3>
+                <div className={styles["service-panel"]}>
+                  {iaAuth &&
+                    checkAccess(
+                      [ROLES.ADMINISTRATOR, ROLES.MODERATOR],
+                      role
+                    ) && (
+                      <>
+                        <DeleteButton onClick={() => onDeletePost(post.id)} />
+                        <EditButton
+                          onClick={() => {
+                            onEditPost(post);
+                          }}
+                        />
+                      </>
+                    )}
+                  <div className={styles.time}>
+                    <i className="fa fa-calendar-o"></i>
+                    <div>{post.published_at}</div>
+                  </div>
                 </div>
               </div>
-              <p>{content}</p>
+              <p>{post.content}</p>
             </article>
           ))}
         </div>

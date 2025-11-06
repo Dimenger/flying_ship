@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Title } from "../../../../../elements/title/title";
 
-import styles from "./new-post.module.css";
+import styles from "./edit-post.module.css";
 import { fetchPosts } from "../../../../../request/thunk-action";
 
-export const NewPost = ({
-  setAddPostState,
-  isEditMode,
-  setIsEditMode,
-  editPostData,
-  setEditPostData,
-}) => {
+export const EditPost = ({ setAddPostState }) => {
   const user = useSelector((state) => state.user);
 
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContentne] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const newPostData = { id: editPostData.id, title, content, author: user.id };
+  const newPostData = { title, content, author: user.id };
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (editPostData) {
-      setTitle(editPostData.title);
-      setContent(editPostData.content);
-    } else {
-      setTitle("");
-      setContent("");
-    }
-  }, [editPostData]);
-
-  const handleAddPost = async (e) => {
+  const handleSendRequest = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/post/add-new-post", {
@@ -41,6 +25,7 @@ export const NewPost = ({
         body: JSON.stringify(newPostData),
         credentials: "include",
       });
+      console.log("handleSendRequest:", newPostData);
       if (!response.ok) {
         throw new Error(`Статус: ${response.status}`);
       }
@@ -49,40 +34,11 @@ export const NewPost = ({
       console.log("Ответ сервера:", result);
 
       setTitle("");
-      setContent("");
+      setContentne("");
       setTimeout(() => {
         setAddPostState(false);
         setIsSending(false);
-      }, 2000);
-      dispatch(fetchPosts());
-    } catch (error) {
-      console.error("Ошибка:", error);
-    }
-  };
-
-  const handleEditPost = async (e) => {
-    try {
-      e.preventDefault();
-      const response = await fetch("http://localhost:3000/post/edit-post", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPostData),
-        credentials: "include",
-      });
-      if (!response.ok) {
-        throw new Error(`Статус: ${response.status}`);
-      }
-      const result = await response.json();
-      setIsSending(true);
-      console.log("Ответ сервера:", result);
-      setTitle("");
-      setContent("");
-      setTimeout(() => {
-        setAddPostState(false);
-        setIsSending(false);
-        setIsEditMode(false);
-        setEditPostData({});
-      }, 2000);
+      }, 3000);
       dispatch(fetchPosts());
     } catch (error) {
       console.error("Ошибка:", error);
@@ -92,13 +48,10 @@ export const NewPost = ({
   return (
     <div className={styles.form_container}>
       <h2 className={isSending ? styles.messageInvisible : styles.message}>
-        Новость опубликована
+        Новость опубликована!
       </h2>
 
-      <form
-        className={styles.form}
-        onSubmit={isEditMode ? handleEditPost : handleAddPost}
-      >
+      <form className={styles.form} onSubmit={handleSendRequest}>
         <fieldset className={styles.title}>
           <legend>
             <Title label="Заголовок" />
@@ -125,7 +78,7 @@ export const NewPost = ({
             rows="30"
             cols="150"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => setContentne(e.target.value)}
             required
           ></textarea>
         </fieldset>
