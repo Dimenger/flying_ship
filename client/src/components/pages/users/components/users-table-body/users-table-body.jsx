@@ -61,16 +61,16 @@ export const UsersTableBody = ({
       </td>
       {isEdit ? (
         <td onClick={() => onSaveChange(id)}>
-          <i className="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
+          <i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
         </td>
       ) : (
         <td onClick={() => setIsEdit(true)}>
-          <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+          <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
         </td>
       )}
 
       <td onClick={() => onDeleteUser(id)}>
-        {<i className="fa fa-trash-o fa-2x" aria-hidden="true"></i>}
+        {<i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>}
       </td>
     </tr>
   );

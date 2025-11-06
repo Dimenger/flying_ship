@@ -7,15 +7,11 @@ const PostShema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    author: {
-      type: String,
-      required: true,
-    },
     content: {
       type: String,
       required: true,
     },
-    published_at: {
+    author: {
       type: String,
       required: true,
     },

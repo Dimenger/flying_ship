@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import { Title } from "../../../elements/title/title";
 import { SERVICES_IMAGES } from "../../../constants";
 
 import styles from "./services.module.css";
-import { Link } from "react-router-dom";
 
 export const Services = () => {
   return (
@@ -15,8 +15,7 @@ export const Services = () => {
               <img
                 src={src}
                 alt={title}
-                width="300px"
-                height="200px"
+                width="200px"
                 className={styles.image}
               />
               <figcaption>

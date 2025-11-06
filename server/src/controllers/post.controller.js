@@ -7,16 +7,16 @@ export const getPosts = async () => {
   return post;
 };
 
-// export const addRequest = async (data) => {
-//   await Request.create({
-//     date: data.date,
-//     time: data.time,
-//     name: data.name,
-//     phone: data.phone,
-//     description: data.description,
-//   });
-//   console.log(chalk.bgGreen("Request was added!"));
-// };
+export const addNewPost = async (data) => {
+  console.log("addNewPost:", data);
+  await Post.create({
+    title: data.title,
+    content: data.content,
+    author: data.author,
+  });
+  console.log(chalk.bgGreen("New post is added!"));
+  return { success: true, message: "Пост добавлен!" };
+};
 
 // delete
 

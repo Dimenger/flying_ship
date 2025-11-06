@@ -11,8 +11,8 @@ export const authMe = async () => {
       throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
     }
 
-    const result = await res.json();
-    return result;
+    const user = await res.json();
+    return user;
   } catch (error) {
     console.error(error, "Ошибка сервера!!!");
     return null;

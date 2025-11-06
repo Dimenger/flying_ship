@@ -12,8 +12,8 @@ import { Schedule } from "./components/pages/schedule/schedule";
 import { Contacts } from "./components/pages/contacts/contacts";
 import { Login } from "./components/pages/login/login";
 import { Failure } from "./components/error/error";
-import { ERROR } from "./constants";
-import { PrivateRoute } from "./components/protected-route/protected-route";
+import { ERROR, ROLES } from "./constants";
+import { ProtectedRoute } from "./components/protected-route/protected-route";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser, removeUser } from "./actions";
@@ -24,9 +24,9 @@ export const App = () => {
 
   useEffect(() => {
     const Me = async () => {
-      const result = await authMe();
-      if (result) {
-        dispatch(getUser(result));
+      const user = await authMe();
+      if (user) {
+        dispatch(getUser(user));
       } else {
         // если `null`, считаем, что пользователь не авторизован
         dispatch(removeUser());
@@ -46,21 +46,24 @@ export const App = () => {
         { path: "/schedule", element: <Schedule /> },
         { path: "/posts", element: <Posts /> },
         { path: "/contacts", element: <Contacts /> },
-        { path: "/registration", element: <Registration /> },
+        {
+          path: "/registration",
+          element: <Registration />,
+        },
         {
           path: "/user",
           element: (
-            <PrivateRoute>
+            <ProtectedRoute>
               <PersonalPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           ),
         },
         {
           path: "/users",
           element: (
-            <PrivateRoute>
+            <ProtectedRoute allowedRoles={ROLES.ADMINISTRATOR}>
               <Users />
-            </PrivateRoute>
+            </ProtectedRoute>
           ),
         },
         { path: "/login", element: <Login /> },
