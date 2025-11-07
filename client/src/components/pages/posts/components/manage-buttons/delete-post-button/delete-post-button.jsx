@@ -1,14 +1,9 @@
-import styles from "./delete-post-button.module.css";
+import { PostButton } from "../../../../../../elements/post-button/post-button";
 
 export const DeleteButton = ({ onClick }) => {
-  return (
-    <>
-      <button className={styles.delete} onClick={onClick}>
-        <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-        <label htmlFor="add-icon" className={styles.lable}>
-          Удалить сообщение
-        </label>
-      </button>
-    </>
-  );
+  const icon = <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>;
+
+  const title = "Удалить сообщение";
+
+  return <PostButton onClick={onClick} icon={icon} title={title} />;
 };

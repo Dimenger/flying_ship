@@ -1,14 +1,11 @@
-import styles from "./edit-post-button.module.css";
+import { PostButton } from "../../../../../../elements/post-button/post-button";
 
 export const EditButton = ({ onClick }) => {
-  return (
-    <>
-      <button className={styles.edit} onClick={onClick}>
-        <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
-        <label htmlFor="add-icon" className={styles.lable}>
-          Редактировать сообщение
-        </label>
-      </button>
-    </>
+  const icon = (
+    <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
   );
+
+  const title = "Редактировать сообщение";
+
+  return <PostButton onClick={onClick} icon={icon} title={title} />;
 };

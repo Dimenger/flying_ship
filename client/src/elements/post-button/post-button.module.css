@@ -1,0 +1,23 @@
+:root {
+  --size: 60px
+} 
+
+.post-button {
+  width: var(--size);
+  height: calc(var(--size)/ 1.618);
+  border-radius: 5px; 
+  border: none;
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:  #76c978; 
+  color: #fff; 
+  font-size: 20px; 
+  padding: 0;
+  transition: background-color 0.3s ease 0.2s
+}
+
+.post-button:hover{
+  background-color: #68a771;
+}

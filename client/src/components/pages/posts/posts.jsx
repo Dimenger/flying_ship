@@ -10,6 +10,7 @@ import { EditButton } from "./components/manage-buttons/edit-post-button/edit-po
 import { checkAccess } from "../../utils";
 import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
+import { Title } from "../../../elements/title/title";
 
 import styles from "./posts.module.css";
 
@@ -94,39 +95,42 @@ export const Posts = () => {
         />
       ) : (
         <div className={styles["postsContainer"]}>
-          <div className={styles["manage-panel"]}>
-            <SortingButton onClick={onSorting} />
-            {iaAuth &&
-              checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
-                <AddButton onClick={onAddPost} />
-              )}
+          <div className={styles.header}>
+            <Title label="Наши новости." fontSize="26px" />
+            <div className={styles["manage-panel"]}>
+              {iaAuth &&
+                checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
+                  <AddButton onClick={onAddPost} />
+                )}
+              <SortingButton onClick={onSorting} />
+            </div>
           </div>
           {dateSotredPosts.map((post) => (
             <article key={post.id} className={styles.article}>
-              <div className={styles.title}>
-                <h3>{post.title}</h3>
-                <div className={styles["service-panel"]}>
-                  {iaAuth &&
-                    checkAccess(
-                      [ROLES.ADMINISTRATOR, ROLES.MODERATOR],
-                      role
-                    ) && (
-                      <>
-                        <DeleteButton onClick={() => onDeletePost(post.id)} />
-                        <EditButton
-                          onClick={() => {
-                            onEditPost(post);
-                          }}
-                        />
-                      </>
-                    )}
-                  <div className={styles.time}>
-                    <i className="fa fa-calendar-o"></i>
-                    <div>{post.published_at}</div>
-                  </div>
+              <div className={styles.header}>
+                <div className={styles.title}>
+                  <Title label={post.title} fontSize="22px" color="#000" />
+                </div>
+                <div className={styles.time}>
+                  <i className="fa fa-calendar-o"></i>
+                  <div>{post.published_at}</div>
                 </div>
               </div>
+
               <p>{post.content}</p>
+              <div className={styles["service-panel"]}>
+                {iaAuth &&
+                  checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
+                    <>
+                      <DeleteButton onClick={() => onDeletePost(post.id)} />
+                      <EditButton
+                        onClick={() => {
+                          onEditPost(post);
+                        }}
+                      />
+                    </>
+                  )}
+              </div>
             </article>
           ))}
         </div>
