@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Title } from "../../../elements/title/title";
-import { getUser } from "../../../actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { Title } from "../../../elements/title/title";
+import { fetchGetUser } from "../../../request/thunk-action/fetch-get-user";
 
 import styles from "./login.module.css";
 
@@ -10,28 +11,18 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const userData = { email, password };
+  const userLoginData = { email, password };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-        credentials: "include",
-      });
-      if (!res.ok) {
-        throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
-      }
-      const result = await res.json();
-
       setEmail("");
       setPassword("");
 
-      dispatch(getUser(result));
+      await dispatch(fetchGetUser(userLoginData));
+
       navigate("/user");
     } catch (error) {
       console.error(error, "Ошибка сервера!!!");

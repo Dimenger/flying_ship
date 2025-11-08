@@ -6,6 +6,7 @@ import { logoutUser, clearUserList } from "../../actions";
 
 import styles from "./service-panel.module.css";
 import { ROLES } from "../../constants/roles";
+import { apiLogoutUser } from "../../request/api";
 
 export const ServicePanel = () => {
   const user = useSelector((state) => state.user);
@@ -18,10 +19,7 @@ export const ServicePanel = () => {
 
   const onLogout = async () => {
     try {
-      const res = await fetch("http://localhost:3000/auth/logout", {
-        credentials: "include",
-      });
-      const result = await res.json();
+      const result = await apiLogoutUser();
       console.log(result);
 
       dispatch(logoutUser());
