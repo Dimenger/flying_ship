@@ -115,3 +115,10 @@ input[type='submit']:hover {
     padding: 20px;
   }
 }
+
+.notification-message{
+    visibility: hidden;
+}
+
+.notification-no-message{
+}

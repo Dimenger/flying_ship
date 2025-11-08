@@ -30,7 +30,14 @@ authRouter.post("/login", async (req, res) => {
     // res.json({ success: true, message: "Пользователь вошел!" });
     console.log(chalk.greenBright("Пользователь вошел!"));
   } catch (err) {
+    if (
+      err.message === "Email не найден!" ||
+      err.message === "Неверный пароль!"
+    ) {
+      return res.status(401).json({ error: err.message });
+    }
     res.status(500).json({ error: err.message });
+    console.error(chalk.redBright("Ошибка входа"), err);
   }
 });
 

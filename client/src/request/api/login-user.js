@@ -7,10 +7,14 @@ export const loginUser = async (userLoginData) => {
       credentials: "include",
     });
     if (!res.ok) {
-      throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
+      const errorData = await res.json();
+      throw new Error(
+        errorData.error || `Ошибка ${res.status}: ${res.statusText}`
+      );
     }
     return await res.json();
   } catch (error) {
-    console.error("Ошибка сервера!!!", error);
+    console.error("loginUser: Ошибка авторизации!!!", error);
+    throw error;
   }
 };
