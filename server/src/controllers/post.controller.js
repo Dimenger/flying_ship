@@ -16,7 +16,7 @@ export const addNewPost = async (data) => {
     content: data.content,
     author: data.author,
   });
-  console.log(chalk.bgGreen("New post is added!"));
+  console.log(chalk.bgGreen("Новое сообщение добавлено!"));
   return { success: true, message: "Пост добавлен!" };
 };
 

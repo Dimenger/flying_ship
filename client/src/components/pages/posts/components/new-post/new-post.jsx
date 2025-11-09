@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Title } from "../../../../../elements/title/title";
+import { fetchPosts } from "../../../../../request/thunk-action";
+import { fetchAddNewPost } from "../../../../../request/thunk-action";
+import { fetchEditPost } from "../../../../../request/thunk-action";
+import { Notification } from "../../../../../elements/notification/notification";
+import { BackButton } from "../manage-buttons/back-button/back-button";
 
 import styles from "./new-post.module.css";
-import { fetchPosts } from "../../../../../request/thunk-action";
+import { LayoutPostForm } from "./layout-post-form";
 
 export const NewPost = ({
   setAddPostState,
@@ -14,12 +19,18 @@ export const NewPost = ({
   setEditPostData,
 }) => {
   const user = useSelector((state) => state.user);
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const newPostData = { id: editPostData.id, title, content, author: user.id };
+  const newPostData = { title, content, author: user.id };
+  const newEditPostData = {
+    id: editPostData.id,
+    title,
+    content,
+    author: user.id,
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,26 +46,12 @@ export const NewPost = ({
   const handleAddPost = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/post/add-new-post", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPostData),
-        credentials: "include",
-      });
-      if (!response.ok) {
-        throw new Error(`Статус: ${response.status}`);
-      }
-      const result = await response.json();
-      setIsSending(true);
-      console.log("Ответ сервера:", result);
+      await dispatch(fetchAddNewPost(newPostData));
+      await dispatch(fetchPosts());
 
+      setIsSending(true);
       setTitle("");
       setContent("");
-      setTimeout(() => {
-        setAddPostState(false);
-        setIsSending(false);
-      }, 2000);
-      dispatch(fetchPosts());
     } catch (error) {
       console.error("Ошибка:", error);
     }
@@ -63,78 +60,40 @@ export const NewPost = ({
   const handleEditPost = async (e) => {
     try {
       e.preventDefault();
-      const response = await fetch("http://localhost:3000/post/edit-post", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPostData),
-        credentials: "include",
-      });
-      if (!response.ok) {
-        throw new Error(`Статус: ${response.status}`);
-      }
-      const result = await response.json();
+      await dispatch(fetchEditPost(newEditPostData));
+      await dispatch(fetchPosts());
+
       setIsSending(true);
-      console.log("Ответ сервера:", result);
       setTitle("");
       setContent("");
-      setTimeout(() => {
-        setAddPostState(false);
-        setIsSending(false);
-        setIsEditMode(false);
-        setEditPostData({});
-      }, 2000);
-      dispatch(fetchPosts());
     } catch (error) {
       console.error("Ошибка:", error);
     }
   };
 
+  const backToList = () => {
+    setAddPostState(false);
+    setIsSending(false);
+    setIsEditMode(false);
+    setEditPostData({});
+  };
+
   return (
-    <div className={styles.form_container}>
-      <h2 className={isSending ? styles.messageInvisible : styles.message}>
-        Новость опубликована
-      </h2>
-
-      <form
-        className={styles.form}
-        onSubmit={isEditMode ? handleEditPost : handleAddPost}
-      >
-        <fieldset className={styles.title}>
-          <legend>
-            <Title label="Заголовок" />
-          </legend>
-          <textarea
-            name="title"
-            id="title"
-            rows="6"
-            cols="150"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          ></textarea>
-        </fieldset>
-
-        <fieldset className={styles.content}>
-          <legend>
-            <Title label="Текст сообщения" />
-          </legend>
-
-          <textarea
-            name="content"
-            id="content"
-            rows="30"
-            cols="150"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          ></textarea>
-        </fieldset>
-        <input
-          type="submit"
-          value="Опубликовать сообщение"
-          disabled={isSending}
-        />
-      </form>
+    <div>
+      <Notification />
+      <div className={styles["back-to-list"]}>
+        <BackButton onClick={backToList} />
+      </div>
+      <LayoutPostForm
+        isEditMode={isEditMode}
+        isSending={isSending}
+        handleEditPost={handleEditPost}
+        handleAddPost={handleAddPost}
+        setContent={setContent}
+        setTitle={setTitle}
+        title={title}
+        content={content}
+      />
     </div>
   );
 };

@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../../elements/title/title";
 import { fetchGetUser } from "../../../request/thunk-action/fetch-get-user";
+import { Notification } from "../../../elements/notification/notification";
 
 import styles from "./login.module.css";
 
 export const Login = () => {
+  // const message = useSelector((state) => state.message);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,12 +28,13 @@ export const Login = () => {
 
       navigate("/user");
     } catch (error) {
-      console.error(error, "Ошибка сервера!!!");
+      console.error("handleSubmit: Ошибка авторизации:", error);
     }
   };
 
   return (
     <div>
+      <Notification />
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>

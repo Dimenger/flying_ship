@@ -4,4 +4,5 @@ export * from "./get-services";
 export * from "./get-service";
 export * from "./delete-user";
 export * from "./login-user";
-export * from "./api-logout-yser";
+export * from "./api-logout-user";
+export * from "./api-edit-post";

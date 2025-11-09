@@ -5,10 +5,14 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 
-import { postsReducer as postsReducer } from "./reducers";
-import { usersReducer } from "./reducers";
-import { userReducer } from "./reducers";
-import { serviceReducer } from "./reducers";
+import {
+  postsReducer,
+  usersReducer,
+  userReducer,
+  serviceReducer,
+  messageReducer,
+} from "./reducers";
+
 import { thunk } from "redux-thunk";
 
 const rootReducer = combineReducers({
@@ -16,6 +20,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   user: userReducer,
   service: serviceReducer,
+  message: messageReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
