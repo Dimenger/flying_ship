@@ -26,8 +26,11 @@ authRouter.post("/login", async (req, res) => {
   try {
     const { token, user } = await loginUser(req.body);
     res.cookie("token", token, { httpOnly: true });
-    res.json(user);
-    // res.json({ success: true, message: "Пользователь вошел!" });
+    res.json({
+      success: true,
+      message: "Пользователь авторизован!",
+      user,
+    });
     console.log(chalk.greenBright("Пользователь вошел!"));
   } catch (err) {
     if (

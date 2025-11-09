@@ -25,7 +25,8 @@ postRouter.post(
   hasRole([ROLES.ADMINISTRATOR, ROLES.MODERATOR]),
   async (req, res) => {
     try {
-      res.json(await addNewPost(req.body));
+      const result = await addNewPost(req.body);
+      res.json(result);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

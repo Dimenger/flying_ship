@@ -1,4 +1,4 @@
-.message{
-  font-size: 20px;
-  visibility: hidden;
+.back-to-list {
+  display: flex;
+  justify-content: end;
 }

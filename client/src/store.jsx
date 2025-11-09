@@ -10,7 +10,7 @@ import {
   usersReducer,
   userReducer,
   serviceReducer,
-  errorReducer,
+  messageReducer,
 } from "./reducers";
 
 import { thunk } from "redux-thunk";
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   user: userReducer,
   service: serviceReducer,
-  error: errorReducer,
+  message: messageReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

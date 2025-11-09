@@ -1,21 +1,18 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../../elements/title/title";
 import { fetchGetUser } from "../../../request/thunk-action/fetch-get-user";
 import { Notification } from "../../../elements/notification/notification";
-import { getError } from "../../../actions";
 
 import styles from "./login.module.css";
 
 export const Login = () => {
-  const errMessage = useSelector((state) => state.error);
-  console.log(errMessage);
+  // const message = useSelector((state) => state.message);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSuccess, setIsSuccess] = useState(null);
 
   const userLoginData = { email, password };
   const dispatch = useDispatch();
@@ -30,17 +27,14 @@ export const Login = () => {
       await dispatch(fetchGetUser(userLoginData));
 
       navigate("/user");
-      setIsSuccess(true);
     } catch (error) {
-      dispatch(getError(error.message));
-      setIsSuccess(false);
       console.error("handleSubmit: Ошибка авторизации:", error);
     }
   };
 
   return (
     <div>
-      <Notification message={errMessage.error} success={isSuccess} />
+      <Notification />
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>
