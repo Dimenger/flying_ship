@@ -9,8 +9,6 @@ import { Notification } from "../../../elements/notification/notification";
 import styles from "./login.module.css";
 
 export const Login = () => {
-  // const message = useSelector((state) => state.message);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

@@ -32,6 +32,7 @@ const UserShema = new mongoose.Schema(
       type: Number,
       default: ROLES.USER,
     },
+    services: [{ type: mongoose.Schema.Types.ObjectId, ref: "Service" }],
   },
   { timestamps: true }
 );

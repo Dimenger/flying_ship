@@ -8,3 +8,4 @@ export * from "./remove-user";
 export * from "./get-error";
 export * from "./get-success-message";
 export * from "./erase-message";
+export * from "./get-user-services-list";

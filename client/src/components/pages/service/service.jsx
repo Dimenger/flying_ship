@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Title } from "../../../elements/title/title";
 import { SERVICES_IMAGES } from "../../../constants/services-images";
@@ -7,15 +8,20 @@ import { Failure } from "../../error/error";
 import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../request/thunk-action/";
+import { AddServiceButton } from "./components/add-service-button";
+import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
 
 import styles from "./services.module.css";
-import { useDispatch, useSelector } from "react-redux";
 
 export const Service = () => {
   let param = useParams();
   const id = param.id;
 
   const service = useSelector((state) => state.service);
+  const user = useSelector((state) => state.user);
+  const userId = user.id;
+  const addedServiceId = service._id;
+
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -31,6 +37,15 @@ export const Service = () => {
       return null;
     }
     return imgSrs.src;
+  };
+
+  const addService = async () => {
+    try {
+      const result = await addServiceToUser(userId, addedServiceId);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (loading) return <Spinner />;
@@ -62,6 +77,7 @@ export const Service = () => {
           ))}
         </div>
       </div>
+      <AddServiceButton onClick={addService} />
     </div>
   );
 };

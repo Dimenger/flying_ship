@@ -60,3 +60,5 @@ export const authMe = (user) => {
     throw error;
   }
 };
+
+export const addService = () => {};

@@ -1,4 +1,5 @@
 const initialServiceState = {
+  _id: "",
   id: "",
   title: "",
   subtitle: "",
