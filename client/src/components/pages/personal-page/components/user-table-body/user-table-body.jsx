@@ -3,7 +3,7 @@ import { PostButton } from "../../../../../elements/post-button/post-button";
 
 import styles from "./user-table-body.module.css";
 
-export const UserTableBody = ({ user, onDeleteService }) => {
+export const UserTableBody = ({ user, onDeleteService, nextDate }) => {
   return (
     <>
       {user.services.map(({ _id, serId, title, subtitle }) => (
@@ -13,12 +13,12 @@ export const UserTableBody = ({ user, onDeleteService }) => {
           </td>
           <td>{title}</td>
           <td>{subtitle}</td>
-          <td>Дата</td>
+          <td>{nextDate || "Нет данных"}</td>
           <td>
             <PostButton
               title={"Удалить"}
               onClick={() => onDeleteService(user.id, _id)}
-              icon={<i class="fa fa-ship fa-lg" aria-hidden="true"></i>}
+              icon={<i className="fa fa-ship fa-lg" aria-hidden="true"></i>}
             />
           </td>
         </tr>

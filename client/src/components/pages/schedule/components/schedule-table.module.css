@@ -1,0 +1,30 @@
+.scheduleContainer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.addressBlock {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.addressTitle {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.scheduleTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scheduleTable th,
+.scheduleTable td {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: center;
+}

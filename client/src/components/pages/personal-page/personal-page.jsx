@@ -28,6 +28,8 @@ export const PersonalPage = () => {
     }
   };
 
+  const nextDate = "Data";
+
   return (
     <div>
       <Title
@@ -46,7 +48,11 @@ export const PersonalPage = () => {
           <UserTableHeader />
         </thead>
         <tbody>
-          <UserTableBody user={user} onDeleteService={onDeleteService} />
+          <UserTableBody
+            user={user}
+            onDeleteService={onDeleteService}
+            nextDate={nextDate}
+          />
         </tbody>
       </table>
       <Notification />
