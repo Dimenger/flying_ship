@@ -12,6 +12,7 @@ export const getUserServices = async (userId) => {
       throw new Error(`Статус: ${res.status}`);
     }
     const result = await res.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.error(error);

@@ -9,10 +9,10 @@ export const Contacts = () => {
       <Addresses />
       <div className={styles.info}>
         <p>
-          <strong>ИНН:</strong> 631503358992
+          <strong>ИНН:</strong> 633300003333
         </p>
         <p>
-          <strong>ИП:</strong> Борисова М.С.
+          <strong>ИП:</strong> Каменева М.С.
         </p>
       </div>
     </section>

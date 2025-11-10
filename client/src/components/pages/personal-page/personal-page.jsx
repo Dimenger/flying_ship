@@ -6,6 +6,10 @@ import {
   fetchGetUserServices,
   fetchRemoveUserService,
 } from "../../../request/thunk-action";
+import { UserTableHeader } from "./components/user-table-header/user-table-header";
+import { UserTableBody } from "./components/user-table-body/user-table-body";
+
+import styles from "./personal-page.module.css";
 
 export const PersonalPage = () => {
   const user = useSelector((state) => state.user);
@@ -29,43 +33,19 @@ export const PersonalPage = () => {
         label={`${user.name} добро пожаловать на борт!`}
         fontSize={"30px"}
       />
+      <Title
+        label={`Здесь находится список выбранных вами занятий.`}
+        fontSize={"20px"}
+      />
       <table>
+        <caption className={styles.caption}>
+          Список ваших любимых гаваней!
+        </caption>
         <thead>
-          <tr>
-            <th>Лого</th>
-            <th>Название</th>
-            <th>Возраст</th>
-            <th>Стоимость</th>
-            <th>Дата занятия</th>
-            <th>Действие</th>
-          </tr>
+          <UserTableHeader />
         </thead>
         <tbody>
-          {user.services.map((service) => (
-            <tr key={service._id}>
-              {/* Лого - пропущено, вставьте изображение по желанию */}
-              <td>
-                {/* Можете добавить изображение, например */}
-                {/* <img src={service.logoUrl} alt="Логотип" width="50" /> */}
-              </td>
-              <td>{service.title}</td>
-              <td>{service.subtitle}</td>
-              <td></td>
-              {/* <td>
-                {service.prices.map((p, index) => (
-                  <div key={index}>
-                    {p.title}: {p.price}
-                  </div>
-                ))}
-              </td> */}
-              <td>Дата</td>
-              <td>
-                <button onClick={() => onDeleteService(user.id, service._id)}>
-                  Удалить
-                </button>
-              </td>
-            </tr>
-          ))}
+          <UserTableBody user={user} onDeleteService={onDeleteService} />
         </tbody>
       </table>
     </div>

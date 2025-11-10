@@ -8,12 +8,12 @@ import origami from "../assets/logo-img/origami.png";
 import speech_therapist from "../assets/logo-img/speech-therapist.png";
 
 export const SERVICES_IMAGES = [
-  { id: "service001", src: i_and_mom, title: "Я и мама" },
-  { id: "service002", src: intelligence, title: "Интеллект" },
-  { id: "service003", src: for_school, title: "Подготовка к школе" },
-  { id: "service004", src: english, title: "Английский язык" },
-  { id: "service005", src: drawing, title: "Рисование" },
-  { id: "service006", src: dancing, title: "Танцы" },
-  { id: "service007", src: origami, title: "Оригами" },
-  { id: "service008", src: speech_therapist, title: "Логопед" },
+  { serId: "service001", src: i_and_mom, title: "Я и мама" },
+  { serId: "service002", src: intelligence, title: "Интеллект" },
+  { serId: "service003", src: for_school, title: "Подготовка к школе" },
+  { serId: "service004", src: english, title: "Английский язык" },
+  { serId: "service005", src: drawing, title: "Рисование" },
+  { serId: "service006", src: dancing, title: "Танцы" },
+  { serId: "service007", src: origami, title: "Оригами" },
+  { serId: "service008", src: speech_therapist, title: "Логопед" },
 ];

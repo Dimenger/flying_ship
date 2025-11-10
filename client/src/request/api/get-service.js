@@ -1,10 +1,10 @@
-export const getService = async (id) => {
+export const getService = async (serId) => {
   try {
     const res = await fetch("http://localhost:3000/service/service", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id,
+        serId,
       }),
       credentials: "include",
     });

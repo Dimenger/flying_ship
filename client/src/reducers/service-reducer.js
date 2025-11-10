@@ -1,6 +1,6 @@
 const initialServiceState = {
   _id: "",
-  id: "",
+  serId: "",
   title: "",
   subtitle: "",
   prices: [],
