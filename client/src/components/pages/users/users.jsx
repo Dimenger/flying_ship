@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDeleteUser, fetchUsers } from "../../../request/thunk-action";
 import { UsersTableHeader } from "./components/users-table-header/users-table-header";
 import { UsersTableBody } from "./components/users-table-body/users-table-body";
+import { Modal } from "../../../components/modal/modal";
 
 import styles from "./users.module.css";
 
@@ -11,6 +12,10 @@ export const Users = () => {
   const users = useSelector((state) => state.users);
 
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userToDeletId, setUserToDeletId] = useState(null);
+
+  const question = "Удалить пользователя?";
 
   const dispatch = useDispatch();
 
@@ -19,12 +24,23 @@ export const Users = () => {
     dispatch(fetchUsers()).finally(() => setLoading(false));
   }, [dispatch]);
 
-  const onDeleteUser = async (id) => {
+  const onDeleteUser = (id) => {
+    setIsOpen(true);
+    setUserToDeletId(id);
+  };
+
+  const onConfirm = async (userToDeletId) => {
     try {
-      dispatch(fetchDeleteUser(id));
+      dispatch(fetchDeleteUser(userToDeletId));
+      setIsOpen(false);
+      setUserToDeletId(null);
     } catch (error) {
       console.error(error);
     }
+  };
+  const onCancel = () => {
+    setIsOpen(false);
+    setUserToDeletId(null);
   };
 
   if (loading) {
@@ -58,6 +74,21 @@ export const Users = () => {
           </tbody>
         </table>
       </div>
+      <Modal
+        question={question}
+        isOpen={isOpen}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        itemToDeletId={userToDeletId}
+      />
     </div>
   );
 };
+
+// const onDeleteUser = async (id) => {
+//   try {
+//     dispatch(fetchDeleteUser(id));
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };

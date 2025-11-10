@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Title } from "../../../elements/title/title";
+import { Spinner } from "../../../elements/spinner/spinner";
 import {
   fetchGetUserServices,
   fetchRemoveUserService,
@@ -14,10 +15,14 @@ import styles from "./personal-page.module.css";
 
 export const PersonalPage = () => {
   const user = useSelector((state) => state.user);
+
+  const [loading, setLoading] = useState(true);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchGetUserServices(user.id));
+    setLoading(true);
+    dispatch(fetchGetUserServices(user.id)).then(() => setLoading(false));
   }, [dispatch, user.id]);
 
   const onDeleteService = (userId, serviceId) => {
@@ -27,6 +32,10 @@ export const PersonalPage = () => {
       console.error(error);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   const nextDate = "Data";
 
