@@ -1,10 +1,11 @@
 import { apiRemoveServiceFromUser } from "../api";
 import { getUserServices } from "../api";
-import { getUserServicesList } from "../../actions";
+import { getSuccessMessage, getUserServicesList } from "../../actions";
 
 export const fetchRemoveUserService =
   (userId, serviceId) => async (dispatch) => {
-    await apiRemoveServiceFromUser(userId, serviceId);
+    const deleteRes = await apiRemoveServiceFromUser(userId, serviceId);
+    dispatch(getSuccessMessage(deleteRes));
     const result = await getUserServices(userId);
     const userServices = result.services;
     dispatch(getUserServicesList(userServices));

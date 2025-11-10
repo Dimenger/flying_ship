@@ -36,7 +36,7 @@ userRouter.patch("/remove-service/:id", auth, async (req, res) => {
     const userId = req.params.id;
     const serviceId = req.body.serviceId;
     await removeService(userId, serviceId);
-    res.json({ success: true, message: "Сервис удален!" });
+    res.json({ success: true, message: "Услуга удалена!" });
   } catch (error) {
     res.json({ error: err.message || "Неизвестная ошибка" });
   }

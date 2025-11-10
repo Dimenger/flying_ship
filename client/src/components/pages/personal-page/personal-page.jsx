@@ -8,6 +8,7 @@ import {
 } from "../../../request/thunk-action";
 import { UserTableHeader } from "./components/user-table-header/user-table-header";
 import { UserTableBody } from "./components/user-table-body/user-table-body";
+import { Notification } from "../../../elements/notification/notification";
 
 import styles from "./personal-page.module.css";
 
@@ -48,6 +49,7 @@ export const PersonalPage = () => {
           <UserTableBody user={user} onDeleteService={onDeleteService} />
         </tbody>
       </table>
+      <Notification />
     </div>
   );
 };

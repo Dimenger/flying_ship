@@ -10,6 +10,8 @@ import { fetchService } from "../../../request/thunk-action/";
 import { AddServiceButton } from "./components/add-service-button";
 import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
 import { getImgSrc } from "../../utils/get-img-scr";
+import { Notification } from "../../../elements/notification/notification";
+import { getSuccessMessage } from "../../../actions";
 
 import styles from "./services.module.css";
 
@@ -34,6 +36,7 @@ export const Service = () => {
   const addService = async () => {
     try {
       const result = await addServiceToUser(userId, addedServiceId);
+      dispatch(getSuccessMessage(result));
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -70,6 +73,7 @@ export const Service = () => {
         </div>
       </div>
       <AddServiceButton onClick={addService} />
+      <Notification />
     </div>
   );
 };

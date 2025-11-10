@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { Title } from "../../../elements/title/title";
-import { getUser } from "../../../actions";
-
-import styles from "./registration.module.css";
+import { getSuccessMessage, getUser, getError } from "../../../actions";
+import { RegistrationForm } from "./components/registration-form/registration-form";
+import { Notification } from "../../../elements/notification/notification";
 
 export const Registration = () => {
   const [surname, setSurname] = useState("");
@@ -36,10 +35,15 @@ export const Registration = () => {
         body: JSON.stringify(registeredUserData),
         credentials: "include",
       });
-      if (!res.ok) {
-        throw new Error(`Ошибка: ${res.status}, ${res.statusText}`);
-      }
+
       const result = await res.json();
+
+      if (!res.ok) {
+        const errorMsg = result.error || `Статус: ${res.status}`;
+        throw new Error(errorMsg);
+      }
+      const { user, success, message } = result;
+      console.log({ success, message });
 
       setSurname("");
       setName("");
@@ -48,10 +52,16 @@ export const Registration = () => {
       setPassword("");
       setRepeatPassword("");
 
-      dispatch(getUser(result));
-      navigate("/user");
+      dispatch(getUser(user));
+      dispatch(getSuccessMessage({ success, message }));
+
+      if (success) {
+        setTimeout(() => navigate("/user"), 2000);
+      }
     } catch (err) {
-      console.error(err, "Ошибка сервера!!!");
+      console.error(err.message);
+      dispatch(getError({ success: false, message: err.message }));
+      console.error(err, "Ошибка регистрации!!!");
     }
   };
 
@@ -63,130 +73,23 @@ export const Registration = () => {
 
   return (
     <>
-      <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>
-              <Title label="ФИО" />
-            </legend>
-            <div className={styles.inputContainer}>
-              <label htmlFor="surname">Фамилия</label>
-              <input
-                type="text"
-                name="surname"
-                id="surname"
-                value={surname}
-                onChange={(event) => {
-                  setSurname(event.target.value);
-                }}
-                autoComplete="username"
-                required
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor="name">Имя</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={name}
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-                required
-              />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>
-              <Title label="Контакты" />
-            </legend>
-            <div className={styles.inputContainer}>
-              <label htmlFor="email">email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-                autoComplete="username"
-                required
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor="phone">Телефон</label>
-              <input
-                type="tel"
-                name="phone"
-                id="phone"
-                value={phone}
-                onChange={(event) => {
-                  setPhone(event.target.value);
-                }}
-                placeholder="999 999-99-99"
-                pattern="[0-9]{3} [0-9]{3}-[0-9]{2}-[0-9]{2}"
-                required
-              />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>
-              <Title label="Пароль" />
-            </legend>
-            <div className={styles.inputContainer}>
-              <div className={styles.passwordSection}>
-                <label htmlFor="password">Пароль </label>
-                <span className={styles.tips}>минимум 6 символов</span>
-              </div>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-                minLength="6"
-                maxLength="12"
-                autoComplete="new-password"
-                required
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor="repeat_password">Павтор пароля</label>
-              <div className={styles["repeat-password"]}>
-                <input
-                  type="password"
-                  name="password"
-                  id="repeat_password"
-                  value={repeatPassword}
-                  onChange={RepeatPasswordChange}
-                  minLength="6"
-                  maxLength="12"
-                  autoComplete="new-password"
-                  required
-                />
-                <span
-                  className={
-                    passwordsMatch || !repeatPassword
-                      ? styles["repeat-password-correct"]
-                      : styles["repeat-password-wrong"]
-                  }
-                >
-                  Пароли не совпадают
-                </span>
-              </div>
-            </div>
-          </fieldset>
-          <input
-            type="submit"
-            value="Зарегистрироваться"
-            disabled={!passwordsMatch}
-          />
-        </form>
-      </div>
+      <RegistrationForm
+        surname={surname}
+        name={name}
+        email={email}
+        phone={phone}
+        password={password}
+        repeatPassword={repeatPassword}
+        handleSubmit={handleSubmit}
+        RepeatPasswordChange={RepeatPasswordChange}
+        setSurname={setSurname}
+        setName={setName}
+        setEmail={setEmail}
+        setPhone={setPhone}
+        setPassword={setPassword}
+        passwordsMatch={passwordsMatch}
+      />
+      <Notification />
     </>
   );
 };

@@ -14,11 +14,21 @@ export const authRouter = Router();
 authRouter.post("/register", async (req, res) => {
   try {
     const { token, user } = await registerUser(req.body);
-    // res.json({ success: true, message: "Пользователь добавлен!" });
     res.cookie("token", token, { httpOnly: true });
-    res.json(user);
+    res.json({
+      success: true,
+      message: "Пользователь авторизован!",
+      user,
+    });
   } catch (err) {
-    res.json({ error: err.message || "Неизвестная ошибка" });
+    console.log(chalk.red(err));
+    if (err.message === "Email уже зарегистрирован!") {
+      res.status(401).json({ error: err.message });
+    }
+    if (err.message === "Пустой пароль!") {
+      res.status(401).json({ error: err.message });
+    }
+    res.status(500).json({ error: err.message });
   }
 });
 

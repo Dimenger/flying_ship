@@ -9,7 +9,6 @@ import { Registration } from "./components/pages/registration/registration";
 import { Services } from "./components/pages/services/services";
 import { Service } from "./components/pages/service/service";
 import { Schedule } from "./components/pages/schedule/schedule";
-import { Contacts } from "./components/pages/contacts/contacts";
 import { Login } from "./components/pages/login/login";
 import { Failure } from "./components/error/error";
 import { ERROR, ROLES } from "./constants";
@@ -45,7 +44,6 @@ export const App = () => {
         { path: "/services/:id", element: <Service /> },
         { path: "/schedule", element: <Schedule /> },
         { path: "/posts", element: <Posts /> },
-        { path: "/contacts", element: <Contacts /> },
         {
           path: "/registration",
           element: <Registration />,
