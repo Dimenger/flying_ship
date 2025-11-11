@@ -7,6 +7,10 @@ import { generateToken } from "../helpers/generate-token.helper.js";
 
 export const registerUser = async (userDate) => {
   try {
+    const alreadyExistingUser = await User.findOne({ email: userDate.email });
+    if (alreadyExistingUser) {
+      throw new Error("Email уже зарегистрирован!");
+    }
     if (!userDate.password) {
       throw new Error("Пустой пароль!");
     }
@@ -60,3 +64,5 @@ export const authMe = (user) => {
     throw error;
   }
 };
+
+export const addService = () => {};

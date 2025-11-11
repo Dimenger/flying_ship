@@ -6,6 +6,7 @@ const initialUserState = {
   email: "",
   role: "",
   registered_at: "",
+  services: [],
 };
 
 export const userReducer = (state = initialUserState, action) => {
@@ -14,7 +15,8 @@ export const userReducer = (state = initialUserState, action) => {
       return { ...state, ...action.payload };
     case "LOGOUT_USER":
       return initialUserState;
-
+    case "GET_USER_SERVICES":
+      return { ...state, services: action.payload };
     default:
       return state;
   }

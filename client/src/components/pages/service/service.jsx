@@ -1,45 +1,55 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Title } from "../../../elements/title/title";
-import { SERVICES_IMAGES } from "../../../constants/services-images";
 import { Failure } from "../../error/error";
 import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../request/thunk-action/";
+import { AddServiceButton } from "./components/add-service-button";
+import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
+import { getImgSrc } from "../../utils/get-img-scr";
+import { Notification } from "../../../elements/notification/notification";
+import { getSuccessMessage } from "../../../actions";
 
 import styles from "./services.module.css";
-import { useDispatch, useSelector } from "react-redux";
 
 export const Service = () => {
   let param = useParams();
-  const id = param.id;
+  const serId = param.id;
 
   const service = useSelector((state) => state.service);
+  const user = useSelector((state) => state.user);
+  const userId = user.id;
+  const addedServiceId = service._id;
+
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchService(id)).finally(() => setLoading(false));
-  }, [dispatch, id]);
+    dispatch(fetchService(serId)).finally(() => setLoading(false));
+  }, [dispatch, serId]);
 
-  const getSRC = (id) => {
-    const imgSrs = SERVICES_IMAGES.find((img) => id === img.id);
-    if (!imgSrs) {
-      return null;
+  const addService = async () => {
+    try {
+      const result = await addServiceToUser(userId, addedServiceId);
+      dispatch(getSuccessMessage(result));
+      console.log(result);
+    } catch (error) {
+      console.error(error);
     }
-    return imgSrs.src;
   };
 
   if (loading) return <Spinner />;
-  if (!service.id) return <Failure error={ERROR.SERVICE_NOT_EXIST} />;
+  if (!service.serId) return <Failure error={ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>
       <div className={styles.imageWrapper}>
-        <img src={getSRC(id)} alt="" />
+        <img src={getImgSrc(serId)} alt="" />
       </div>
       <div className={styles.content}>
         <Title label={service.title} fontSize="26px" />
@@ -62,6 +72,8 @@ export const Service = () => {
           ))}
         </div>
       </div>
+      <AddServiceButton onClick={addService} />
+      <Notification />
     </div>
   );
 };

@@ -9,8 +9,6 @@ import { Notification } from "../../../elements/notification/notification";
 import styles from "./login.module.css";
 
 export const Login = () => {
-  // const message = useSelector((state) => state.message);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +24,7 @@ export const Login = () => {
 
       await dispatch(fetchGetUser(userLoginData));
 
-      navigate("/user");
+      setTimeout(() => navigate("/user"), 2000);
     } catch (error) {
       console.error("handleSubmit: Ошибка авторизации:", error);
     }

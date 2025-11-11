@@ -11,9 +11,4 @@ export const BUTTONS_LIST = [
     path: "/schedule",
   },
   { id: "Posts", title: "Новости", path: "/posts" },
-  {
-    id: "Contacts",
-    title: "Контакты",
-    path: "/contacts",
-  },
 ];

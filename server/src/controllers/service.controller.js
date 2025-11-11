@@ -1,7 +1,8 @@
 import { Service } from "../models/service.model.js";
 
-export const getService = async (id) => {
-  const service = await Service.findOne({ id: id });
+export const getService = async (serId) => {
+  const service = await Service.findOne({ serId: serId });
+
   return service;
 };
 

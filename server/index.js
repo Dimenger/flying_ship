@@ -9,6 +9,7 @@ import { authRouter } from "./src/route/auth.router.js";
 import { postRouter } from "./src/route/post.router.js";
 import { serviceRouter } from "./src/route/service.router.js";
 import { usersRouter } from "./src/route/users.router.js";
+import { userRouter } from "./src/route/user.router.js";
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.use("/auth", authRouter);
 app.use("/post", postRouter);
 app.use("/service", serviceRouter);
 app.use("/users", usersRouter);
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL;

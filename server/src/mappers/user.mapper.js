@@ -6,4 +6,5 @@ export const userMapper = (user) => ({
   email: user.email,
   role: user.role,
   registered_at: user.createdAt.toISOString().slice(0, 10),
+  services: user.services,
 });

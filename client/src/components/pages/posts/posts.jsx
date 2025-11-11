@@ -11,13 +11,14 @@ import { checkAccess } from "../../utils";
 import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
 import { Title } from "../../../elements/title/title";
+import { deletePost } from "../../../request/api";
+import { Modal } from "../../../components/modal/modal";
 
 import styles from "./posts.module.css";
 
 export const Posts = () => {
   const user = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
-  const dispatch = useDispatch();
 
   const [dateSotredPosts, setDateSotredPosts] = useState(posts);
   const [isSorted, setIsSorted] = useState(false);
@@ -25,9 +26,14 @@ export const Posts = () => {
   const [addPostState, setAddPostState] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editPostData, setEditPostData] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [itemToDeletId, setItemToDeletId] = useState(null);
 
   const iaAuth = !!user.id;
   const role = user?.role;
+
+  const dispatch = useDispatch();
+  const question = "Удалить сообщение?";
 
   useEffect(() => {
     setLoading(true);
@@ -62,21 +68,25 @@ export const Posts = () => {
   };
 
   const onDeletePost = async (id) => {
+    setIsOpen(true);
+    setItemToDeletId(id);
+  };
+
+  const onConfirm = async (itemToDeletId) => {
     try {
-      const res = await fetch(`http://localhost:3000/post/delete-post/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      console.log(id);
-      if (!res.ok) {
-        throw new Error("Error");
-      }
-      const result = await res.json();
+      const result = await deletePost(itemToDeletId);
       dispatch(fetchPosts()).then(() => setLoading(false));
-      console.log(result);
+      setIsOpen(false);
+      setItemToDeletId(null);
+      alert(result.message);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onCancel = () => {
+    setIsOpen(false);
+    setItemToDeletId(null);
   };
 
   if (loading) {
@@ -135,6 +145,13 @@ export const Posts = () => {
           ))}
         </div>
       )}
+      <Modal
+        question={question}
+        isOpen={isOpen}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        itemToDeletId={itemToDeletId}
+      />
     </>
   );
 };

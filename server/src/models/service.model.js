@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const ServiceShema = new mongoose.Schema({
+  serId: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
