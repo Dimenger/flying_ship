@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPosts } from "../../../request/thunk-action";
+import { fetchDeletePost, fetchPosts } from "../../../request/thunk-action";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { AddButton } from "./components/manage-buttons/add-post-button/add-post-button";
 import { SortingButton } from "./components/manage-buttons/sorting-burron/sorting-batton";
@@ -11,7 +11,7 @@ import { checkAccess } from "../../utils";
 import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
 import { Title } from "../../../elements/title/title";
-import { deletePost } from "../../../request/api";
+// import { deletePost } from "../../../request/api";
 import { Modal } from "../../../components/modal/modal";
 
 import styles from "./posts.module.css";
@@ -74,11 +74,9 @@ export const Posts = () => {
 
   const onConfirm = async (itemToDeletId) => {
     try {
-      const result = await deletePost(itemToDeletId);
-      dispatch(fetchPosts()).then(() => setLoading(false));
+      dispatch(fetchDeletePost(itemToDeletId));
       setIsOpen(false);
       setItemToDeletId(null);
-      alert(result.message);
     } catch (error) {
       console.error(error);
     }

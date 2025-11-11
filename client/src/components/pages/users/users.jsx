@@ -5,6 +5,7 @@ import { fetchDeleteUser, fetchUsers } from "../../../request/thunk-action";
 import { UsersTableHeader } from "./components/users-table-header/users-table-header";
 import { UsersTableBody } from "./components/users-table-body/users-table-body";
 import { Modal } from "../../../components/modal/modal";
+import { Notification } from "../../../elements/notification/notification";
 
 import styles from "./users.module.css";
 
@@ -14,8 +15,6 @@ export const Users = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [userToDeletId, setUserToDeletId] = useState(null);
-
-  const question = "Удалить пользователя?";
 
   const dispatch = useDispatch();
 
@@ -38,6 +37,7 @@ export const Users = () => {
       console.error(error);
     }
   };
+
   const onCancel = () => {
     setIsOpen(false);
     setUserToDeletId(null);
@@ -73,9 +73,11 @@ export const Users = () => {
             )}
           </tbody>
         </table>
+        <br />
+        <Notification />
       </div>
       <Modal
-        question={question}
+        question={"Удалить пользователя?"}
         isOpen={isOpen}
         onConfirm={onConfirm}
         onCancel={onCancel}
@@ -84,11 +86,3 @@ export const Users = () => {
     </div>
   );
 };
-
-// const onDeleteUser = async (id) => {
-//   try {
-//     dispatch(fetchDeleteUser(id));
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

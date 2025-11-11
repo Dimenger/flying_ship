@@ -1,12 +1,17 @@
 import { editPost } from "../api";
 import { getSuccessMessage } from "../../actions";
+import { getUpdatePost } from "../../actions";
 
 export const fetchEditPost = (editPostData) => async (dispatch) => {
   try {
-    console.log(editPostData);
     const result = await editPost(editPostData);
-    console.log("Ответ сервера:", result);
-    dispatch(getSuccessMessage(result));
+    const { success, message, updatePost } = result;
+
+    console.log("editPost:", updatePost);
+    console.log("editPost:", updatePost);
+
+    dispatch(getSuccessMessage({ success, message }));
+    dispatch(getUpdatePost(updatePost));
   } catch (err) {
     console.error(err);
   }

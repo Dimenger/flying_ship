@@ -5,7 +5,3 @@ export const getService = async (serId) => {
 
   return service;
 };
-
-// add
-// edit
-// delete

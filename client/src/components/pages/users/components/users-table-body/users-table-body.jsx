@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { ROLES } from "../../../../../constants";
 import { convertRole } from "../../../../utils";
+// import { changeUserRole } from "../../../../../request/api/api-change-user-role";
+import { fetchEditUserRole } from "../../../../../request/thunk-action/fetch-edit-user-role";
 
 import styles from "./users-table-body.module.css";
 
@@ -17,19 +21,11 @@ export const UsersTableBody = ({
   const [userRole, setUserRole] = useState(role);
   const [isEdit, setIsEdit] = useState(false);
 
+  const dispatch = useDispatch();
+
   const onSaveChange = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/users/users/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userRole }),
-        credentials: "include",
-      });
-      if (!res.ok) {
-        throw new Error(`Ошибка: ${res.status}. ${res.statusText}`);
-      }
-      const result = await res.json();
-      console.log(result);
+      await dispatch(fetchEditUserRole(id, userRole));
     } catch (error) {
       console.error(error);
     }
@@ -60,16 +56,16 @@ export const UsersTableBody = ({
         </select>
       </td>
       {isEdit ? (
-        <td onClick={() => onSaveChange(id)}>
+        <td onClick={() => onSaveChange(id)} className={styles["control-icon"]}>
           <i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
         </td>
       ) : (
-        <td onClick={() => setIsEdit(true)}>
+        <td onClick={() => setIsEdit(true)} className={styles["control-icon"]}>
           <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
         </td>
       )}
 
-      <td onClick={() => onDeleteUser(id)}>
+      <td onClick={() => onDeleteUser(id)} className={styles["control-icon"]}>
         {<i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>}
       </td>
     </tr>

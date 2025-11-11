@@ -22,3 +22,7 @@ td {
 .select{
   font-size: 20px;
 }
+
+.control-icon {
+  cursor: pointer;
+}

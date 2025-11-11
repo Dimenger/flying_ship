@@ -26,7 +26,13 @@ export const deleteUser = async (id) => {
 
 export const editUser = async (id, newUserRole) => {
   try {
-    await User.findByIdAndUpdate(id, { role: newUserRole });
+    const user = await User.findByIdAndUpdate(
+      id,
+      { role: newUserRole },
+      { new: true }
+    );
+
+    return userMapper(user);
   } catch (err) {
     throw err;
   }

@@ -16,7 +16,7 @@ export const Notification = () => {
       const timer = setTimeout(() => {
         dispatch(eraseMessage());
         setIsVisible(false);
-      }, 1000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [message, dispatch]);

@@ -46,8 +46,8 @@ usersRouter.patch(
       const userId = req.params.id;
       const newUserRole = req.body.userRole;
 
-      await editUser(userId, ROLES[newUserRole]);
-      res.json({ success: true, message: "Роль изменена!" });
+      const editedUser = await editUser(userId, ROLES[newUserRole]);
+      res.json({ success: true, message: "Роль изменена!", editedUser });
     } catch (err) {
       res.json({ error: err.message || "Неизвестная ошибка" });
     }

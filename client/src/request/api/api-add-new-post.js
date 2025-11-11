@@ -6,7 +6,6 @@ export const addNewPost = async (newPostData) => {
       body: JSON.stringify(newPostData),
       credentials: "include",
     });
-    console.log(newPostData);
 
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);

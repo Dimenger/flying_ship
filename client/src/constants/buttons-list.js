@@ -2,7 +2,7 @@ export const BUTTONS_LIST = [
   { id: "Main Page", title: "Главная", path: "/" },
   {
     id: "Services",
-    title: "Услуги",
+    title: "Направления",
     path: "/services",
   },
   {

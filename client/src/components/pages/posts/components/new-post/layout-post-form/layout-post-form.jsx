@@ -1,4 +1,6 @@
-import { Title } from "../../../../../elements/title/title";
+import { Title } from "../../../../../../elements/title/title";
+
+import styles from "./layout-post-form.module.css";
 
 export const LayoutPostForm = ({
   isEditMode,
@@ -17,10 +19,11 @@ export const LayoutPostForm = ({
           <Title label="Заголовок" fontSize={"30px"} />
         </legend>
         <textarea
+          className={styles.textarea}
           name="title"
           id="title"
-          rows="6"
-          cols="150"
+          rows="4"
+          cols="80"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -33,16 +36,18 @@ export const LayoutPostForm = ({
         </legend>
 
         <textarea
+          className={styles.textarea}
           name="content"
           id="content"
-          rows="30"
-          cols="150"
+          rows="16"
+          cols="80"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
         ></textarea>
       </fieldset>
       <input
+        className={styles.input}
         type="submit"
         value="Опубликовать сообщение"
         disabled={isSending}

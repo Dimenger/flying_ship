@@ -7,7 +7,7 @@ export const fetchDeleteUser = (id) => async (dispatch) => {
     if (!result) {
       throw new Error("Ошибка");
     }
-    console.log(result);
+    alert(result.message);
     dispatch(removeUser(id));
   } catch (error) {
     console.error(error);

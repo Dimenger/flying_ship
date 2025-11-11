@@ -16,7 +16,6 @@ export const getServices = async (userId) => {
     const fullUser = await User.findById(userId).populate("services");
     const useServices = fullUser.services;
     const result = useServices.map(serviceMapper);
-    console.log(result);
     return result;
   } catch (err) {
     throw err;

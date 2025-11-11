@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../../elements/title/title";
-import { fetchGetUser } from "../../../request/thunk-action/fetch-get-user";
+import { fetchGetUser } from "../../../request/thunk-action";
 import { Notification } from "../../../elements/notification/notification";
 
 import styles from "./login.module.css";

@@ -11,3 +11,5 @@ export * from "./api-add-service-to-user";
 export * from "./get-user-services";
 export * from "./api-remove-service-from-user";
 export * from "./api-delete-post";
+export * from "./api-change-user-role";
+export * from "./auth-me";

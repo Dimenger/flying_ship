@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Title } from "../../../../../elements/title/title";
-import { fetchPosts } from "../../../../../request/thunk-action";
+// import { fetchPosts } from "../../../../../request/thunk-action";
 import { fetchAddNewPost } from "../../../../../request/thunk-action";
 import { fetchEditPost } from "../../../../../request/thunk-action";
 import { Notification } from "../../../../../elements/notification/notification";
 import { BackButton } from "../manage-buttons/back-button/back-button";
+import { LayoutPostForm } from "./layout-post-form/layout-post-form";
 
 import styles from "./new-post.module.css";
-import { LayoutPostForm } from "./layout-post-form";
 
 export const NewPost = ({
   setAddPostState,
@@ -47,11 +46,14 @@ export const NewPost = ({
     e.preventDefault();
     try {
       await dispatch(fetchAddNewPost(newPostData));
-      await dispatch(fetchPosts());
 
       setIsSending(true);
       setTitle("");
       setContent("");
+      setTimeout(() => {
+        setAddPostState(false);
+        setIsSending(false);
+      }, 2000);
     } catch (error) {
       console.error("Ошибка:", error);
     }
@@ -61,11 +63,16 @@ export const NewPost = ({
     try {
       e.preventDefault();
       await dispatch(fetchEditPost(newEditPostData));
-      await dispatch(fetchPosts());
 
       setIsSending(true);
       setTitle("");
       setContent("");
+      setTimeout(() => {
+        setAddPostState(false);
+        setIsSending(false);
+        setIsEditMode(false);
+        setEditPostData({});
+      }, 2000);
     } catch (error) {
       console.error("Ошибка:", error);
     }

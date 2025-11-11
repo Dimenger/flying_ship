@@ -2,5 +2,5 @@ export const ROLES = {
   ADMINISTRATOR: 0,
   MODERATOR: 1,
   USER: 2,
-  GUEST: 3,
+  // GUEST: 3,
 };

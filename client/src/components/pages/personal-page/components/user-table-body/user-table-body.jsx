@@ -17,7 +17,7 @@ export const UserTableBody = ({ user, onDeleteService, nextDate }) => {
           <td>
             <PostButton
               title={"Удалить"}
-              onClick={() => onDeleteService(user.id, _id)}
+              onClick={() => onDeleteService(_id)}
               icon={<i className="fa fa-ship fa-lg" aria-hidden="true"></i>}
             />
           </td>

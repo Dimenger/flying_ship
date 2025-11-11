@@ -6,8 +6,6 @@ export const editPost = async (editPostData) => {
       body: JSON.stringify(editPostData),
       credentials: "include",
     });
-    console.log(editPostData);
-
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);
     }
