@@ -1,0 +1,30 @@
+.service-panel-container{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: fff;
+}
+
+.link{
+  text-decoration: none;
+  color: #fff;
+}
+
+.login{
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+  text-decoration: none;
+  color: #fff;
+}
+
+.login-span {
+  font-size: 26px;
+}
+
+.user-name{
+    font-size: 26px;
+}
+.users{
+    font-size: 26px;
+}

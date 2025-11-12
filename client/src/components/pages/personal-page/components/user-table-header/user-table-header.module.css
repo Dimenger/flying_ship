@@ -1,0 +1,13 @@
+.tr-container {
+  background-color: #4CAF50;  
+  color: white;  
+  border-bottom: 3px solid #ddd;
+}
+
+th {
+  padding: 12px 15px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
+  white-space: nowrap
+}

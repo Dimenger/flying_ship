@@ -1,0 +1,117 @@
+.formContainer {
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(144, 238, 144, 0.2), 
+    rgba(144, 238, 144, 0.1)
+  );
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 10px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: rgba(144, 238, 144, 0.05); 
+}
+
+legend {
+  padding: 0 10px;
+  margin-bottom: -30px;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 6px;
+  margin-right: 10px;
+  font-weight: 600;
+  color: #33691e;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='password'] {
+  padding: 10px;
+  border: 1px solid #388e3c;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: all 0.2s;
+}
+
+/* Ховер и фокус */
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+input[type='password']:focus {
+  outline: none;
+  border-color: #66bb6a;
+  box-shadow: 0 0 8px rgba(102, 187, 106, 0.3);
+}
+
+input[type='submit'] {
+  padding: 12px 20px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+input[type='submit']:hover {
+  background-color: #4caf50;
+}
+
+.repeat-password{
+  display: flex;
+  flex-direction: column;
+}
+
+.repeat-password-wrong{
+  margin-top: 5px;
+  margin-left: 10px;
+  color: red;
+}
+
+.repeat-password-correct{
+  margin-top: 5px;
+  margin-left: 10px;
+  visibility: hidden;
+}
+
+.passwordSection{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tips{
+  font-size: 12px;
+  color: #33691e;
+  margin-top: -10px;
+}
+
+@media(max-width: 600px) {
+  .formContainer {
+    padding: 20px;
+  }
+}

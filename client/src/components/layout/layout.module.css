@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color:#fffdf5;
+}
+
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align:justify;
+  flex: 1 1 auto;
+  min-height: 0; /* для корректного скролла */
+  overflow-y: auto; /* если контента много, появляется скролл */
+}
+
+.header, .footer {
+  flex-shrink: 0; /* не сжимается */
+}

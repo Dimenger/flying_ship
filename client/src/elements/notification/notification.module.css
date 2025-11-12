@@ -1,0 +1,36 @@
+.notification {
+  width: 400px;
+  height: 50px;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.invisible {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0);
+}
+
+.success {
+  background-color: #4caf50; 
+}
+.error {
+  background-color: #f44336; 
+}
