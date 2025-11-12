@@ -1,0 +1,44 @@
+.posts-container {
+  font-size: 18px;
+}
+
+.manage-panel{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+.article {
+  border-top: 2px double rgb(16, 177, 78);
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.time {
+  display: flex;
+  gap: 10px;
+  font-size: large;
+  align-items: center;
+}
+
+.sorting {
+  display: flex;
+  justify-content:end;
+  align-items: center;
+  gap: 10px;
+}
+
+.lable {
+  font-size: 20px;
+}
+
+.service-panel{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-bottom: 6px;
+}

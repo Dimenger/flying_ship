@@ -1,0 +1,51 @@
+.controlPanelContainer{
+  display: flex;
+  flex-direction: column;
+  font-size: 26px;
+  color: #fff;
+}
+.userName{
+  display: flex;
+  justify-content: end;
+  font-size: 20px;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap; 
+}
+
+.link{
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.link :hover {
+  color: orangered;
+  background-color: yellow;
+  font-weight: 600;
+}
+
+.activeLink button {
+  color: orangered;
+  background-color: yellow;
+  font-weight: 600
+}
+
+.activeLink {
+  text-decoration: none;
+}
+
+.login{
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+  gap: 8px;
+}
+
+.login-span{
+  font-size: 20px;
+}

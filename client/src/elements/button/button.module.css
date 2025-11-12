@@ -1,0 +1,15 @@
+.customButton {
+  width: 180px;
+  height: 40px;
+  border-radius: 5px; 
+  border: none;
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FF8000; 
+  color: #fff; 
+  font-size: 20px; 
+  padding: 0; 
+  
+}
