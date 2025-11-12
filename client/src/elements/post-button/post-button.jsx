@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./post-button.module.css";
 
 export const PostButton = ({ icon, title, onClick }) => {
@@ -6,4 +8,10 @@ export const PostButton = ({ icon, title, onClick }) => {
       {icon}
     </button>
   );
+};
+
+PostButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

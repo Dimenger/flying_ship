@@ -6,3 +6,9 @@
 .table {
     margin-right: 80px;
 }
+
+.subheader{
+    display: flex;
+    flex-direction: column;
+    padding: -10px;
+}

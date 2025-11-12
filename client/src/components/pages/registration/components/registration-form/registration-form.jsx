@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Title } from "../../../../../elements/title/title";
 
 import styles from "./registration-form.module.css";
@@ -146,4 +148,21 @@ export const RegistrationForm = ({
       </div>
     </>
   );
+};
+
+RegistrationForm.propTypes = {
+  surname: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  repeatPassword: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  RepeatPasswordChange: PropTypes.func.isRequired,
+  setSurname: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setPhone: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  passwordsMatch: PropTypes.bool.isRequired,
 };

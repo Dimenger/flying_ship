@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { PostButton } from "../../../../../../elements/post-button/post-button";
 
 export const DeleteButton = ({ onClick }) => {
@@ -6,4 +8,8 @@ export const DeleteButton = ({ onClick }) => {
   const title = "Удалить сообщение";
 
   return <PostButton onClick={onClick} icon={icon} title={title} />;
+};
+
+DeleteButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

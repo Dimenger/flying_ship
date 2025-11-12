@@ -23,8 +23,6 @@ export const PersonalPage = () => {
   const [serviceToDeletId, setServiceToDeletId] = useState(null);
   const [serIdList, setSerIdList] = useState([]);
 
-  console.log(serIdList);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,13 +61,25 @@ export const PersonalPage = () => {
         fontSize={"30px"}
       />
       <Title
-        label={`Здесь находится список выбранных вами занятий.`}
+        label={
+          <div className={styles.subheader}>
+            <span>Здесь находится список ваших занятий.</span>
+            <br />
+            <span>Вы можете выбрать нужные вам в разделе «Направления»!</span>
+          </div>
+        }
         fontSize={"20px"}
       />
       <table className={styles.table}>
-        <caption className={styles.caption}>
-          Список ваших любимых гаваней!
-        </caption>
+        {!serIdList.length ? (
+          <caption className={styles.caption}>
+            Список ваших любимых гаваней пока пуст!
+          </caption>
+        ) : (
+          <caption className={styles.caption}>
+            Список ваших любимых гаваней!
+          </caption>
+        )}
         <thead>
           <UserTableHeader />
         </thead>
@@ -81,7 +91,7 @@ export const PersonalPage = () => {
           />
         </tbody>
       </table>
-      <Schedule allowedSerIds={serIdList} />
+      {!!serIdList.length && <Schedule allowedSerIds={serIdList} />}
       <Notification />
       <Modal
         question={"Удалить направление!"}

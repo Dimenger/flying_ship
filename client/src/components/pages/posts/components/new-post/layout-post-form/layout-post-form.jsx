@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Title } from "../../../../../../elements/title/title";
 
 import styles from "./layout-post-form.module.css";
@@ -54,4 +56,15 @@ export const LayoutPostForm = ({
       />
     </form>
   );
+};
+
+LayoutPostForm.propTypes = {
+  isEditMode: PropTypes.bool.isRequired,
+  isSending: PropTypes.bool.isRequired,
+  handleEditPost: PropTypes.func.isRequired,
+  handleAddPost: PropTypes.func.isRequired,
+  setContent: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 };

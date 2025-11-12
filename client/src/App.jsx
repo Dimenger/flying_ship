@@ -40,7 +40,9 @@ export const App = () => {
         {
           path: "/user",
           element: (
-            <ProtectedRoute>
+            <ProtectedRoute
+              allowedRoles={[ROLES.ADMINISTRATOR, ROLES.MODERATOR, ROLES.USER]}
+            >
               <PersonalPage />
             </ProtectedRoute>
           ),
@@ -48,7 +50,7 @@ export const App = () => {
         {
           path: "/users",
           element: (
-            <ProtectedRoute allowedRoles={ROLES.ADMINISTRATOR}>
+            <ProtectedRoute allowedRoles={[ROLES.ADMINISTRATOR]}>
               <Users />
             </ProtectedRoute>
           ),

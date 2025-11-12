@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { COMMUNICATION } from "../../../constants";
 import { scheduleByAddress } from "../../../constants";
 import { ScheduleTable } from "./components/schedule-table";
@@ -17,4 +19,8 @@ export const Schedule = ({ allowedSerIds }) => {
       ))}
     </div>
   );
+};
+
+Schedule.propTypes = {
+  allowedSerIds: PropTypes.arrayOf(PropTypes.string),
 };

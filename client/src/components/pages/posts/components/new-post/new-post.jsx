@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
+
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// import { fetchPosts } from "../../../../../request/thunk-action";
 import { fetchAddNewPost } from "../../../../../request/thunk-action";
 import { fetchEditPost } from "../../../../../request/thunk-action";
 import { Notification } from "../../../../../elements/notification/notification";
@@ -103,4 +104,16 @@ export const NewPost = ({
       />
     </div>
   );
+};
+
+NewPost.propTypes = {
+  isEditMode: PropTypes.bool.isRequired,
+  setAddPostState: PropTypes.func.isRequired,
+  setIsEditMode: PropTypes.func.isRequired,
+  editPostData: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    title: PropTypes.string,
+    content: PropTypes.string,
+  }).isRequired,
+  setEditPostData: PropTypes.func.isRequired,
 };

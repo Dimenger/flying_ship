@@ -6,11 +6,19 @@ import { UsersTableHeader } from "./components/users-table-header/users-table-he
 import { UsersTableBody } from "./components/users-table-body/users-table-body";
 import { Modal } from "../../../components/modal/modal";
 import { Notification } from "../../../elements/notification/notification";
+import { Failure } from "../../error/error";
+import { ERROR } from "../../../constants";
+import { checkAccess } from "../../utils";
+import { ROLES } from "../../../constants";
 
 import styles from "./users.module.css";
 
 export const Users = () => {
   const users = useSelector((state) => state.users);
+  const user = useSelector((state) => state.user);
+
+  const Auth = !!user;
+  const role = user?.role;
 
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -46,6 +54,12 @@ export const Users = () => {
   if (loading) {
     return <Spinner />;
   }
+
+  if (!Auth && !checkAccess([ROLES.ADMINISTRATOR], role))
+    return <Failure error={ERROR.ACCESS_DENIED} />;
+
+  console.log(Auth);
+  console.log(checkAccess([ROLES.ADMINISTRATOR], role));
 
   return (
     <div className={styles["users-container"]}>

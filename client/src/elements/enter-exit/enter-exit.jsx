@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./enter-exit.module.css";
 
 export const EnterExit = ({ stateFlag }) => {
@@ -14,3 +16,5 @@ export const EnterExit = ({ stateFlag }) => {
     </div>
   );
 };
+
+EnterExit.PropTypes = { stateFlag: PropTypes.bool };

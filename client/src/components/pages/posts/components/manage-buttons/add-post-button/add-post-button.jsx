@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { PostButton } from "../../../../../../elements/post-button/post-button";
 
 export const AddButton = ({ onClick }) => {
@@ -8,4 +10,8 @@ export const AddButton = ({ onClick }) => {
   const title = "Добавить сообщение";
 
   return <PostButton onClick={onClick} icon={icon} title={title} />;
+};
+
+AddButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

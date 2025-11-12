@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./schedule-table.module.css";
 
 export const ScheduleTable = ({ data, addressFull, allowedSerIds }) => {
@@ -69,4 +71,20 @@ export const ScheduleTable = ({ data, addressFull, allowedSerIds }) => {
       </table>
     </div>
   );
+};
+
+ScheduleTable.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          serId: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired,
+          time: PropTypes.string,
+        })
+      )
+    )
+  ).isRequired,
+  addressFull: PropTypes.string.isRequired,
+  allowedSerIds: PropTypes.arrayOf(PropTypes.string),
 };

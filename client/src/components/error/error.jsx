@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./error.module.css";
 
 export const Failure = ({ error }) =>
@@ -7,3 +9,5 @@ export const Failure = ({ error }) =>
       <div>{error}</div>
     </div>
   );
+
+Failure.PropTypes = { error: PropTypes.string };

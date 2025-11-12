@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useEffect } from "react";
 import { getImgSrc } from "../../../../../components/utils";
 import { PostButton } from "../../../../../elements/post-button/post-button";
@@ -31,4 +33,10 @@ export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
       ))}
     </>
   );
+};
+
+UserTableBody.propTypes = {
+  user: PropTypes.string.isRequired,
+  onDeleteService: PropTypes.func.isRequired,
+  setSerIdList: PropTypes.func.isRequired,
 };

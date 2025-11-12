@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { ConfirmButton } from "./components/confirm-button";
 import { RejectButton } from "./components/reject-button";
 
@@ -27,4 +29,12 @@ export const Modal = ({
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  question: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  itemToDeletId: PropTypes.func.string,
 };

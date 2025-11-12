@@ -11,7 +11,6 @@ import { checkAccess } from "../../utils";
 import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
 import { Title } from "../../../elements/title/title";
-// import { deletePost } from "../../../request/api";
 import { Modal } from "../../../components/modal/modal";
 
 import styles from "./posts.module.css";
@@ -29,7 +28,7 @@ export const Posts = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [itemToDeletId, setItemToDeletId] = useState(null);
 
-  const iaAuth = !!user.id;
+  const isAuth = !!user.id;
   const role = user?.role;
 
   const dispatch = useDispatch();
@@ -106,7 +105,7 @@ export const Posts = () => {
           <div className={styles.header}>
             <Title label="Наши новости." fontSize="26px" />
             <div className={styles["manage-panel"]}>
-              {iaAuth &&
+              {isAuth &&
                 checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
                   <AddButton onClick={onAddPost} />
                 )}
@@ -127,7 +126,7 @@ export const Posts = () => {
 
               <p>{post.content}</p>
               <div className={styles["service-panel"]}>
-                {iaAuth &&
+                {isAuth &&
                   checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
                     <>
                       <DeleteButton onClick={() => onDeletePost(post.id)} />

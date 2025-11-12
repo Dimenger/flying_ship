@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./add-service-button.module.css";
 
 export const AddServiceButton = ({ onClick }) => {
@@ -16,4 +18,8 @@ export const AddServiceButton = ({ onClick }) => {
       </button>
     </>
   );
+};
+
+AddServiceButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

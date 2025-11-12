@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { ROLES } from "../../../../../constants";
 import { convertRole } from "../../../../utils";
-// import { changeUserRole } from "../../../../../request/api/api-change-user-role";
 import { fetchEditUserRole } from "../../../../../request/thunk-action/fetch-edit-user-role";
 
 import styles from "./users-table-body.module.css";
@@ -70,4 +71,15 @@ export const UsersTableBody = ({
       </td>
     </tr>
   );
+};
+
+UsersTableBody.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  surname: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  registered_at: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  role: PropTypes.oneOf(Object.values(ROLES)).isRequired,
+  onDeleteUser: PropTypes.func.isRequired,
 };

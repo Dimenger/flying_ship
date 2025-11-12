@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { PostButton } from "../../../../../../elements/post-button/post-button";
 
 export const BackButton = ({ onClick }) => {
@@ -8,4 +10,8 @@ export const BackButton = ({ onClick }) => {
   const title = "Вернуться к списку";
 
   return <PostButton onClick={onClick} icon={icon} title={title} />;
+};
+
+BackButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
