@@ -1,5 +1,5 @@
 FROM node:20 AS builder
-WORKDIR /GRADUATIONPROJECT
+WORKDIR /flying_ship
 COPY ./client ./client
 RUN cd client && npm ci && npm run build
 
