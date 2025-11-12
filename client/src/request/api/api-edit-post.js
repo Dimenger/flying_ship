@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const editPost = async (editPostData) => {
   try {
-    const res = await fetch("http://localhost:3000/post/edit-post", {
+    const res = await request("/post/edit-post", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editPostData),

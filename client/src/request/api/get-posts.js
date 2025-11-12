@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const getPosts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/post/posts");
+    const res = await request("/post/posts");
     if (!res.ok) {
       throw new Error(`Oшибка получения данных! status: ${res.status}`);
     }

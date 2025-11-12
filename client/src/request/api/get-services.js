@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const getServices = async () => {
   try {
-    const res = await fetch("http://localhost:3000/services");
+    const res = await request("/services");
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. ${res.statusText}`);
     }

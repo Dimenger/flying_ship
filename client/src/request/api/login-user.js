@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const loginUser = async (userLoginData) => {
   try {
-    const res = await fetch("http://localhost:3000/auth/login", {
+    const res = await request("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userLoginData),

@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const authMe = async () => {
   try {
-    const res = await fetch("http://localhost:3000/auth/me", {
+    const res = await request("/auth/me", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });

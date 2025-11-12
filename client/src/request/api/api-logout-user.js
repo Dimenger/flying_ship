@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const apiLogoutUser = async () => {
   try {
-    const res = await fetch("http://localhost:3000/auth/logout", {
+    const res = await request("/auth/logout", {
       credentials: "include",
     });
     if (!res.ok) {

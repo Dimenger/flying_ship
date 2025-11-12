@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const changeUserRole = async (id, userRole) => {
   try {
-    const res = await fetch(`http://localhost:3000/users/users/${id}`, {
+    const res = await request(`/users/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userRole }),

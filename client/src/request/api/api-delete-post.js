@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const deletePost = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/post/delete-post/${id}`, {
+    const res = await request(`/post/delete-post/${id}`, {
       method: "DELETE",
       credentials: "include",
     });

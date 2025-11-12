@@ -1,13 +1,12 @@
+import { request } from "../../components/utils";
+
 export const getUserServices = async (userId) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/user/get-services/${userId}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      }
-    );
+    const res = await request(`/user/get-services/${userId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);
     }

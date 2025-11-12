@@ -1,6 +1,8 @@
+import { request } from "../../components/utils";
+
 export const addNewPost = async (newPostData) => {
   try {
-    const res = await fetch("http://localhost:3000/post/add-new-post", {
+    const res = await request("/post/add-new-post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPostData),

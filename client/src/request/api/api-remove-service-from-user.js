@@ -1,14 +1,13 @@
+import { request } from "../../components/utils";
+
 export const apiRemoveServiceFromUser = async (userId, serviceId) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/user/remove-service/${userId}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ serviceId }),
-        credentials: "include",
-      }
-    );
+    const res = await request(`/user/remove-service/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ serviceId }),
+      credentials: "include",
+    });
     console.log(userId, serviceId);
 
     if (!res.ok) {
