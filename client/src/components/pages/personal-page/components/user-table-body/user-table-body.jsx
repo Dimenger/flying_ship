@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { getImgSrc } from "../../../../../components/utils";
 import { PostButton } from "../../../../../elements/post-button/post-button";
 
 import styles from "./user-table-body.module.css";
 
-export const UserTableBody = ({ user, onDeleteService, nextDate }) => {
+export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
+  useEffect(() => {
+    const serIdList = user.services.map((service) => service.serId);
+    setSerIdList(serIdList);
+  }, [user.services, setSerIdList]);
+
   return (
     <>
       {user.services.map(({ _id, serId, title, subtitle }) => (
@@ -13,7 +19,7 @@ export const UserTableBody = ({ user, onDeleteService, nextDate }) => {
           </td>
           <td>{title}</td>
           <td>{subtitle}</td>
-          <td>{nextDate || "Нет данных"}</td>
+
           <td>
             <PostButton
               title={"Удалить"}

@@ -21,10 +21,11 @@ export const Service = () => {
 
   const service = useSelector((state) => state.service);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+
   const userId = user.id;
   const addedServiceId = service._id;
-
-  const [loading, setLoading] = useState(false);
+  const Auth = !!userId;
 
   const dispatch = useDispatch();
 
@@ -72,7 +73,7 @@ export const Service = () => {
           ))}
         </div>
       </div>
-      <AddServiceButton onClick={addService} />
+      {Auth && <AddServiceButton onClick={addService} />}
       <Notification />
     </div>
   );

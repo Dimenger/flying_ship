@@ -1,15 +1,28 @@
 import styles from "./schedule-table.module.css";
 
-export const ScheduleTable = ({ data, addressFull, addressName }) => {
+export const ScheduleTable = ({ data, addressFull, allowedSerIds }) => {
   const daysOrder = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
+
+  const shouldFilter = Array.isArray(allowedSerIds) && allowedSerIds.length > 0;
+
+  const filteredData = shouldFilter
+    ? data.map((dayObj) => {
+        const dayKey = Object.keys(dayObj)[0];
+        const acts = dayObj[dayKey].filter((act) =>
+          allowedSerIds.includes(act.serId)
+        );
+        return { [dayKey]: acts };
+      })
+    : data;
 
   const getStreetFromFullAddress = (fullAddress) => {
     const parts = fullAddress.split(", ");
-    return parts[1] || fullAddress;
+    const header = `Наш центр по адресу ${parts[1]}, ${parts[2]}`;
+    return header || fullAddress;
   };
 
   const allActivities = [];
-  data.forEach((dayObj) => {
+  filteredData.forEach((dayObj) => {
     Object.values(dayObj).forEach((acts) => {
       allActivities.push(...acts);
     });
@@ -25,11 +38,7 @@ export const ScheduleTable = ({ data, addressFull, addressName }) => {
         const acts = Object.values(dayObj)[0];
         const act = acts.find((a) => a.title === subject);
         if (act) {
-          return (
-            <td key={day}>
-              {act.время} - {act.title}
-            </td>
-          );
+          return <td key={day}>{act.time}</td>;
         }
       }
       return <td key={day}></td>;
@@ -43,9 +52,9 @@ export const ScheduleTable = ({ data, addressFull, addressName }) => {
   });
 
   return (
-    <div className={styles.addressBlock}>
+    <div className={styles.scheduleContainer}>
       <h3 className={styles.addressTitle}>
-        {addressName} — {getStreetFromFullAddress(addressFull)}
+        {getStreetFromFullAddress(addressFull)}
       </h3>
       <table className={styles.scheduleTable}>
         <thead>
@@ -61,5 +70,3 @@ export const ScheduleTable = ({ data, addressFull, addressName }) => {
     </div>
   );
 };
-
-export default ScheduleTable;

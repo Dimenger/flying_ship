@@ -11,6 +11,7 @@ import { UserTableHeader } from "./components/user-table-header/user-table-heade
 import { UserTableBody } from "./components/user-table-body/user-table-body";
 import { Notification } from "../../../elements/notification/notification";
 import { Modal } from "../../modal/modal";
+import { Schedule } from "../schedule/schedule";
 
 import styles from "./personal-page.module.css";
 
@@ -20,6 +21,9 @@ export const PersonalPage = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [serviceToDeletId, setServiceToDeletId] = useState(null);
+  const [serIdList, setSerIdList] = useState([]);
+
+  console.log(serIdList);
 
   const dispatch = useDispatch();
 
@@ -52,8 +56,6 @@ export const PersonalPage = () => {
     return <Spinner />;
   }
 
-  const nextDate = "Data";
-
   return (
     <div>
       <Title
@@ -64,7 +66,7 @@ export const PersonalPage = () => {
         label={`Здесь находится список выбранных вами занятий.`}
         fontSize={"20px"}
       />
-      <table>
+      <table className={styles.table}>
         <caption className={styles.caption}>
           Список ваших любимых гаваней!
         </caption>
@@ -75,10 +77,11 @@ export const PersonalPage = () => {
           <UserTableBody
             user={user}
             onDeleteService={onDeleteService}
-            nextDate={nextDate}
+            setSerIdList={setSerIdList}
           />
         </tbody>
       </table>
+      <Schedule allowedSerIds={serIdList} />
       <Notification />
       <Modal
         question={"Удалить направление!"}

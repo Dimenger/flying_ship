@@ -13,26 +13,15 @@ import { Login } from "./components/pages/login/login";
 import { Failure } from "./components/error/error";
 import { ERROR, ROLES } from "./constants";
 import { ProtectedRoute } from "./components/protected-route/protected-route";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getUser, removeUser } from "./actions";
-import { authMe } from "./request/api";
+import { useAuth } from "./hooks/use-auth";
+import { Spinner } from "./elements/spinner/spinner";
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const { loading } = useAuth();
 
-  useEffect(() => {
-    const Me = async () => {
-      const user = await authMe();
-      if (user) {
-        dispatch(getUser(user));
-      } else {
-        // если `null`, считаем, что пользователь не авторизован
-        dispatch(removeUser());
-      }
-    };
-    Me();
-  }, [dispatch]);
+  if (loading) {
+    return <Spinner />;
+  }
 
   const router = createBrowserRouter([
     {

@@ -7,7 +7,6 @@ import {
   authMe,
 } from "../controllers/auth.controller.js";
 import { verifyToken } from "../helpers/verify-token.helper.js";
-import { auth } from "../middlewares/auth.js";
 
 export const authRouter = Router();
 

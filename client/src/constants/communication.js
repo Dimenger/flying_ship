@@ -3,9 +3,7 @@ export const COMMUNICATION = {
     { id: "phone_1", phone: "+79996788033" },
     { id: "phone_2", phone: "+79996780044" },
   ],
-  social: [
-    { id: "vk", vk: "https://vk.com/teremoksamara", icon: "fa fa-vk fa-2x" },
-  ],
+  social: [{ id: "vk", vk: "https://vk.com/", icon: "fa fa-vk fa-2x" }],
   addresses: [
     {
       id: "address_1",

@@ -7,7 +7,6 @@ export const UserTableHeader = () => {
         Название
       </th>
       <th scope="col">Возраст</th>
-      <th scope="col">Дата занятия</th>
       <th scope="col">Покинуть порт!</th>
     </tr>
   );
