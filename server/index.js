@@ -33,7 +33,7 @@ const launch = async () => {
     app.listen(PORT, () => {
       console.log(chalk.green(`Server start on port ${PORT}!`));
     });
-  } catch (error) {
+  } catch (err) {
     console.error(err);
   }
 };
