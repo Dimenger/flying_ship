@@ -10,6 +10,6 @@ RUN  npm ci --omit=dev
 COPY ./server ./
 
 # copy build client files
-COPY --from=builder /app/client/dist ./dist
+COPY --from=builder /flying_ship/client/dist ./dist
 EXPOSE 3005
 CMD [ "node", "index.js" ]
