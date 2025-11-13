@@ -4,7 +4,7 @@ COPY ./client ./client
 RUN cd client && npm ci && npm run build
 
 FROM node:20
-WORKDIR /app/server
+WORKDIR /flying_ship/server
 COPY ./server/package*.json ./
 RUN  npm ci --omit=dev
 COPY ./server ./
