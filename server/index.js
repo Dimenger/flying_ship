@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const distPath = join(__dirname, "..", "client", "dist");
+const distPath = join(__dirname, "/dist");
 
 app.use(express.static(distPath));
 app.get(/^(?!\/api).*/, (req, res) => {
