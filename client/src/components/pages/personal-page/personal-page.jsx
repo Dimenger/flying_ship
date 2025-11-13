@@ -27,8 +27,10 @@ export const PersonalPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchGetUserServices(user.id)).then(() => setLoading(false));
-  }, [dispatch, user.id]);
+    if (user.service.length > 0) {
+      dispatch(fetchGetUserServices(user.id)).finally(() => setLoading(false));
+    }
+  }, [dispatch, user.id, user.service.length]);
 
   const onDeleteService = (serviceId) => {
     setIsOpen(true);
