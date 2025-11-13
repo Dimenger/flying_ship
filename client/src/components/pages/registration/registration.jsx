@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getSuccessMessage, getUser, getError } from "../../../actions";
 import { RegistrationForm } from "./components/registration-form/registration-form";
 import { Notification } from "../../../elements/notification/notification";
+import { request } from "../../utils";
 
 export const Registration = () => {
   const [surname, setSurname] = useState("");
@@ -29,7 +30,7 @@ export const Registration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/auth/register", {
+      const res = await request("/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registeredUserData),

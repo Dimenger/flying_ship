@@ -36,7 +36,7 @@ app.use("/service", serviceRouter);
 app.use("/users", usersRouter);
 app.use("/user", userRouter);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 const MONGO_URL = process.env.MONGO_URL;
 
 const launch = async () => {
