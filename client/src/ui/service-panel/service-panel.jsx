@@ -19,8 +19,7 @@ export const ServicePanel = () => {
 
   const onLogout = async () => {
     try {
-      const result = await apiLogoutUser();
-      console.log(result);
+      await apiLogoutUser();
 
       dispatch(logoutUser());
       dispatch(clearUserList());

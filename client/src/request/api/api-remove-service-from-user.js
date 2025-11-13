@@ -8,13 +8,11 @@ export const apiRemoveServiceFromUser = async (userId, serviceId) => {
       body: JSON.stringify({ serviceId }),
       credentials: "include",
     });
-    console.log(userId, serviceId);
 
     if (!res.ok) {
       throw new Error("Error");
     }
     const result = await res.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.error(error);

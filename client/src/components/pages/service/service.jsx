@@ -38,7 +38,6 @@ export const Service = () => {
     try {
       const result = await addServiceToUser(userId, addedServiceId);
       dispatch(getSuccessMessage(result));
-      console.log(result);
     } catch (error) {
       console.error(error);
     }

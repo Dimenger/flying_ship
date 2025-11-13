@@ -79,7 +79,6 @@ authRouter.get("/me", async (req, res) => {
     const user = authMe(verifyUser);
     res.json(user);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });

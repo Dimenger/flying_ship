@@ -4,7 +4,6 @@ import { getError, getUser, getSuccessMessage } from "../../actions";
 export const fetchGetUser = (userLoginData) => async (dispatch) => {
   try {
     const result = await loginUser(userLoginData);
-    console.log(result);
     dispatch(getUser(result.user));
     dispatch(
       getSuccessMessage({

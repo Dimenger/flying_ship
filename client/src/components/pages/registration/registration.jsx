@@ -43,7 +43,6 @@ export const Registration = () => {
         throw new Error(errorMsg);
       }
       const { user, success, message } = result;
-      console.log({ success, message });
 
       setSurname("");
       setName("");

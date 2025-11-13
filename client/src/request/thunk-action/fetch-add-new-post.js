@@ -7,8 +7,6 @@ export const fetchAddNewPost = (newPostData) => async (dispatch) => {
     const result = await addNewPost(newPostData);
     const { success, message, newPost } = result;
 
-    console.log("addNewPost:", result);
-    console.log("addNewPost:", newPost);
     dispatch(getSuccessMessage({ success, message }));
     dispatch(addNewPostToList(newPost));
   } catch (err) {
