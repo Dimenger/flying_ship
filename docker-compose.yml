@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: result-server
+    container_name: server
     restart: always
     ports:
       - '80:3005'
@@ -16,7 +16,7 @@ services:
 
   mongo:
     image: mongo:7
-    container_name: result-mongo_db
+    container_name: mongo_db
     restart: always
     ports:
       - '27017:27017'

@@ -13,3 +13,4 @@ export * from "./api-remove-service-from-user";
 export * from "./api-delete-post";
 export * from "./api-change-user-role";
 export * from "./auth-me";
+export * from "./api-registration-user";
