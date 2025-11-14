@@ -30,6 +30,7 @@ export const Posts = () => {
 
   const isAuth = !!user.id;
   const role = user?.role;
+  const isPosts = Array.isArray(posts) && posts.length > 0;
 
   const dispatch = useDispatch();
   const question = "Удалить сообщение?";
@@ -101,7 +102,7 @@ export const Posts = () => {
           setEditPostData={setEditPostData}
         />
       ) : (
-        <div className={styles["postsContainer"]}>
+        <div className={styles["posts-container"]}>
           <div className={styles.header}>
             <Title label="Наши новости." fontSize="26px" />
             <div className={styles["manage-panel"]}>
@@ -112,34 +113,41 @@ export const Posts = () => {
               <SortingButton onClick={onSorting} />
             </div>
           </div>
-          {dateSotredPosts.map((post) => (
-            <article key={post.id} className={styles.article}>
-              <div className={styles.header}>
-                <div className={styles.title}>
-                  <Title label={post.title} fontSize="22px" color="#000" />
+          {isPosts ? (
+            dateSotredPosts.map((post) => (
+              <article key={post.id} className={styles.article}>
+                <div className={styles.header}>
+                  <div className={styles.title}>
+                    <Title label={post.title} fontSize="22px" color="#000" />
+                  </div>
+                  <div className={styles.time}>
+                    <i className="fa fa-calendar-o"></i>
+                    <div>{post.published_at}</div>
+                  </div>
                 </div>
-                <div className={styles.time}>
-                  <i className="fa fa-calendar-o"></i>
-                  <div>{post.published_at}</div>
-                </div>
-              </div>
 
-              <p>{post.content}</p>
-              <div className={styles["service-panel"]}>
-                {isAuth &&
-                  checkAccess([ROLES.ADMINISTRATOR, ROLES.MODERATOR], role) && (
-                    <>
-                      <DeleteButton onClick={() => onDeletePost(post.id)} />
-                      <EditButton
-                        onClick={() => {
-                          onEditPost(post);
-                        }}
-                      />
-                    </>
-                  )}
-              </div>
-            </article>
-          ))}
+                <p>{post.content}</p>
+                <div className={styles["service-panel"]}>
+                  {isAuth &&
+                    checkAccess(
+                      [ROLES.ADMINISTRATOR, ROLES.MODERATOR],
+                      role
+                    ) && (
+                      <>
+                        <DeleteButton onClick={() => onDeletePost(post.id)} />
+                        <EditButton
+                          onClick={() => {
+                            onEditPost(post);
+                          }}
+                        />
+                      </>
+                    )}
+                </div>
+              </article>
+            ))
+          ) : (
+            <span>Новостей пока нет</span>
+          )}
         </div>
       )}
       <Modal
