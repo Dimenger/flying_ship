@@ -21,14 +21,14 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// const distPath = join(__dirname, "/dist");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = join(__dirname, "/dist");
 
-// app.use(express.static(distPath));
-// app.get(/^(?!\/api).*/, (req, res) => {
-//   res.sendFile(join(distPath, "index.html"));
-// });
+app.use(express.static(distPath));
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(join(distPath, "index.html"));
+});
 
 app.use("/auth", authRouter);
 app.use("/post", postRouter);
