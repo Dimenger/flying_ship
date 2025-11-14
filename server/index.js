@@ -24,8 +24,13 @@ app.use("/service", serviceRouter);
 app.use("/users", usersRouter);
 app.use("/user", userRouter);
 
-const PORT = process.env.PORT || 3000;
-const MONGO_URL = process.env.MONGO_URL;
+//  для сервера или для dev тогда 3005 помеять на 3000
+// const PORT = process.env.PORT || 3005;
+// const MONGO_URL = process.env.MONGO_URL;
+
+const PORT = 3000;
+const MONGO_URL =
+  "mongodb://user:mongopass@localhost:27017/flying_ship?authSource=admin";
 
 const launch = async () => {
   try {
@@ -39,3 +44,26 @@ const launch = async () => {
 };
 
 launch();
+
+/*
+сейчас этот файл убираю совсем мешает
+
+файл .env для servera эти данные загружены в файл на server
+
+API_KEY = swan    - для токена располагать в файле env сечас напремую в файле где используется 
+PORT = 3005
+
+MONGO_USER=user
+MONGO_PASSWORD=mongopass
+MONGO_DB=flying_ship
+
+MONGO_URL = mongodb://user:mongopass@result-mongo_db:27017/flying_ship?authSource=admin
+
+
+файл .env для dev
+
+API_KEY = swan
+PORT = 3000
+MONGO_URL = mongodb://user:mongopass@localhost:27017/flying_ship?authSource=admin
+
+*/
