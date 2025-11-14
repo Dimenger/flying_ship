@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "690364881a39296449d463c7"
+  },
+  "surname": "Moderator",
+  "name": "Second",
+  "email": "asd@asd.ru",
+  "phone": "333 777-88-11",
+  "password": "$2b$08$E/sN5bFelL/vNjrpnlUiluSc1H0ZxNmHzG4csG9C09icz7VIzwTDa",
+  "role": 1,
+  "createdAt": {
+    "$date": "2025-10-30T13:13:44.048Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T11:47:45.749Z"
+  },
+  "__v": 0,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba92"
+    },
+    {
+      "$oid": "6900e219b2ca590bb50dba94"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "690364ef1a39296449d463cd"
+  },
+  "surname": "Master",
+  "name": "First",
+  "email": "qwe@qwe.ru",
+  "phone": "777 888-99-22",
+  "password": "$2b$08$AtyY1lz4t5jyJMA.wFLmhONFJnmouo7B/mmh2mGysJPUyoG0aXbIe",
+  "role": 0,
+  "createdAt": {
+    "$date": "2025-10-30T13:15:27.953Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T11:40:20.180Z"
+  },
+  "__v": 0,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba97"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69145220676b4dddb24d3437"
+  },
+  "surname": "Иванов",
+  "name": "Вася",
+  "email": "rrty@ff.hk",
+  "phone": "444 555-65-54",
+  "password": "$2b$08$oN.5z9F7EJqGrtXxHzy/luOapUGeahdrk143PKidNp0r1BR8V3I0C",
+  "role": 2,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba92"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-12T09:23:44.977Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T09:52:15.400Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145945676b4dddb24d34a4"
+  },
+  "surname": "Света",
+  "name": "Маркова",
+  "email": "sveta@mail.ru",
+  "phone": "333 999-33-22",
+  "password": "$2b$08$pWqUKQkZrCcmc0xpO9HyKuGVpVh4oqatG.U58R5UJjsLN1Kxvu132",
+  "role": 2,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba99"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-12T09:54:13.798Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T09:54:44.953Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145aa0676b4dddb24d34c7"
+  },
+  "surname": "Катя",
+  "name": "Петрова",
+  "email": "vfhgkm@mail.ru",
+  "phone": "987 654-44-77",
+  "password": "$2b$08$S5.5z.V1imY.JhqGudMEhO2WxPHxaD3keN40RrWyCss77RLb/AtuW",
+  "role": 1,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba95"
+    },
+    {
+      "$oid": "6900e219b2ca590bb50dba98"
+    },
+    {
+      "$oid": "6900e219b2ca590bb50dba92"
+    },
+    {
+      "$oid": "6900e219b2ca590bb50dba96"
+    },
+    {
+      "$oid": "6900e219b2ca590bb50dba97"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-12T10:00:00.402Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T10:23:04.715Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c1e29cc4f0fe255e9b0f"
+  },
+  "surname": "Петя",
+  "name": "Куприн",
+  "email": "rty@tg.yu",
+  "phone": "344 555-66-44",
+  "password": "$2b$08$tD.mqytuzO.IQdJgclJNAe2NMvMFOd/xPSCeIW4IRdbNnLvWhezNK",
+  "role": 2,
+  "services": [
+    {
+      "$oid": "6900e219b2ca590bb50dba93"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-13T11:32:50.088Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-13T11:33:01.721Z"
+  },
+  "__v": 0
+}]
