@@ -6,7 +6,7 @@ export const addNewPost = async (newPostData) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPostData),
-      credentials: "include",
+      // credentials: "include",
     });
 
     if (!res.ok) {

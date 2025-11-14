@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import cors from "cors";
+// import cors from "cors";
 import mongoose from "mongoose";
 import chalk from "chalk";
 import path from "path";
@@ -17,7 +17,7 @@ import { userRouter } from "./src/route/user.router.js";
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 

@@ -4,7 +4,7 @@ export const authMe = async () => {
   try {
     const res = await request("/auth/me", {
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
+      // credentials: "include",
     });
     if (res.status === 401) {
       return null;

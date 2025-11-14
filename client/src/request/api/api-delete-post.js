@@ -4,7 +4,7 @@ export const deletePost = async (id) => {
   try {
     const res = await request(`/post/delete-post/${id}`, {
       method: "DELETE",
-      credentials: "include",
+      // credentials: "include",
     });
     if (!res.ok) {
       throw new Error("Error");

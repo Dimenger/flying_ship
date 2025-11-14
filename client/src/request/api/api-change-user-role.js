@@ -6,7 +6,7 @@ export const changeUserRole = async (id, userRole) => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userRole }),
-      credentials: "include",
+      // credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. ${res.statusText}`);

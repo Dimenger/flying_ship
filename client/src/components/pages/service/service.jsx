@@ -13,7 +13,7 @@ import { getImgSrc } from "../../utils/get-img-scr";
 import { Notification } from "../../../elements/notification/notification";
 import { getSuccessMessage } from "../../../actions";
 
-import styles from "./services.module.css";
+import styles from "./service.module.css";
 
 export const Service = () => {
   let param = useParams();
