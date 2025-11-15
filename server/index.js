@@ -30,11 +30,11 @@ app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
 
-app.use("/auth", authRouter);
-app.use("/post", postRouter);
-app.use("/service", serviceRouter);
-app.use("/users", usersRouter);
-app.use("/user", userRouter);
+app.use("api/auth", authRouter);
+app.use("api/post", postRouter);
+app.use("api/service", serviceRouter);
+app.use("api/users", usersRouter);
+app.use("api/user", userRouter);
 
 const PORT = process.env.PORT || 3005;
 const MONGO_URL = process.env.MONGO_URL;
