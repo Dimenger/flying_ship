@@ -25,16 +25,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = join(__dirname, "/dist");
 
+app.use("/api/auth", authRouter);
+app.use("/api/post", postRouter);
+app.use("/api/service", serviceRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/user", userRouter);
+
 app.use(express.static(distPath));
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
-
-app.use("api/auth", authRouter);
-app.use("api/post", postRouter);
-app.use("api/service", serviceRouter);
-app.use("api/users", usersRouter);
-app.use("api/user", userRouter);
 
 const PORT = process.env.PORT || 3005;
 const MONGO_URL = process.env.MONGO_URL;
