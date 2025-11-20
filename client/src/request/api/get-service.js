@@ -17,5 +17,6 @@ export const getService = async (serId) => {
     return await res.json();
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

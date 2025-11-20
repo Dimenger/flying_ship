@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,17 +21,15 @@ export const Service = () => {
 
   const service = useSelector((state) => state.service);
   const user = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
 
   const userId = user.id;
-  const addedServiceId = service._id;
+  const addedServiceId = service.id;
   const isAuth = !!userId;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchService(serId)).finally(() => setLoading(false));
+    dispatch(fetchService(serId));
   }, [dispatch, serId]);
 
   const addService = async () => {
@@ -43,8 +41,9 @@ export const Service = () => {
     }
   };
 
-  if (loading) return <Spinner />;
-  if (!service.serId) return <Failure error={ERROR.SERVICE_NOT_EXIST} />;
+  if (service.isLoading) return <Spinner />;
+  if (!service.serId)
+    return <Failure error={service.failure || ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>

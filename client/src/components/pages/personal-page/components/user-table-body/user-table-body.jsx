@@ -14,8 +14,8 @@ export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
 
   return (
     <>
-      {user.services.map(({ _id, serId, title, subtitle }) => (
-        <tr key={_id} className={styles["tr-container"]}>
+      {user.services.map(({ id, serId, title, subtitle }) => (
+        <tr key={id} className={styles["tr-container"]}>
           <td>
             <img src={getImgSrc(serId)} alt="service.title" width="200px" />
           </td>
@@ -25,7 +25,7 @@ export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
           <td>
             <PostButton
               title={"Удалить"}
-              onClick={() => onDeleteService(_id)}
+              onClick={() => onDeleteService(id)}
               icon={<i className="fa fa-ship fa-lg" aria-hidden="true"></i>}
             />
           </td>

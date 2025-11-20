@@ -1,4 +1,4 @@
-export const postService = (service) => ({
-  type: "POST_SERVICE",
+export const postServiceSuccess = (service) => ({
+  type: "POST_SERVICE_SUCCESS",
   payload: service,
 });

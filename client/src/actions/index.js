@@ -13,3 +13,5 @@ export * from "./get-update-user";
 export * from "./remove-post";
 export * from "./add-new-post-to-list";
 export * from "./get-update-post";
+export * from "./catch-error";
+export * from "./set-is-loading";
