@@ -7,6 +7,7 @@ import {
   addNewPost,
   deletePost,
   editPost,
+  getSortingPosts,
 } from "../controllers/post.controller.js";
 
 export const postRouter = Router();
@@ -14,6 +15,21 @@ export const postRouter = Router();
 postRouter.get("/posts", async (req, res) => {
   try {
     res.json(await getPosts());
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+postRouter.get("/sorting-posts", async (req, res) => {
+  try {
+    const sortField = req.query.sort || "createdAt";
+    const sortSendOrder = req.query.order || "asc";
+    const sortOrder = sortSendOrder === "desc" ? -1 : 1;
+
+    const sortOptions = {};
+    sortOptions[sortField] = sortOrder;
+
+    res.json(await getSortingPosts(sortOptions));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

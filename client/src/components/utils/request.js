@@ -1,5 +1,5 @@
 import { API_URL } from "../../constants";
 
 export const request = async (endpoint, options = {}) => {
-  return fetch(`${API_URL.SERVER}/api${endpoint}`, options);
+  return fetch(`${API_URL.LOCALHOST}/api${endpoint}`, options);
 };

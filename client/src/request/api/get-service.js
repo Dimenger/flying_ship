@@ -8,7 +8,7 @@ export const getService = async (serId) => {
       body: JSON.stringify({
         serId,
       }),
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. ${res.statusText}`);

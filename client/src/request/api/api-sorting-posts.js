@@ -1,8 +1,8 @@
 import { request } from "../../components/utils";
 
-export const getPosts = async () => {
+export const apiSortingPosts = async () => {
   try {
-    const res = await request("/post/posts", {
+    const res = await request("/post/sorting-posts?sort=createdAt&order=desc", {
       credentials: "include",
     });
     if (!res.ok) {

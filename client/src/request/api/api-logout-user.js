@@ -3,7 +3,7 @@ import { request } from "../../components/utils";
 export const apiLogoutUser = async () => {
   try {
     const res = await request("/auth/logout", {
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error("Error");

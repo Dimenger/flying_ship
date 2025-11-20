@@ -6,7 +6,7 @@ export const addServiceToUser = async (userId, addedServiceId) => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ addedServiceId }),
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);

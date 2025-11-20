@@ -3,10 +3,7 @@ import { request } from "../../components/utils";
 export const getUsers = async () => {
   try {
     const res = await request("/users/users", {
-      // credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}. Текст: ${res.statusText}`);

@@ -17,7 +17,7 @@ export const Users = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
 
-  const Auth = !!user;
+  const isAuth = !!user;
   const role = user?.role;
 
   const [loading, setLoading] = useState(false);
@@ -27,11 +27,11 @@ export const Users = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (Auth && checkAccess([ROLES.ADMINISTRATOR], role)) {
+    if (isAuth && checkAccess([ROLES.ADMINISTRATOR], role)) {
       setLoading(true);
       dispatch(fetchUsers()).finally(() => setLoading(false));
     }
-  }, [dispatch, Auth, role]);
+  }, [dispatch, isAuth, role]);
 
   const onDeleteUser = (id) => {
     setIsOpen(true);
@@ -57,7 +57,7 @@ export const Users = () => {
     return <Spinner />;
   }
 
-  if (!Auth || !checkAccess([ROLES.ADMINISTRATOR], role)) {
+  if (!isAuth || !checkAccess([ROLES.ADMINISTRATOR], role)) {
     return <Failure error={ERROR.ACCESS_DENIED} />;
   }
 

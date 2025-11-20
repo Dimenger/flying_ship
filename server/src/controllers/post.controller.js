@@ -14,6 +14,17 @@ export const getPosts = async () => {
   }
 };
 
+export const getSortingPosts = async (sortOptions) => {
+  try {
+    const posts = await Post.find().sort(sortOptions);
+    const mapedPosts = posts.map(postMapper);
+    console.log(chalk.bgGreen("Сортировка сообщений. Отправлено!"));
+    return mapedPosts;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addNewPost = async (data) => {
   try {
     const newAddedPost = await Post.create({

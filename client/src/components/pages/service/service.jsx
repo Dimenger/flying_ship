@@ -25,7 +25,7 @@ export const Service = () => {
 
   const userId = user.id;
   const addedServiceId = service._id;
-  const Auth = !!userId;
+  const isAuth = !!userId;
 
   const dispatch = useDispatch();
 
@@ -72,7 +72,7 @@ export const Service = () => {
           ))}
         </div>
       </div>
-      {Auth && <AddServiceButton onClick={addService} />}
+      {isAuth && <AddServiceButton onClick={addService} />}
       <Notification />
     </div>
   );

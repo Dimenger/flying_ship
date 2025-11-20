@@ -6,7 +6,7 @@ export const loginUser = async (userLoginData) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userLoginData),
-      // credentials: "include",
+      credentials: "include",
     });
     const result = await res.json();
 

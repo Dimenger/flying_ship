@@ -14,6 +14,7 @@ import { Title } from "../../../elements/title/title";
 import { Modal } from "../../../components/modal/modal";
 
 import styles from "./posts.module.css";
+import { apiSortingPosts } from "../../../request/api/api-sorting-posts";
 
 export const Posts = () => {
   const user = useSelector((state) => state.user);
@@ -43,11 +44,9 @@ export const Posts = () => {
     setDateSotredPosts(posts);
   }, [posts]);
 
-  const onSorting = () => {
+  const onSorting = async () => {
     if (!isSorted) {
-      const sortingPosts = dateSotredPosts
-        .slice()
-        .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+      const sortingPosts = await apiSortingPosts();
       setDateSotredPosts(sortingPosts);
       setIsSorted(true);
     } else {
