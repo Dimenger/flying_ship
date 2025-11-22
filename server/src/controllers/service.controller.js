@@ -1,7 +1,13 @@
 import { Service } from "../models/service.model.js";
 
 export const getService = async (serId) => {
-  const service = await Service.findOne({ serId: serId });
-
-  return service;
+  try {
+    const service = await Service.findOne({ serId: serId });
+    if (!service) {
+      throw new Error("Такого направления не существует!");
+    }
+    return service;
+  } catch (error) {
+    throw error;
+  }
 };

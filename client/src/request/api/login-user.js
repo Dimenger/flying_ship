@@ -11,7 +11,8 @@ export const loginUser = async (userLoginData) => {
     const result = await res.json();
 
     if (!res.ok) {
-      const errorMsg = result.error || `Статус: ${res.status}`;
+      const errorMsg =
+        result.error || `Ошибка: ${res.status}. ${res.statusText}`;
       throw new Error(errorMsg);
     }
     return result;

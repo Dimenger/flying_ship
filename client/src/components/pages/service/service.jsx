@@ -22,8 +22,8 @@ export const Service = () => {
   const service = useSelector((state) => state.service);
   const user = useSelector((state) => state.user);
 
-  const userId = user.id;
-  const addedServiceId = service.id;
+  const userId = user?.id;
+  const addedServiceId = service?.id;
   const isAuth = !!userId;
 
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const Service = () => {
 
   if (service.isLoading) return <Spinner />;
   if (!service.serId)
-    return <Failure error={service.failure || ERROR.SERVICE_NOT_EXIST} />;
+    return <Failure error={service?.failure || ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>

@@ -1,6 +1,5 @@
 export * from "./post-posts";
 export * from "./post-users";
-export * from "./post-service";
 export * from "./logout-user";
 export * from "./get-user";
 export * from "./clear-user-list";
@@ -13,5 +12,3 @@ export * from "./get-update-user";
 export * from "./remove-post";
 export * from "./add-new-post-to-list";
 export * from "./get-update-post";
-export * from "./catch-error";
-export * from "./set-is-loading";
