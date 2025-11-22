@@ -8,10 +8,11 @@ import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../request/thunk-action/";
 import { AddServiceButton } from "./components/add-service-button";
-import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
 import { getImgSrc } from "../../utils/get-img-scr";
 import { Notification } from "../../../elements/notification/notification";
-import { getSuccessMessage } from "../../../actions";
+import { fetchAddServiceToUser } from "../../../request/thunk-action/";
+// import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
+// import { getSuccessMessage } from "../../../actions";
 
 import styles from "./service.module.css";
 
@@ -32,14 +33,14 @@ export const Service = () => {
     dispatch(fetchService(serId));
   }, [dispatch, serId]);
 
-  const addService = async () => {
-    try {
-      const result = await addServiceToUser(userId, addedServiceId);
-      dispatch(getSuccessMessage(result));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const addService = async () => {
+  //   try {
+  //     const result = await addServiceToUser(userId, addedServiceId);
+  //     dispatch(getSuccessMessage(result));
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   if (service.isLoading) return <Spinner />;
   if (!service.serId)
@@ -71,7 +72,13 @@ export const Service = () => {
           ))}
         </div>
       </div>
-      {isAuth && <AddServiceButton onClick={addService} />}
+      {isAuth && (
+        <AddServiceButton
+          onClick={() =>
+            dispatch(fetchAddServiceToUser(userId, addedServiceId))
+          }
+        />
+      )}
       <Notification />
     </div>
   );

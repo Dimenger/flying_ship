@@ -19,6 +19,12 @@ export const serviceReducer = (state = initialServiceState, action) => {
     }
     case "POST_SERVICE_FAILURE":
       return { ...state, isLoading: false, failure: action.payload };
+    case "ADD_SERVICE_TO_USER_REQUEST":
+      return { ...state, isLoading: true, failure: null };
+    case "ADD_SERVICE_TO_USER_SUCCESS":
+      return { ...state, isLoading: false, failure: null };
+    case "ADD_SERVICE_TO_USER_FAILURE":
+      return { ...state, isLoading: false, failure: action.payload };
 
     default:
       return state;

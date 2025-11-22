@@ -9,3 +9,4 @@ export * from "./fetch-edit-user-role";
 export * from "./fetch-remove-user-service";
 export * from "./fetch-delete-user";
 export * from "./fetch-delete-post";
+export * from "./fetch-add-service-to-user";

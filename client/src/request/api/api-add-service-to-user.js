@@ -15,5 +15,6 @@ export const addServiceToUser = async (userId, addedServiceId) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

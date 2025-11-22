@@ -11,7 +11,6 @@ export const fetchService = (serId) => async (dispatch) => {
     const service = await getService(serId);
     dispatch({ type: POST_SERVICE_SUCCESS, payload: service });
   } catch (error) {
-    console.log(error);
     dispatch({ type: POST_SERVICE_FAILURE, payload: error.message || error });
   }
 };
