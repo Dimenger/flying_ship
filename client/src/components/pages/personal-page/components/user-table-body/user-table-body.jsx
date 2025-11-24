@@ -14,8 +14,8 @@ export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
 
   return (
     <>
-      {user.services.map(({ id, serId, title, subtitle }) => (
-        <tr key={id} className={styles["tr-container"]}>
+      {user.services.map(({ id, serId, title, subtitle }, index) => (
+        <tr key={id || index} className={styles["tr-container"]}>
           <td>
             <img src={getImgSrc(serId)} alt="service.title" width="200px" />
           </td>

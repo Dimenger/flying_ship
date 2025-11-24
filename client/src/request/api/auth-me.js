@@ -15,6 +15,6 @@ export const authMe = async () => {
     return result;
   } catch (error) {
     console.error(error, "Ошибка сервера!!!");
-    return [];
+    throw error;
   }
 };

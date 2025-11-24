@@ -68,7 +68,7 @@ authRouter.get("/me", async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ error: "Пользователь не авторизован" });
+      return res.status(401).json({ message: "Пользователь не авторизован" });
     }
     const verifyResult = verifyToken(token);
     const verifyUser = await User.findById(verifyResult.id);
