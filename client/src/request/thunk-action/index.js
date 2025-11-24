@@ -11,3 +11,4 @@ export * from "./fetch-delete-user";
 export * from "./fetch-delete-post";
 export * from "./fetch-add-service-to-user";
 export * from "./fetch-registration";
+export * from "./fetch-user";
