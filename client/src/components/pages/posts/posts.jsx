@@ -90,8 +90,6 @@ export const Posts = () => {
   if (loading) return <Spinner />;
   if (failure) return <Failure error={failure || ERROR.FAIL_GET_POSTS} />;
 
-  console.log(failure);
-
   return (
     <>
       {addPostState ? (

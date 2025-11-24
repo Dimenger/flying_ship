@@ -73,8 +73,9 @@ authRouter.get("/me", async (req, res) => {
     const verifyResult = verifyToken(token);
     const verifyUser = await User.findById(verifyResult.id);
     if (!verifyUser) {
-      res.json({ message: "Authenticated user not found!" });
-      return;
+      return res
+        .status(404)
+        .json({ message: "Аутентифицированный пользователь не найден!" });
     }
     const user = authMe(verifyUser);
     res.json({
