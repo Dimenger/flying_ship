@@ -8,8 +8,6 @@ export const useAuth = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  console.log(loading);
-
   useEffect(() => {
     // const fetchUser = async () => {
     //   const user = await authMe();

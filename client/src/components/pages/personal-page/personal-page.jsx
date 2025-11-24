@@ -10,7 +10,6 @@ import {
 import { UserTableHeader } from "./components/user-table-header/user-table-header";
 import { UserTableBody } from "./components/user-table-body/user-table-body";
 import { Notification } from "../../../elements/notification/notification";
-// import { Modal } from "../../modal/modal";
 import { Portal } from "../../portal/portal";
 import { Schedule } from "../schedule/schedule";
 
@@ -100,13 +99,6 @@ export const PersonalPage = () => {
         onCancel={onCancel}
         itemToDeletId={serviceToDeletId}
       />
-      {/* <Modal
-        question={"Удалить направление!"}
-        isOpen={isOpen}
-        onConfirm={onConfirm}
-        onCancel={onCancel}
-        itemToDeletId={serviceToDeletId}
-      /> */}
     </div>
   );
 };

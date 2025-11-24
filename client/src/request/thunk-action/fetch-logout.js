@@ -11,12 +11,7 @@ export const fetchLogout = () => async (dispatch) => {
     const result = await apiLogoutUser();
     dispatch({ type: LOGOUT_USER_SUCCESS });
     dispatch({ type: CLEAR_USERS_LIST_SUCCESS });
-    dispatch(
-      getSuccessMessage({
-        success: result.success,
-        message: result.message,
-      })
-    );
+    dispatch(getSuccessMessage(result));
   } catch (error) {
     dispatch({ type: USER_FAILURE, payload: error.message || error });
     console.error(error);

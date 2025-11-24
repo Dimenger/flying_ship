@@ -6,12 +6,7 @@ export const fetchGetUser = (userLoginData) => async (dispatch) => {
     const result = await loginUser(userLoginData);
     const { user, success, message } = result;
     dispatch(getUser({ user, success }));
-    dispatch(
-      getSuccessMessage({
-        success,
-        message,
-      })
-    );
+    dispatch(getSuccessMessage({ success, message }));
   } catch (err) {
     dispatch(
       getError({
