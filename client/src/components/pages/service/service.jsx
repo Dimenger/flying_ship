@@ -11,8 +11,6 @@ import { AddServiceButton } from "./components/add-service-button";
 import { getImgSrc } from "../../utils/get-img-scr";
 import { Notification } from "../../../elements/notification/notification";
 import { fetchAddServiceToUser } from "../../../request/thunk-action/";
-// import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
-// import { getSuccessMessage } from "../../../actions";
 
 import styles from "./service.module.css";
 
@@ -32,15 +30,6 @@ export const Service = () => {
   useEffect(() => {
     dispatch(fetchService(serId));
   }, [dispatch, serId]);
-
-  // const addService = async () => {
-  //   try {
-  //     const result = await addServiceToUser(userId, addedServiceId);
-  //     dispatch(getSuccessMessage(result));
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   if (service.isLoading) return <Spinner />;
   if (!service.serId)

@@ -17,8 +17,8 @@ import styles from "./personal-page.module.css";
 
 export const PersonalPage = () => {
   const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.user.isLoading);
 
-  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [serviceToDeletId, setServiceToDeletId] = useState(null);
   const [serIdList, setSerIdList] = useState([]);
@@ -26,8 +26,7 @@ export const PersonalPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchGetUserServices(user.id)).then(() => setLoading(false));
+    dispatch(fetchGetUserServices(user.id));
   }, [dispatch, user.id]);
 
   const onDeleteService = (serviceId) => {

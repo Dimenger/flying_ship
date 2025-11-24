@@ -36,7 +36,16 @@ export const UserTableBody = ({ user, onDeleteService, setSerIdList }) => {
 };
 
 UserTableBody.propTypes = {
-  user: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    services: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        serId: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        subtitle: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
   onDeleteService: PropTypes.func.isRequired,
   setSerIdList: PropTypes.func.isRequired,
 };

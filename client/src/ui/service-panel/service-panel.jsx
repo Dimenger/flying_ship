@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { ROLES } from "../../constants/roles";
 import { EnterExit } from "../../elements/enter-exit/enter-exit";
-import { logoutUser, clearUserList } from "../../actions";
+import { fetchLogout } from "../../request/thunk-action/fetch-logout";
 
 import styles from "./service-panel.module.css";
-import { ROLES } from "../../constants/roles";
-import { apiLogoutUser } from "../../request/api";
 
 export const ServicePanel = () => {
   const user = useSelector((state) => state.user);
@@ -19,10 +18,7 @@ export const ServicePanel = () => {
 
   const onLogout = async () => {
     try {
-      await apiLogoutUser();
-
-      dispatch(logoutUser());
-      dispatch(clearUserList());
+      dispatch(fetchLogout());
     } catch (err) {
       console.error(err, "Ошибка сервера!!!");
     }
@@ -63,35 +59,3 @@ export const ServicePanel = () => {
     </div>
   );
 };
-
-/*
-        <div className={styles.buttonsContainer}>
-          {ICONS_LIST.map(({ id, title, path, allowedRoles }) => (
-            <NavLink
-              key={id}
-              className={({ isActive }) =>
-                isActive ? styles.activeLink : styles.link
-              }
-              to={path}
-            >
-              {(!allowedRoles ||
-                allowedRoles.length === 0 ||
-                allowedRoles.includes(role)) && (
-                <Button type="button">{title}</Button>
-              )}
-            </NavLink>
-          ))}
-        </div>
-
-
-        // Пример thunk-функции
-const clearUserData = () => (dispatch) => {
-  dispatch(removeUser());
-  dispatch(clearUserList());
-  // можно добавить дополнительную логику или асинхронные операции
-};
-
-// Затем в компоненте вы вызываете
-dispatch(clearUserData());
-
-*/

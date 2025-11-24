@@ -14,5 +14,6 @@ export const getUserServices = async (userId) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

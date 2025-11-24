@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getSuccessMessage, getUser, getError } from "../../../actions";
 import { RegistrationForm } from "./components/registration-form/registration-form";
 import { Notification } from "../../../elements/notification/notification";
-import { registrationUser } from "../../../request/api";
+import { fetchRegistration } from "../../../request/thunk-action";
 
 export const Registration = () => {
+  const success = useSelector((state) => state.user.success);
+
   const [surname, setSurname] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,12 +28,16 @@ export const Registration = () => {
     password,
   };
 
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => navigate("/user"), 2000);
+    }
+  }, [success, navigate]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await registrationUser(registeredUserData);
-
-      const { user, success, message } = result;
+      dispatch(fetchRegistration(registeredUserData));
 
       setSurname("");
       setName("");
@@ -40,17 +45,8 @@ export const Registration = () => {
       setPhone("");
       setPassword("");
       setRepeatPassword("");
-
-      dispatch(getUser(user));
-      dispatch(getSuccessMessage({ success, message }));
-
-      if (success) {
-        setTimeout(() => navigate("/user"), 2000);
-      }
     } catch (err) {
       console.error(err.message);
-      dispatch(getError({ success: false, message: err.message }));
-      console.error(err, "Ошибка регистрации!!!");
     }
   };
 

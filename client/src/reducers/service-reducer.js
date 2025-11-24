@@ -11,19 +11,18 @@ const initialServiceState = {
 };
 export const serviceReducer = (state = initialServiceState, action) => {
   switch (action.type) {
-    case "POST_SERVICE_REQUEST":
+    case "SERVICE_REQUEST":
       return { ...state, isLoading: true, failure: null };
+
     case "POST_SERVICE_SUCCESS": {
       const { _id, ...rest } = action.payload;
       return { ...state, ...rest, id: _id, isLoading: false, failure: null };
     }
-    case "POST_SERVICE_FAILURE":
-      return { ...state, isLoading: false, failure: action.payload };
-    case "ADD_SERVICE_TO_USER_REQUEST":
-      return { ...state, isLoading: true, failure: null };
+
     case "ADD_SERVICE_TO_USER_SUCCESS":
       return { ...state, isLoading: false, failure: null };
-    case "ADD_SERVICE_TO_USER_FAILURE":
+
+    case "SERVICE_FAILURE":
       return { ...state, isLoading: false, failure: action.payload };
 
     default:

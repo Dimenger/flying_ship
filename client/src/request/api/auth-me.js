@@ -11,11 +11,10 @@ export const authMe = async () => {
     if (!res.ok) {
       throw new Error(`Ошибка ${res.status}, ${res.statusText}`);
     }
-
-    const user = await res.json();
-    return user;
+    const result = await res.json();
+    return result;
   } catch (error) {
     console.error(error, "Ошибка сервера!!!");
-    return null;
+    return [];
   }
 };

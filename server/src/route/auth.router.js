@@ -77,7 +77,11 @@ authRouter.get("/me", async (req, res) => {
       return;
     }
     const user = authMe(verifyUser);
-    res.json(user);
+    res.json({
+      success: true,
+      message: "Пользователь аутентифицирован!",
+      user,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

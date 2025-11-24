@@ -4,11 +4,12 @@ import { getError, getUser, getSuccessMessage } from "../../actions";
 export const fetchGetUser = (userLoginData) => async (dispatch) => {
   try {
     const result = await loginUser(userLoginData);
-    dispatch(getUser(result.user));
+    const { user, success, message } = result;
+    dispatch(getUser({ user, success }));
     dispatch(
       getSuccessMessage({
-        success: result.success,
-        message: result.message,
+        success,
+        message,
       })
     );
   } catch (err) {

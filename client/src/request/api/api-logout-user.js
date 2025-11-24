@@ -6,10 +6,12 @@ export const apiLogoutUser = async () => {
       credentials: "include",
     });
     if (!res.ok) {
-      throw new Error("Error");
+      throw new Error(`Статус: ${res.status}`);
     }
-    return await res.json();
+    const result = await res.json();
+    return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

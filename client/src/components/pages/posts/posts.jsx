@@ -12,17 +12,20 @@ import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
 import { Title } from "../../../elements/title/title";
 import { Modal } from "../../../components/modal/modal";
+import { Failure } from "../../error/error";
+import { ERROR } from "../../../constants";
 
 import styles from "./posts.module.css";
 import { apiSortingPosts } from "../../../request/api/api-sorting-posts";
 
 export const Posts = () => {
   const user = useSelector((state) => state.user);
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.list);
+  const loading = useSelector((state) => state.posts.isLoading);
+  const failure = useSelector((state) => state.posts.failure);
 
   const [dateSotredPosts, setDateSotredPosts] = useState(posts);
   const [isSorted, setIsSorted] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [addPostState, setAddPostState] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editPostData, setEditPostData] = useState({});
@@ -36,8 +39,7 @@ export const Posts = () => {
   const question = "Удалить сообщение?";
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchPosts()).then(() => setLoading(false));
+    dispatch(fetchPosts());
   }, [dispatch]);
 
   useEffect(() => {
@@ -85,9 +87,10 @@ export const Posts = () => {
     setItemToDeletId(null);
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
+  if (loading) return <Spinner />;
+  if (failure) return <Failure error={failure || ERROR.FAIL_GET_POSTS} />;
+
+  console.log(failure);
 
   return (
     <>

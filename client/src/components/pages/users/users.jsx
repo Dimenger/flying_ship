@@ -14,13 +14,14 @@ import { ROLES } from "../../../constants";
 import styles from "./users.module.css";
 
 export const Users = () => {
-  const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
+  const users = useSelector((state) => state.users.list);
+  const loading = useSelector((state) => state.users.isLoading);
+  const failure = useSelector((state) => state.users.failure);
 
   const isAuth = !!user;
   const role = user?.role;
 
-  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userToDeletId, setUserToDeletId] = useState(null);
 
@@ -28,8 +29,7 @@ export const Users = () => {
 
   useEffect(() => {
     if (isAuth && checkAccess([ROLES.ADMINISTRATOR], role)) {
-      setLoading(true);
-      dispatch(fetchUsers()).finally(() => setLoading(false));
+      dispatch(fetchUsers());
     }
   }, [dispatch, isAuth, role]);
 
@@ -60,6 +60,8 @@ export const Users = () => {
   if (!isAuth || !checkAccess([ROLES.ADMINISTRATOR], role)) {
     return <Failure error={ERROR.ACCESS_DENIED} />;
   }
+
+  if (failure) return <Failure error={failure || ERROR.FAIL_GET_USERS} />;
 
   return (
     <div className={styles["users-container"]}>
