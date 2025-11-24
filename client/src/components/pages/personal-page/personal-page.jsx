@@ -10,7 +10,8 @@ import {
 import { UserTableHeader } from "./components/user-table-header/user-table-header";
 import { UserTableBody } from "./components/user-table-body/user-table-body";
 import { Notification } from "../../../elements/notification/notification";
-import { Modal } from "../../modal/modal";
+// import { Modal } from "../../modal/modal";
+import { Portal } from "../../portal/portal";
 import { Schedule } from "../schedule/schedule";
 
 import styles from "./personal-page.module.css";
@@ -92,13 +93,20 @@ export const PersonalPage = () => {
       </table>
       {!!serIdList.length && <Schedule allowedSerIds={serIdList} />}
       <Notification />
-      <Modal
+      <Portal
         question={"Удалить направление!"}
         isOpen={isOpen}
         onConfirm={onConfirm}
         onCancel={onCancel}
         itemToDeletId={serviceToDeletId}
       />
+      {/* <Modal
+        question={"Удалить направление!"}
+        isOpen={isOpen}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        itemToDeletId={serviceToDeletId}
+      /> */}
     </div>
   );
 };
