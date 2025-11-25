@@ -1,5 +1,5 @@
 import { authMe } from "../api";
-import { getUser, getSuccessMessage, getError } from "../../actions";
+import { getUser, getError } from "../../actions";
 import {
   USER_FAILURE,
   USER_REQUEST,
@@ -10,12 +10,9 @@ export const fetchUser = () => async (dispatch) => {
     dispatch({ type: USER_REQUEST });
     const result = await authMe();
     if (result) {
-      const { user, success, message } = result;
-      if (user) {
-        dispatch(getUser({ user, success }));
-        dispatch(getSuccessMessage({ success, message }));
-      }
+      dispatch(getUser({ user: result.user, success: result.success }));
     }
+    return result;
   } catch (error) {
     console.error(error.message);
     dispatch({ type: USER_FAILURE });

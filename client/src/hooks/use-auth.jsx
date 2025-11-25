@@ -9,16 +9,20 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const fetchUser = async () => {
-    //   const user = await authMe();
-    //   if (user) {
-    //     dispatch(getUser(user));
-    //   }
-    //   setLoading(false);
-    // };
-    dispatch(fetchUser());
-    setLoading(false);
+    const loadUser = async () => {
+      dispatch(fetchUser());
+      setLoading(false);
+    };
+    loadUser();
   }, [dispatch]);
 
   return { loading };
 };
+
+// const fetchUser = async () => {
+//   const user = await authMe();
+//   if (user) {
+//     dispatch(getUser(user));
+//   }
+//   setLoading(false);
+// };

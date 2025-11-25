@@ -3,7 +3,6 @@ import { auth } from "../middlewares/auth.js";
 import { hasRole } from "../middlewares/has-role.js";
 import { ROLES } from "../constants/roles.constant.js";
 import {
-  getPosts,
   addNewPost,
   deletePost,
   editPost,
@@ -11,14 +10,6 @@ import {
 } from "../controllers/post.controller.js";
 
 export const postRouter = Router();
-
-postRouter.get("/posts", async (req, res) => {
-  try {
-    res.json(await getPosts());
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 postRouter.get("/sorting-posts", async (req, res) => {
   try {

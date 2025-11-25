@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchDeletePost, fetchPosts } from "../../../request/thunk-action";
+import {
+  fetchDeletePost,
+  fetchSortingPosts,
+} from "../../../request/thunk-action";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { AddButton } from "./components/manage-buttons/add-post-button/add-post-button";
 import { SortingButton } from "./components/manage-buttons/sorting-burron/sorting-batton";
@@ -16,7 +19,6 @@ import { Failure } from "../../error/error";
 import { ERROR } from "../../../constants";
 
 import styles from "./posts.module.css";
-import { apiSortingPosts } from "../../../request/api/api-sorting-posts";
 
 export const Posts = () => {
   const user = useSelector((state) => state.user);
@@ -24,13 +26,13 @@ export const Posts = () => {
   const loading = useSelector((state) => state.posts.isLoading);
   const failure = useSelector((state) => state.posts.failure);
 
-  const [dateSotredPosts, setDateSotredPosts] = useState(posts);
-  const [isSorted, setIsSorted] = useState(false);
+  // const [dateSotredPosts, setDateSotredPosts] = useState(posts);
   const [addPostState, setAddPostState] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editPostData, setEditPostData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [itemToDeletId, setItemToDeletId] = useState(null);
+  const [orderPosts, setOrderPosts] = useState("desc");
 
   const isAuth = !!user.id;
   const role = user?.role;
@@ -39,22 +41,16 @@ export const Posts = () => {
   const question = "Удалить сообщение?";
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    dispatch(fetchSortingPosts(orderPosts));
+  }, [dispatch, orderPosts]);
 
-  useEffect(() => {
-    setDateSotredPosts(posts);
-  }, [posts]);
+  // useEffect(() => {
+  //   setDateSotredPosts(posts);
+  // }, [posts]);
 
   const onSorting = async () => {
-    if (!isSorted) {
-      const sortingPosts = await apiSortingPosts();
-      setDateSotredPosts(sortingPosts);
-      setIsSorted(true);
-    } else {
-      setDateSotredPosts(posts);
-      setIsSorted(false);
-    }
+    const newOrder = orderPosts === "asc" ? "desc" : "asc";
+    setOrderPosts(newOrder);
   };
 
   const onAddPost = () => {
@@ -67,12 +63,12 @@ export const Posts = () => {
     setEditPostData(post);
   };
 
-  const onDeletePost = async (id) => {
+  const onDeletePost = (id) => {
     setIsOpen(true);
     setItemToDeletId(id);
   };
 
-  const onConfirm = async (itemToDeletId) => {
+  const onConfirm = (itemToDeletId) => {
     try {
       dispatch(fetchDeletePost(itemToDeletId));
       setIsOpen(false);
@@ -112,7 +108,7 @@ export const Posts = () => {
               <SortingButton onClick={onSorting} />
             </div>
           </div>
-          {dateSotredPosts.map((post) => (
+          {posts.map((post) => (
             <article key={post.id} className={styles.article}>
               <div className={styles.header}>
                 <div className={styles.title}>

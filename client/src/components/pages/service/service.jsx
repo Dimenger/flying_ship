@@ -31,9 +31,9 @@ export const Service = () => {
     dispatch(fetchService(serId));
   }, [dispatch, serId]);
 
-  if (service.isLoading) return <Spinner />;
-  if (!service.serId)
-    return <Failure error={service?.failure || ERROR.SERVICE_NOT_EXIST} />;
+  if (service?.isLoading) return <Spinner />;
+  if (service?.failure)
+    return <Failure error={service.failure || ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>

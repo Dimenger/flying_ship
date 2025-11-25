@@ -1,4 +1,3 @@
-export * from "./fetch-posts";
 export * from "./fetch-users";
 export * from "./fetch-service";
 export * from "./fetch-get-user-services";
@@ -12,3 +11,4 @@ export * from "./fetch-delete-post";
 export * from "./fetch-add-service-to-user";
 export * from "./fetch-registration";
 export * from "./fetch-user";
+export * from "./fetch-sorting-posts";

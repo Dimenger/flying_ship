@@ -9,7 +9,7 @@ export const postsReducer = (state = inintialPostsState, action) => {
     case "POSTS_REQUEST":
       return { ...state, isLoading: true, failure: null };
 
-    case "POST_POSTS_SUCCESS":
+    case "SORTING_POSTS_SUCCESS":
       return {
         ...state,
         list: [...action.payload],
