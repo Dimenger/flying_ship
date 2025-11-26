@@ -9,16 +9,15 @@ import {
 } from "../../../request/thunk-action";
 import { UserTableHeader } from "./components/user-table-header/user-table-header";
 import { UserTableBody } from "./components/user-table-body/user-table-body";
-import { Notification } from "../../../elements/notification/notification";
-import { Modal } from "../../modal/modal";
+import { Portal } from "../../portal/portal";
 import { Schedule } from "../schedule/schedule";
 
 import styles from "./personal-page.module.css";
 
 export const PersonalPage = () => {
   const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.user.isLoading);
 
-  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [serviceToDeletId, setServiceToDeletId] = useState(null);
   const [serIdList, setSerIdList] = useState([]);
@@ -26,8 +25,7 @@ export const PersonalPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchGetUserServices(user.id)).then(() => setLoading(false));
+    dispatch(fetchGetUserServices(user.id));
   }, [dispatch, user.id]);
 
   const onDeleteService = (serviceId) => {
@@ -92,8 +90,7 @@ export const PersonalPage = () => {
         </tbody>
       </table>
       {!!serIdList.length && <Schedule allowedSerIds={serIdList} />}
-      <Notification />
-      <Modal
+      <Portal
         question={"Удалить направление!"}
         isOpen={isOpen}
         onConfirm={onConfirm}

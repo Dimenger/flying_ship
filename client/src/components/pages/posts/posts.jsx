@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchDeletePost, fetchPosts } from "../../../request/thunk-action";
+import {
+  fetchDeletePost,
+  fetchSortingPosts,
+} from "../../../request/thunk-action";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { AddButton } from "./components/manage-buttons/add-post-button/add-post-button";
 import { SortingButton } from "./components/manage-buttons/sorting-burron/sorting-batton";
@@ -12,21 +15,24 @@ import { NewPost } from "./components/new-post/new-post";
 import { ROLES } from "../../../constants";
 import { Title } from "../../../elements/title/title";
 import { Modal } from "../../../components/modal/modal";
+import { Failure } from "../../error/error";
+import { ERROR } from "../../../constants";
 
 import styles from "./posts.module.css";
 
 export const Posts = () => {
   const user = useSelector((state) => state.user);
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.list);
+  const loading = useSelector((state) => state.posts.isLoading);
+  const failure = useSelector((state) => state.posts.failure);
 
-  const [dateSotredPosts, setDateSotredPosts] = useState(posts);
-  const [isSorted, setIsSorted] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [dateSotredPosts, setDateSotredPosts] = useState(posts);
   const [addPostState, setAddPostState] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editPostData, setEditPostData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [itemToDeletId, setItemToDeletId] = useState(null);
+  const [orderPosts, setOrderPosts] = useState("desc");
 
   const isAuth = !!user.id;
   const role = user?.role;
@@ -35,25 +41,16 @@ export const Posts = () => {
   const question = "Удалить сообщение?";
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchPosts()).then(() => setLoading(false));
-  }, [dispatch]);
+    dispatch(fetchSortingPosts(orderPosts));
+  }, [dispatch, orderPosts]);
 
-  useEffect(() => {
-    setDateSotredPosts(posts);
-  }, [posts]);
+  // useEffect(() => {
+  //   setDateSotredPosts(posts);
+  // }, [posts]);
 
-  const onSorting = () => {
-    if (!isSorted) {
-      const sortingPosts = dateSotredPosts
-        .slice()
-        .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-      setDateSotredPosts(sortingPosts);
-      setIsSorted(true);
-    } else {
-      setDateSotredPosts(posts);
-      setIsSorted(false);
-    }
+  const onSorting = async () => {
+    const newOrder = orderPosts === "asc" ? "desc" : "asc";
+    setOrderPosts(newOrder);
   };
 
   const onAddPost = () => {
@@ -66,12 +63,12 @@ export const Posts = () => {
     setEditPostData(post);
   };
 
-  const onDeletePost = async (id) => {
+  const onDeletePost = (id) => {
     setIsOpen(true);
     setItemToDeletId(id);
   };
 
-  const onConfirm = async (itemToDeletId) => {
+  const onConfirm = (itemToDeletId) => {
     try {
       dispatch(fetchDeletePost(itemToDeletId));
       setIsOpen(false);
@@ -86,9 +83,8 @@ export const Posts = () => {
     setItemToDeletId(null);
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
+  if (loading) return <Spinner />;
+  if (failure) return <Failure error={failure || ERROR.FAIL_GET_POSTS} />;
 
   return (
     <>
@@ -112,7 +108,7 @@ export const Posts = () => {
               <SortingButton onClick={onSorting} />
             </div>
           </div>
-          {dateSotredPosts.map((post) => (
+          {posts.map((post) => (
             <article key={post.id} className={styles.article}>
               <div className={styles.header}>
                 <div className={styles.title}>

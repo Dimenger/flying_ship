@@ -1,4 +1,3 @@
-// hooks/useAuth.js
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getUser } from "../actions";
@@ -10,9 +9,9 @@ export const useAuth = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await authMe();
-      if (user) {
-        dispatch(getUser(user));
+      const result = await authMe();
+      if (result) {
+        dispatch(getUser({ user: result.user, success: result.success }));
       }
       setLoading(false);
     };

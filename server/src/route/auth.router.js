@@ -68,16 +68,21 @@ authRouter.get("/me", async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ error: "Пользователь не авторизован" });
+      return res.status(401).json({ message: "Пользователь не авторизован" });
     }
     const verifyResult = verifyToken(token);
     const verifyUser = await User.findById(verifyResult.id);
     if (!verifyUser) {
-      res.json({ message: "Authenticated user not found!" });
-      return;
+      return res
+        .status(404)
+        .json({ message: "Аутентифицированный пользователь не найден!" });
     }
     const user = authMe(verifyUser);
-    res.json(user);
+    res.json({
+      success: true,
+      message: "Пользователь аутентифицирован!",
+      user,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

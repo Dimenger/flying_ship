@@ -6,7 +6,7 @@ export const apiRemoveServiceFromUser = async (userId, serviceId) => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ serviceId }),
-      // credentials: "include",
+      credentials: "include",
     });
 
     if (!res.ok) {

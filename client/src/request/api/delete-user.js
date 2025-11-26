@@ -4,7 +4,7 @@ export const deleteUser = async (id) => {
   try {
     const res = await request(`/users/users/${id}`, {
       method: "DELETE",
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Ошибка: ${res.status}, ${res.statusText}`);
@@ -13,5 +13,6 @@ export const deleteUser = async (id) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

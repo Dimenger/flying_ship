@@ -1,15 +1,16 @@
-import { removeUser } from "../../actions";
 import { deleteUser } from "../api";
+import {
+  REMOVE_USER_SUCCESS,
+  USERS_FAILURE,
+} from "../../actions/users-actions/users-actions";
 
 export const fetchDeleteUser = (id) => async (dispatch) => {
   try {
     const result = await deleteUser(id);
-    if (!result) {
-      throw new Error("Ошибка");
-    }
     alert(result.message);
-    dispatch(removeUser(id));
+    dispatch({ type: REMOVE_USER_SUCCESS, payload: id });
   } catch (error) {
+    dispatch({ type: USERS_FAILURE, payload: error.message || error });
     console.error(error);
   }
 };

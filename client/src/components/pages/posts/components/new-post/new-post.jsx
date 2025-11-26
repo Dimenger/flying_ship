@@ -10,6 +10,7 @@ import { BackButton } from "../manage-buttons/back-button/back-button";
 import { LayoutPostForm } from "./layout-post-form/layout-post-form";
 
 import styles from "./new-post.module.css";
+import { Spinner } from "../../../../../elements/spinner/spinner";
 
 export const NewPost = ({
   setAddPostState,
@@ -19,6 +20,7 @@ export const NewPost = ({
   setEditPostData,
 }) => {
   const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.posts.isLoading);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -43,10 +45,10 @@ export const NewPost = ({
     }
   }, [editPostData]);
 
-  const handleAddPost = async (e) => {
+  const handleAddPost = (e) => {
     e.preventDefault();
     try {
-      await dispatch(fetchAddNewPost(newPostData));
+      dispatch(fetchAddNewPost(newPostData));
 
       setIsSending(true);
       setTitle("");
@@ -60,10 +62,10 @@ export const NewPost = ({
     }
   };
 
-  const handleEditPost = async (e) => {
+  const handleEditPost = (e) => {
     try {
       e.preventDefault();
-      await dispatch(fetchEditPost(newEditPostData));
+      dispatch(fetchEditPost(newEditPostData));
 
       setIsSending(true);
       setTitle("");
@@ -85,6 +87,8 @@ export const NewPost = ({
     setIsEditMode(false);
     setEditPostData({});
   };
+
+  if (loading) return <Spinner />;
 
   return (
     <div>

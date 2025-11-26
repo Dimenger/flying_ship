@@ -3,17 +3,24 @@ import { auth } from "../middlewares/auth.js";
 import { hasRole } from "../middlewares/has-role.js";
 import { ROLES } from "../constants/roles.constant.js";
 import {
-  getPosts,
   addNewPost,
   deletePost,
   editPost,
+  getSortingPosts,
 } from "../controllers/post.controller.js";
 
 export const postRouter = Router();
 
-postRouter.get("/posts", async (req, res) => {
+postRouter.get("/sorting-posts", async (req, res) => {
   try {
-    res.json(await getPosts());
+    const sortField = req.query.sort || "createdAt";
+    const sortSendOrder = req.query.order || "asc";
+    const sortOrder = sortSendOrder === "desc" ? -1 : 1;
+
+    const sortOptions = {};
+    sortOptions[sortField] = sortOrder;
+
+    res.json(await getSortingPosts(sortOptions));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

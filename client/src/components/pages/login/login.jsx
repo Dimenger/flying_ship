@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../../elements/title/title";
@@ -9,6 +9,8 @@ import { Notification } from "../../../elements/notification/notification";
 import styles from "./login.module.css";
 
 export const Login = () => {
+  const success = useSelector((state) => state.user.success);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,15 +18,19 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => navigate("/user"), 2000);
+    }
+  }, [success, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setEmail("");
       setPassword("");
 
-      await dispatch(fetchGetUser(userLoginData));
-
-      setTimeout(() => navigate("/user"), 2000);
+      dispatch(fetchGetUser(userLoginData));
     } catch (error) {
       console.error("handleSubmit: Ошибка авторизации:", error);
     }

@@ -3,11 +3,11 @@ import chalk from "chalk";
 import { Post } from "../models/post.model.js";
 import { postMapper } from "../mappers/post.mapper.js";
 
-export const getPosts = async () => {
+export const getSortingPosts = async (sortOptions) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort(sortOptions);
     const mapedPosts = posts.map(postMapper);
-    console.log(chalk.bgGreen("Cообщение отправлены!"));
+    console.log(chalk.bgGreen("Сортировка сообщений. Отправлено!"));
     return mapedPosts;
   } catch (error) {
     throw error;

@@ -14,24 +14,24 @@ import { ROLES } from "../../../constants";
 import styles from "./users.module.css";
 
 export const Users = () => {
-  const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
+  const users = useSelector((state) => state.users.list);
+  const loading = useSelector((state) => state.users.isLoading);
+  const failure = useSelector((state) => state.users.failure);
 
-  const Auth = !!user;
+  const isAuth = !!user;
   const role = user?.role;
 
-  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userToDeletId, setUserToDeletId] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (Auth && checkAccess([ROLES.ADMINISTRATOR], role)) {
-      setLoading(true);
-      dispatch(fetchUsers()).finally(() => setLoading(false));
+    if (isAuth && checkAccess([ROLES.ADMINISTRATOR], role)) {
+      dispatch(fetchUsers());
     }
-  }, [dispatch, Auth, role]);
+  }, [dispatch, isAuth, role]);
 
   const onDeleteUser = (id) => {
     setIsOpen(true);
@@ -57,9 +57,11 @@ export const Users = () => {
     return <Spinner />;
   }
 
-  if (!Auth || !checkAccess([ROLES.ADMINISTRATOR], role)) {
+  if (!isAuth || !checkAccess([ROLES.ADMINISTRATOR], role)) {
     return <Failure error={ERROR.ACCESS_DENIED} />;
   }
+
+  if (failure) return <Failure error={failure || ERROR.FAIL_GET_USERS} />;
 
   return (
     <div className={styles["users-container"]}>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,10 +8,8 @@ import { ERROR } from "../../../constants";
 import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../request/thunk-action/";
 import { AddServiceButton } from "./components/add-service-button";
-import { addServiceToUser } from "../../../request/api/api-add-service-to-user";
 import { getImgSrc } from "../../utils/get-img-scr";
-import { Notification } from "../../../elements/notification/notification";
-import { getSuccessMessage } from "../../../actions";
+import { fetchAddServiceToUser } from "../../../request/thunk-action/";
 
 import styles from "./service.module.css";
 
@@ -21,30 +19,31 @@ export const Service = () => {
 
   const service = useSelector((state) => state.service);
   const user = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
-
-  const userId = user.id;
-  const addedServiceId = service._id;
-  const Auth = !!userId;
+  const userServices = useSelector((state) => state.user.services);
 
   const dispatch = useDispatch();
 
+  const userId = user?.id;
+  const addedServiceId = service?.id;
+  const isAuth = !!userId;
+
+  const getUserServicesIdList = userServices.map((item) => {
+    if (typeof item === "object") {
+      return item.id;
+    } else {
+      return item;
+    }
+  });
+
+  const isFavorite = getUserServicesIdList.includes(addedServiceId);
+
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchService(serId)).finally(() => setLoading(false));
+    dispatch(fetchService(serId));
   }, [dispatch, serId]);
 
-  const addService = async () => {
-    try {
-      const result = await addServiceToUser(userId, addedServiceId);
-      dispatch(getSuccessMessage(result));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  if (loading) return <Spinner />;
-  if (!service.serId) return <Failure error={ERROR.SERVICE_NOT_EXIST} />;
+  if (user.isLoading || service.isLoading) return <Spinner />;
+  if (user.failure || service.failure)
+    return <Failure error={user.failure || ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>
@@ -72,8 +71,14 @@ export const Service = () => {
           ))}
         </div>
       </div>
-      {Auth && <AddServiceButton onClick={addService} />}
-      <Notification />
+      {isAuth && (
+        <AddServiceButton
+          isFavorite={isFavorite}
+          onClick={() =>
+            dispatch(fetchAddServiceToUser(userId, addedServiceId))
+          }
+        />
+      )}
     </div>
   );
 };

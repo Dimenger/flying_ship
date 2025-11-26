@@ -1,4 +1,3 @@
-export * from "./get-posts";
 export * from "./get-users";
 export * from "./get-services";
 export * from "./get-service";
@@ -14,3 +13,4 @@ export * from "./api-delete-post";
 export * from "./api-change-user-role";
 export * from "./auth-me";
 export * from "./api-registration-user";
+export * from "./api-sorting-posts.js";

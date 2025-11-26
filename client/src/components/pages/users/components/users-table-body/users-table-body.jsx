@@ -24,9 +24,9 @@ export const UsersTableBody = ({
 
   const dispatch = useDispatch();
 
-  const onSaveChange = async (id) => {
+  const onSaveChange = (id) => {
     try {
-      await dispatch(fetchEditUserRole(id, userRole));
+      dispatch(fetchEditUserRole(id, userRole));
     } catch (error) {
       console.error(error);
     }

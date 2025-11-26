@@ -8,6 +8,10 @@ serviceRouter.post("/service", async (req, res) => {
     const service = await getService(req.body.serId);
     res.json(service);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    if (err.message === "Такого направления не существует!") {
+      res.status(404).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: err.message });
+    }
   }
 });

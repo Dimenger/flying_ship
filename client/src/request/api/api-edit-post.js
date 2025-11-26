@@ -6,7 +6,7 @@ export const editPost = async (editPostData) => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editPostData),
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);

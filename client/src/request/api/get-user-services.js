@@ -5,7 +5,7 @@ export const getUserServices = async (userId) => {
     const res = await request(`/user/get-services/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      // credentials: "include",
+      credentials: "include",
     });
     if (!res.ok) {
       throw new Error(`Статус: ${res.status}`);
@@ -14,5 +14,6 @@ export const getUserServices = async (userId) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

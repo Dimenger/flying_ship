@@ -1,4 +1,4 @@
-export const getUser = (user) => ({
-  type: "GET_USER",
-  payload: user,
+export const getUser = ({ user, success }) => ({
+  type: "GET_USER_SUCCESS",
+  payload: { user, success },
 });
