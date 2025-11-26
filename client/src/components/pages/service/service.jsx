@@ -20,20 +20,31 @@ export const Service = () => {
 
   const service = useSelector((state) => state.service);
   const user = useSelector((state) => state.user);
+  const userServices = useSelector((state) => state.user.services);
+
+  const dispatch = useDispatch();
 
   const userId = user?.id;
   const addedServiceId = service?.id;
   const isAuth = !!userId;
 
-  const dispatch = useDispatch();
+  const getUserServicesIdList = userServices.map((item) => {
+    if (typeof item === "object") {
+      return item.id;
+    } else {
+      return item;
+    }
+  });
+
+  const isFavorite = getUserServicesIdList.includes(addedServiceId);
 
   useEffect(() => {
     dispatch(fetchService(serId));
   }, [dispatch, serId]);
 
-  if (service?.isLoading) return <Spinner />;
-  if (service?.failure)
-    return <Failure error={service.failure || ERROR.SERVICE_NOT_EXIST} />;
+  if (user.isLoading || service.isLoading) return <Spinner />;
+  if (user.failure || service.failure)
+    return <Failure error={user.failure || ERROR.SERVICE_NOT_EXIST} />;
 
   return (
     <div className={styles.serviceContainer}>
@@ -63,6 +74,7 @@ export const Service = () => {
       </div>
       {isAuth && (
         <AddServiceButton
+          isFavorite={isFavorite}
           onClick={() =>
             dispatch(fetchAddServiceToUser(userId, addedServiceId))
           }

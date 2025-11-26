@@ -1,21 +1,21 @@
 import { addServiceToUser } from "../api";
 import { getSuccessMessage } from "../../actions";
 import {
-  SERVICE_REQUEST,
+  USER_REQUEST,
   ADD_SERVICE_TO_USER_SUCCESS,
-  SERVICE_FAILURE,
-} from "../../actions/service-actions/service-actions";
+  USER_FAILURE,
+} from "../../actions/user-actions/user-actions";
 
 export const fetchAddServiceToUser =
   (userId, addedServiceId) => async (dispatch) => {
     try {
-      dispatch({ type: SERVICE_REQUEST });
+      dispatch({ type: USER_REQUEST });
       const result = await addServiceToUser(userId, addedServiceId);
-      dispatch({ type: ADD_SERVICE_TO_USER_SUCCESS });
+      dispatch({ type: ADD_SERVICE_TO_USER_SUCCESS, payload: addedServiceId });
       dispatch(getSuccessMessage(result));
     } catch (error) {
       dispatch({
-        type: SERVICE_FAILURE,
+        type: USER_FAILURE,
         payload: error.message || error,
       });
     }

@@ -37,6 +37,14 @@ export const userReducer = (state = initialUserState, action) => {
         failure: null,
       };
 
+    case "ADD_SERVICE_TO_USER_SUCCESS":
+      return {
+        ...state,
+        services: [...state.services, action.payload],
+        isLoading: false,
+        failure: null,
+      };
+
     case "USER_FAILURE":
       return {
         ...state,
