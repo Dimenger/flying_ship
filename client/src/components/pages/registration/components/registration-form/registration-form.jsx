@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { IMaskInput } from "react-imask";
 
 import { Title } from "../../../../../elements/title/title";
 
@@ -76,16 +77,16 @@ export const RegistrationForm = ({
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="phone">Телефон</label>
-              <input
-                type="tel"
+              <IMaskInput
+                type="text"
+                inputMode="tel"
                 name="phone"
                 id="phone"
                 value={phone}
-                onChange={(event) => {
-                  setPhone(event.target.value);
-                }}
+                unmask={false}
+                onAccept={(val) => setPhone(val)}
                 placeholder="999 999-99-99"
-                pattern="[0-9]{3} [0-9]{3}-[0-9]{2}-[0-9]{2}"
+                mask="000 000-00-00"
                 required
               />
             </div>
