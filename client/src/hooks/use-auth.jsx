@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { getUser } from "../actions";
-// import { authMe } from "../request/api";
-import { fetchUser } from "../request/thunk-action";
+import { getUser } from "../actions";
+import { authMe } from "../request/api";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadUser = async () => {
-      dispatch(fetchUser());
+    const fetchUser = async () => {
+      const result = await authMe();
+      if (result) {
+        dispatch(getUser({ user: result.user, success: result.success }));
+      }
       setLoading(false);
     };
-    loadUser();
+    fetchUser();
   }, [dispatch]);
 
   return { loading };
 };
-
-// const fetchUser = async () => {
-//   const user = await authMe();
-//   if (user) {
-//     dispatch(getUser(user));
-//   }
-//   setLoading(false);
-// };
