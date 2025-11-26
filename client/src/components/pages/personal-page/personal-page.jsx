@@ -9,7 +9,6 @@ import {
 } from "../../../request/thunk-action";
 import { UserTableHeader } from "./components/user-table-header/user-table-header";
 import { UserTableBody } from "./components/user-table-body/user-table-body";
-import { Notification } from "../../../elements/notification/notification";
 import { Portal } from "../../portal/portal";
 import { Schedule } from "../schedule/schedule";
 
@@ -91,7 +90,6 @@ export const PersonalPage = () => {
         </tbody>
       </table>
       {!!serIdList.length && <Schedule allowedSerIds={serIdList} />}
-      <Notification />
       <Portal
         question={"Удалить направление!"}
         isOpen={isOpen}

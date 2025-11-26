@@ -9,7 +9,6 @@ import { Spinner } from "../../../elements/spinner/spinner";
 import { fetchService } from "../../../request/thunk-action/";
 import { AddServiceButton } from "./components/add-service-button";
 import { getImgSrc } from "../../utils/get-img-scr";
-import { Notification } from "../../../elements/notification/notification";
 import { fetchAddServiceToUser } from "../../../request/thunk-action/";
 
 import styles from "./service.module.css";
@@ -80,7 +79,6 @@ export const Service = () => {
           }
         />
       )}
-      <Notification />
     </div>
   );
 };

@@ -45,6 +45,18 @@ export const userReducer = (state = initialUserState, action) => {
         failure: null,
       };
 
+    case "REMOVE_SERVICE_FROM_USER": {
+      const newServicesList = state.services.filter(
+        (service) => service.id !== action.payload
+      );
+      return {
+        ...state,
+        services: [...newServicesList],
+        isLoading: false,
+        failure: null,
+      };
+    }
+
     case "USER_FAILURE":
       return {
         ...state,
